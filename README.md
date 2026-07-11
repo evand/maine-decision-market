@@ -1,5 +1,7 @@
 # The Committee & the Market — Maine Senate 2026
 
+**Live page: <https://evand.github.io/maine-decision-market/>**
+
 Pre-registered read of the Manifold decision-market family for the 2026
 Maine Senate nomination, frozen 2026-07-10 — before the party committee's
 choice (deadline 2026-07-27).
