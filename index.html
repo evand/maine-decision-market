@@ -161,14 +161,31 @@
   /* live overlay */
   .livemark { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 3px; height: 28px;
     border-radius: 1.5px; background: currentColor; box-shadow: 0 0 0 2px var(--card); }
-  .pairmark { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 10px; height: 10px;
-    border: 2.5px solid currentColor; background: var(--card); border-radius: 2px; }
-  .pairdemo { width: 9px; height: 9px; border: 2px solid var(--ink-2); background: none; border-radius: 2px; display: inline-block; }
   .liveb { font: inherit; font-size: 0.76rem; padding: 2px 10px; border-radius: 12px;
     border: 1px solid var(--line-strong); background: none; color: var(--ink-2); cursor: pointer; }
   .liveb.on { border-color: var(--accent); color: var(--accent); }
   .liveb:disabled { opacity: 0.55; cursor: default; }
   .livedemo { width: 3px; height: 14px; border-radius: 1.5px; background: var(--ink-2); display: inline-block; }
+
+  /* structure view selector + joint-market (pair) marks */
+  .viewsel { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 22px; }
+  .viewsel .glabel2 { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; margin-right: 2px; }
+  .viewsel button { font: inherit; font-size: 0.78rem; padding: 3px 12px; border-radius: 14px;
+    border: 1px solid var(--line-strong); background: none; color: var(--ink-2); cursor: pointer; }
+  .viewsel button.on { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .viewnote { flex-basis: 100%; font-size: 0.8rem; color: var(--ink-3); margin: 2px 0 0; }
+  .band.sq { border-radius: 2px; }
+  .band.slim { height: 11px; }
+  .sqmark { position: absolute; top: 50%; width: 11px; height: 11px; transform: translate(-50%, -50%);
+    box-shadow: 0 0 0 2px var(--card); border-radius: 2px; }
+  .sqmark.hollow { background: var(--card) !important; border: 2.5px solid currentColor; }
+  .pos-up { top: 30% !important; }
+  .pos-dn { top: 70% !important; }
+  .sqdemo { width: 9px; height: 9px; border-radius: 2px; background: var(--ink-2); display: inline-block; }
+  .circdemo { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-2); display: inline-block; }
+  .bucketnote { position: absolute; top: 50%; transform: translateY(-50%); left: 4px;
+    font-size: 0.78rem; color: var(--ink-3); font-style: italic; }
+  .mlinks { margin: 10px 2px 0; font-size: 0.82rem; color: var(--ink-2); }
 
   /* legend */
   .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.8rem; color: var(--ink-2); margin: 12px 2px 0; }
@@ -215,6 +232,11 @@
 
   .pending { border: 1px dashed var(--line-strong); border-radius: 6px; padding: 16px 20px; margin-top: 16px; color: var(--ink-2); background: color-mix(in srgb, var(--card) 55%, transparent); }
 
+  .dateline { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); border: 1px solid var(--accent); border-radius: 3px;
+    padding: 1px 8px; vertical-align: 4px; margin-left: 10px;
+    font-family: system-ui, sans-serif; font-weight: 600; white-space: nowrap; }
+
   details { margin: 10px 0; }
   summary { cursor: pointer; color: var(--accent); font-size: 0.9rem; }
   .fnote { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 4px 20px 10px; margin: 14px 0; }
@@ -245,6 +267,7 @@
     <div class="tl done"><div class="d">Jun 9</div><div class="t">Platner wins the Democratic primary</div></div>
     <div class="tl done"><div class="d">Jul 8</div><div class="t">Platner withdraws after allegations</div></div>
     <div class="tl done"><div class="d">Jul 10</div><div class="t"><strong>This snapshot</strong></div></div>
+    <div class="tl done"><div class="d">Jul 11</div><div class="t">We add a joint-structure market</div></div>
     <div class="tl next"><div class="d">Jul 27</div><div class="t">Party committee names the nominee</div></div>
     <div class="tl"><div class="d">Nov 3</div><div class="t">General election vs. Susan Collins</div></div>
   </div>
@@ -280,16 +303,32 @@
     <p class="readout" id="readout"></p>
   </div>
 
+  <div class="viewsel" id="viewsel">
+    <span class="glabel2">Structure</span>
+    <button data-view="board" class="on">conditional board</button>
+    <button data-view="pair">joint market</button>
+    <button data-view="both">both</button>
+    <p class="viewnote" id="viewnote"></p>
+  </div>
+
   <div class="board"><div class="board-inner" id="board"></div>
     <div class="legend">
+      <span class="item" id="circlegend" style="display:none"><span class="circdemo"></span> conditional board</span>
+      <span class="item" id="pairlegend" style="display:none"><span class="sqdemo"></span> joint market, pair-implied — ratio of the two "X vs Collins" answers</span>
       <span class="item"><span class="banddemo"></span> no-correction band (±ε at <span id="legendR">r = 2%/mo</span>)</span>
-      <span class="item"><span class="fossildemo"></span> withdrawn — price is conditional on un-withdrawing</span>
+      <span class="item" id="fossillegend"><span class="fossildemo"></span> withdrawn — price is conditional on un-withdrawing</span>
       <span class="item"><span class="num" style="color:var(--accent)">│</span> market's overall P(Dem win) = 0.596</span>
       <span class="item"><button class="liveb" id="livebtn">overlay live prices</button></span>
+      <span class="item"><button class="liveb" id="refreshbtn" style="display:none">refresh</button></span>
       <span class="item" id="livenote" style="display:none"><span class="livedemo"></span> <span id="livenotetext"></span></span>
-      <span class="item" id="pairlegend" style="display:none"><span class="pairdemo"></span> pair-implied conditional (joint market, Jul-11 addendum)</span>
     </div>
   </div>
+  <p class="mlinks">The markets, on Manifold:
+    <a href="https://manifold.markets/Tetraspace/if-this-person-is-the-democratic-se">conditional board</a> ·
+    <a href="https://manifold.markets/Jack1/who-will-be-the-democratic-candidat-PyPynyctU2">nominee</a> ·
+    <a href="https://manifold.markets/EvanDaniel/maine-senate-election-result-collin">joint pairwise</a> ·
+    <a href="https://manifold.markets/Jack1/will-the-democratic-party-candidate-NQOPZAnOA8">P(Dem win)</a> ·
+    <a href="https://manifold.markets/SaviorofPlant/will-susan-collins-win-reelection-t">Collins re-election</a></p>
 
   <p class="prose">Read it plainly: the market prices Jackson <span class="num">0.620</span> and Bellows
   <span class="num">0.590</span> with bands of ±<span class="num">5–6</span> points — <strong>each measured
@@ -326,14 +365,13 @@
   are <strong>mutually exclusive</strong> — exactly one candidate gets the nomination, so at most one
   answer can ever cost a multi-answer bettor money. But Manifold margins every answer independently:
   full stake posted on every leg, even the ones that are <em>guaranteed refunds</em>.</p>
-  <p class="prose">How much this costs depends on the shape of the book — nobody bets equal stakes on all
-  nine, so here is the realistic spectrum. A conviction-weighted book over the live candidates posts about
-  <strong>1.6–2×</strong> its worst-case loss. The pairwise <em>ranking</em> trade — YES on one conditional,
-  NO on another, the trade that answers the committee's actual question — posts exactly <strong>2×</strong>
-  (only one leg can ever lose). A uniform market-making quote across the whole board — the participant a
-  decision market needs most — pays the full <strong>9×</strong>. Every realistic shape pays; the deepest
-  tax lands on the most useful participants, and the only untaxed shape is the single-leg directional bet,
-  which carries the least decision information.</p>
+  <p class="prose">The cost depends on the shape of the book. A conviction-weighted book over the live
+  candidates posts about <strong>1.6–2×</strong> its worst-case loss. The pairwise <em>ranking</em> trade —
+  YES on one conditional, NO on another, the trade that answers the committee's actual question — posts
+  exactly <strong>2×</strong> (only one leg can ever lose). A uniform market-making quote across the whole
+  board — the participant a decision market needs most — pays the full <strong>9×</strong>. The deepest tax
+  lands on the most useful participants; the only untaxed shape is the single-leg directional bet, which
+  carries the least decision information.</p>
   <p class="prose">Worst-case-loss margining (net capital = the maximum loss over the exclusive branches)
   deletes the <span class="num">(1−p_B)/p_B</span> term from the band formula for any trader running a
   book across answers: idle legs would no longer tie capital, so only the live branch's
@@ -390,16 +428,16 @@
   someone still has to notice, and the prize must cover the noticing.</p>
   <p class="prose">The loans toggle exists because Manifold's leverage system changes the carry arithmetic
   more than any plausible disagreement about r. A position holder can reclaim <strong>1% of position value
-  per day</strong> as an interest-free loan (linear, so a position is fully recycled in ~100 days; paid
-  members reclaim 2–3%/day). We verified against the resolution source that this is safe even on the refund
-  branch: the loan is repaid by deduction from the N/A refund, so the holder stays whole in every world —
-  and meanwhile had the capital back. Loans shrink the four-month live branch by ~<span class="num">2.4×</span>
-  and the two-week refund branch by only ~<span class="num">7%</span> — so they tighten exactly the
-  front-runner bands that were already the informative ones. The platform's margin-loan rate
-  (<span class="num">0.03%</span>/day ≈ <span class="num">0.9%</span>/mo) is also the honest anchor for r
-  itself: nobody rational carries at 5%/mo while the house lends at 0.9%. Fine print: loan capacity per
-  answer is capped at 5% of a trader's equity, so the <em>no-loans</em> column is still the right model for
-  a single whale trying to buy a correction alone.</p>
+  per day</strong> as an interest-free loan (linear — a position fully recycles in ~100 days; paid members
+  2–3%/day), and we verified against the resolution source that this is safe even on the refund branch: the
+  loan is repaid by deduction from the N/A refund, so the holder stays whole in every world and meanwhile
+  had the capital back. Loans shrink the four-month live branch by ~<span class="num">2.4×</span> and the
+  two-week refund branch by only ~<span class="num">7%</span> — they tighten exactly the bands that were
+  already the informative ones. The platform's margin-loan rate (<span class="num">0.03%</span>/day ≈
+  <span class="num">0.9%</span>/mo) is also the honest anchor for r itself: nobody rational carries at
+  5%/mo while the house lends at 0.9%. Fine print: loan capacity per answer caps at 5% of a trader's
+  equity, so the <em>no-loans</em> column is still the right model for a single whale trying to buy a
+  correction alone.</p>
   <div class="tablewrap" id="anatomy"></div>
   <p class="prose small muted" id="anatomynote"></p>
 
@@ -434,6 +472,72 @@
   that's ~4.5× more of each subsidized mana landing on target — and would stop the current liquidity-add
   discarding a small slice of every contribution. Better if merged; nothing above depends on it.</p>
 
+  <h2>The other structure <span class="dateline">added Jul 11</span></h2>
+  <p class="prose">The capital tax and the carry floor are properties of the <em>conditional-board
+  structure</em>, not of prediction markets. So we built the structure that dodges the tax, within
+  current platform rules: price the <strong>joints</strong> — "Jackson defeats Collins," not "Jackson
+  wins <em>if</em> nominated" — as one mutually-exclusive market. Exclusivity is then enforced by the
+  market mechanism itself (complete sets of shares redeem to cash automatically), so a trader quoting
+  the whole board, or trading the <em>ranking</em>, posts roughly worst-case loss instead of every leg.
+  The catch, and the reason the board above stays the instrument of record: joint prices for long-shot
+  nominees live below Manifold's 1% price floor, where the market literally cannot quote them. The
+  board's refund structure is what keeps every candidate readable — the carry its bands price in is the
+  fee for that. Two structures, two halves of the problem. This race now has both, and they grade each
+  other:</p>
+  <p class="prose"><a href="https://manifold.markets/EvanDaniel/maine-senate-election-result-collin">
+  <strong>Maine Senate election result? (Collins, Jackson, Bellows)</strong></a> — created 2026-07-11,
+  seeded off the frozen family (nominee odds × conditionals × Collins-primary risk). Disclosure: we
+  created and seeded it; it's run as publication plus criticism bounty, and nothing in our own analysis
+  treats its prices as external evidence until other people trade it.</p>
+  <div class="tablewrap"><table id="pairtable">
+    <tr><th>Answer</th><th class="num">at creation<br><span class="small">Jul 11, 19:00 UTC</span></th><th class="num">live</th></tr>
+    <tr><td>Jackson (D) defeats Collins (R)</td><td class="num">0.293</td><td class="num" data-aid="QznPg2dsdg">—</td></tr>
+    <tr><td>Collins (R) defeats Jackson (D)</td><td class="num">0.188</td><td class="num" data-aid="s5Z0cLU0cg">—</td></tr>
+    <tr><td>Bellows (D) defeats Collins (R)</td><td class="num">0.125</td><td class="num" data-aid="ZtQZyqSOu6">—</td></tr>
+    <tr><td>Collins (R) defeats Bellows (D)</td><td class="num">0.104</td><td class="num" data-aid="Nzcq9LL525">—</td></tr>
+    <tr><td>Other (D) defeats Collins (R)</td><td class="num">0.104</td><td class="num" data-aid="lS8yOQsNdO">—</td></tr>
+    <tr><td>Collins (R) defeats other (D)</td><td class="num">0.125</td><td class="num" data-aid="tLPN082OLs">—</td></tr>
+    <tr><td>None of the above</td><td class="num">0.060</td><td class="num" data-aid="2El2SnS8LQ">—</td></tr>
+  </table></div>
+  <p class="prose" id="pairnote">Each front-runner gets two answers — "X defeats Collins" and "Collins
+  defeats X". Their <em>sum</em> is the probability of that matchup happening at all; their
+  <em>ratio</em>, ĉ&nbsp;=&nbsp;P(X&nbsp;defeats&nbsp;Collins)&nbsp;÷&nbsp;P(matchup), is the joint
+  market's implied P(X wins, given the matchup) — the <strong>pair-implied conditional</strong>, this
+  structure's answer to the board's question. (One wedge: it also conditions on Collins being the
+  Republican nominee, a ~3% risk the family prices separately.) At creation: Jackson
+  <span class="num">0.609</span> (board: <span class="num">0.620</span>), Bellows
+  <span class="num">0.546</span> (board: <span class="num">0.590</span>) — a 1–4 point divergence at
+  birth, inside the board's bands. The chart at the top has a <strong>structure selector</strong>:
+  switch to "joint market" to see this structure's own dots and error bars, or "both" to compare the
+  two bar-for-bar.</p>
+
+  <h3>Do the structures agree? (claim S1, tracked live)</h3>
+  <div class="tablewrap"><table id="s1track">
+    <tr><th>Front-runner</th><th class="num">board P(win | nom)</th><th class="num">pair-implied ĉ</th><th class="num">divergence</th><th class="num">frozen band</th><th>S1 status</th></tr>
+    <tr data-i="0"><td>Troy Jackson</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>—</td></tr>
+    <tr data-i="1"><td>Shenna Bellows</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>—</td></tr>
+  </table></div>
+  <p class="prose small muted">Prices <span id="s1when">at creation (Jul 11, 19:00 UTC)</span>.
+  Divergence is |pair-implied − board|; S1 (frozen below) predicts it stays inside the board's frozen
+  no-correction band until the nomination — free money separates the structures otherwise, and our own
+  arbitrage anchors are pointed at the gap.</p>
+
+  <div class="prereg">
+    <h3>Structure claims, frozen 2026-07-11 at market creation</h3>
+    <div class="claim"><span class="cid">S1</span><div>
+      <p><strong>The two structures agree within incentive bounds.</strong> Until the nomination, the
+      pair-implied conditionals for Jackson and Bellows stay within the board's no-correction band of the
+      board's prices (else free money separates them, and our own arbitrage anchors are pointed at it).</p>
+      <p class="grade">Grade at the nomination. Divergence at creation: 1.1 / 4.4 points — inside.</p></div></div>
+    <div class="claim"><span class="cid">S2</span><div>
+      <p><strong>Joints jump; conditionals don't.</strong> At the nomination of X ∈ {Jackson, Bellows},
+      X's "defeats Collins" answer jumps up by roughly the non-nomination mass being resolved (from ≈p·c
+      toward ≈c), while the board's conditional for X moves by less than its band (P2's martingale
+      property — now with an in-family control). LP capital in the joint market pays for that jump;
+      board LPs don't.</p>
+      <p class="grade">Grade within 3 trading days of the announcement, alongside P2.</p></div></div>
+  </div>
+
   <h2>Hanson's objections, graded on live data</h2>
   <div class="cards">
     <div class="cardx"><span class="verdict v-no">partly refuted</span>
@@ -456,7 +560,7 @@
       <p>Riskless arbitrage is structurally repelled: the N/A refund branch breaks every static payout table
       (our own arb bot disabled its Maine conditional legs for exactly this). Only opinionated capital
       disciplines a conditional — unless you hedge with the conditioner market, which restores the joint at
-      exactly c·p and is how the identity above becomes tradeable at all.</p></div>
+      exactly c·p and is how the family's consistency law (footnotes) becomes tradeable at all.</p></div>
     <div class="cardx"><span class="verdict v-mid">wrong objective</span>
       <h3>"Who chose the question?"</h3>
       <p>The markets condition on <em>a Democrat</em> winning. The anti-Collins coalition's objective is
@@ -493,62 +597,13 @@
       <p class="grade">One Brier sample in November — weak evidence by construction, recorded anyway.</p></div></div>
   </div>
 
-  <h2>Addendum (Jul 11): we built the other structure</h2>
-  <p class="prose">The capital tax and the carry floor above are properties of the <em>conditional-board
-  structure</em>, not of prediction markets. Working through alternatives led to a design that dodges the
-  tax within current platform rules: price the <strong>joints</strong> — "Jackson defeats Collins," not
-  "Jackson wins <em>if</em> nominated" — as one mutually-exclusive market. Exclusivity is then enforced by
-  the market mechanism itself (complete sets of shares redeem for cash automatically), so a trader
-  quoting the whole board, or trading the <em>ranking</em>, posts roughly worst-case loss instead of
-  every leg. The catch, and the reason the board above stays the instrument of record: joint prices for
-  long-shot nominees live below Manifold's 1% price floor, where the market literally cannot quote them —
-  the board's refund structure is what keeps every candidate readable, at the cost of the carry the
-  bands price in. Two structures, two halves of the problem. So now this race has both, and they can
-  grade each other:</p>
-  <p class="prose"><a href="https://manifold.markets/evand/maine-senate-election-result-collin">
-  <strong>Maine Senate election result? (Collins, Jackson, Bellows)</strong></a> — created 2026-07-11,
-  seeded off the frozen family (nominee odds × conditionals × Collins-primary risk). Disclosure: we
-  created and seeded it; it's run as publication plus criticism bounty, and nothing in our own analysis
-  treats its prices as external evidence until other people trade it.</p>
-  <div class="tablewrap"><table id="pairtable">
-    <tr><th>Answer</th><th class="num">at creation<br><span class="small">Jul 11, 19:00 UTC</span></th><th class="num">live</th></tr>
-    <tr><td>Jackson (D) defeats Collins (R)</td><td class="num">0.293</td><td class="num" data-aid="QznPg2dsdg">—</td></tr>
-    <tr><td>Collins (R) defeats Jackson (D)</td><td class="num">0.188</td><td class="num" data-aid="s5Z0cLU0cg">—</td></tr>
-    <tr><td>Bellows (D) defeats Collins (R)</td><td class="num">0.125</td><td class="num" data-aid="ZtQZyqSOu6">—</td></tr>
-    <tr><td>Collins (R) defeats Bellows (D)</td><td class="num">0.104</td><td class="num" data-aid="Nzcq9LL525">—</td></tr>
-    <tr><td>Other (D) defeats Collins (R)</td><td class="num">0.104</td><td class="num" data-aid="lS8yOQsNdO">—</td></tr>
-    <tr><td>Collins (R) defeats other (D)</td><td class="num">0.125</td><td class="num" data-aid="tLPN082OLs">—</td></tr>
-    <tr><td>None of the above</td><td class="num">0.060</td><td class="num" data-aid="2El2SnS8LQ">—</td></tr>
-  </table></div>
-  <p class="prose small muted" id="pairnote">The joint market implies its own conditionals as ratios:
-  ĉ = P(X defeats Collins) / P(X-vs-Collins matchup). At creation: Jackson
-  <span class="num">0.609</span> (board: <span class="num">0.620</span>), Bellows
-  <span class="num">0.546</span> (board: <span class="num">0.590</span>) — a 1–4 point divergence at
-  birth, inside the board's bands. Use "overlay live prices" above the board to see the current
-  pair-implied conditionals drawn on the board (hollow squares) and updated in this table.</p>
-
-  <div class="prereg">
-    <h3>Structure claims, frozen 2026-07-11 at market creation</h3>
-    <div class="claim"><span class="cid">S1</span><div>
-      <p><strong>The two structures agree within incentive bounds.</strong> Until the nomination, the
-      pair-implied conditionals for Jackson and Bellows stay within the board's no-correction band of the
-      board's prices (else free money separates them, and our own arbitrage anchors are pointed at it).</p>
-      <p class="grade">Grade at the nomination. Divergence at creation: 1.1 / 4.4 points — inside.</p></div></div>
-    <div class="claim"><span class="cid">S2</span><div>
-      <p><strong>Joints jump; conditionals don't.</strong> At the nomination of X ∈ {Jackson, Bellows},
-      X's "defeats Collins" answer jumps up by roughly the non-nomination mass being resolved (from ≈p·c
-      toward ≈c), while the board's conditional for X moves by less than its band (P2's martingale
-      property — now with an in-family control). LP capital in the joint market pays for that jump;
-      board LPs don't.</p>
-      <p class="grade">Grade within 3 trading days of the announcement, alongside P2.</p></div></div>
-  </div>
-
   <div class="pending">
-    <strong>Model read: pending.</strong> Our statistical-arbitrage Congress model (a 470-dimension joint
-    over every 2026 race) has this family wired in — nominee dimension, the conditionals as hedged-pair joint
-    constraints at c·p, eleven constraints total. The fitting run is deliberately on hold: a new diagnostic
-    caught our sampler misbehaving on an unrelated axis, and we don't publish reads from a sampler we don't
-    trust. If it's repaired before July 27, the model's joint read lands here with its own timestamp.
+    <strong>Model read: none before the decision</strong> <span class="small">(decided 2026-07-11)</span>.
+    Our statistical-arbitrage Congress model (a 470-dimension joint over every 2026 race) has this family
+    wired in — nominee dimension, the conditionals as hedged-pair joint constraints at c·p. But a new
+    diagnostic caught the sampler misbehaving on an unrelated axis, the repair is research rather than a
+    bugfix, and we don't publish reads from a sampler we don't trust. So the model read is dropped from
+    this page's pre-decision scope, not rushed. If one is ever published, it will carry its own date.
   </div>
 
   <h2>Footnotes</h2>
@@ -614,18 +669,22 @@
 
   <footer>
     <p><strong>Provenance.</strong> All prices are Manifold Markets play-money (M$; very roughly M$150–200 ≈ $1),
-    snapshotted 2026-07-10 (evening UTC−4). Key markets: conditional board
-    <span class="num">ZI29Oy5URc</span>; nominee <span class="num">nqLE5L0yhs</span>; P(Dem win) deep/thin
-    <span class="num">RcL0Q9O0EU</span>/<span class="num">L6Lll6upng</span>; party <span class="num">UzNUOlCZgt</span>;
-    Collins <span class="num">cdzE85PIEz</span>; Jackson standalone <span class="num">lchuI99Qlc</span>;
-    joint pairwise market (Jul-11 addendum) <span class="num">n2yLUz2l6q</span>.
+    snapshotted 2026-07-10 (evening UTC−4). Key markets (links go to Manifold): conditional board
+    <a class="num" href="https://manifold.markets/Tetraspace/if-this-person-is-the-democratic-se">ZI29Oy5URc</a>;
+    nominee <a class="num" href="https://manifold.markets/Jack1/who-will-be-the-democratic-candidat-PyPynyctU2">nqLE5L0yhs</a>;
+    P(Dem win) deep/thin
+    <a class="num" href="https://manifold.markets/Jack1/will-the-democratic-party-candidate-NQOPZAnOA8">RcL0Q9O0EU</a>/<a class="num" href="https://manifold.markets/kl938/will-the-democratic-party-candidate-SPUCggzPdP">L6Lll6upng</a>;
+    party <a class="num" href="https://manifold.markets/NicBergman/which-party-will-win-the-2026-maine">UzNUOlCZgt</a>;
+    Collins <a class="num" href="https://manifold.markets/SaviorofPlant/will-susan-collins-win-reelection-t">cdzE85PIEz</a>;
+    Jackson standalone <a class="num" href="https://manifold.markets/Jack1/troy-jackson-wins-2026-us-senate-el">lchuI99Qlc</a>;
+    joint pairwise market <a class="num" href="https://manifold.markets/EvanDaniel/maine-senate-election-result-collin">n2yLUz2l6q</a>.
     Band derivation, refund-semantics verification (against the Manifold open-source resolution code), and the
     market map live in the project task directory (<span class="num">tasks/maine_decision_market/</span>).
     Numbers on this page are intentionally frozen — that is what pre-registered means. Two clearly-marked
-    interactive layers sit on top of the frozen record without touching it: the band controls re-derive ±ε
-    from the frozen prices under different capital-cost assumptions, and the optional live-price overlay
-    fetches current prices from the Manifold API in your browser (it degrades to unavailable where
-    cross-origin fetches are blocked).</p>
+    live layers sit on top of the frozen record without touching it: the band controls re-derive ±ε
+    from the frozen prices under different capital-cost assumptions, and current prices are fetched from
+    the Manifold API in your browser on load (the board overlay, the joint-market table, and the S1
+    tracker). Where cross-origin fetches are blocked, the page degrades to the frozen record.</p>
   </footer>
 </div>
 
@@ -639,9 +698,11 @@
   // rounding). pool: per-answer AMM pool (YES+NO shares) frozen 2026-07-10.
   var CANDS = [
     { name: "Troy Jackson",  key: "jackson", p: 0.564, pX: 0.564,   c: 0.620, pool: 528, lt: "Jul 10", v8: 666,  status: "informative",
-      condId: "tRLLSAgRns", nomId: "qEttS2EgSl", pairDem: "QznPg2dsdg", pairRep: "s5Z0cLU0cg" },
+      condId: "tRLLSAgRns", nomId: "qEttS2EgSl", pairDem: "QznPg2dsdg", pairRep: "s5Z0cLU0cg",
+      pair: { c: 0.609, q: 0.481, p: 0.497 } },
     { name: "Shenna Bellows",key: "bellows", p: 0.271, pX: 0.271,   c: 0.590, pool: 632, lt: "Jul 10", v8: 1470, status: "informative",
-      condId: "c56R9zZt2U", nomId: "QOLgZ26pQ8", pairDem: "ZtQZyqSOu6", pairRep: "Nzcq9LL525" },
+      condId: "c56R9zZt2U", nomId: "QOLgZ26pQ8", pairDem: "ZtQZyqSOu6", pairRep: "Nzcq9LL525",
+      pair: { c: 0.546, q: 0.229, p: 0.249 } },
     { name: "Nirav Shah",    key: "shah",    p: 0.037, pX: 0.0366,  c: 0.600, pool: 607, lt: "Jul 10", v8: 448,  status: "mush — band swallows the price",
       condId: "UNuAAzg2cu", nomId: "6sU9hhdpSc" },
     { name: "Jordan Wood",   key: "wood",    p: 0.031, pX: 0.0310,  c: 0.400, pool: 520, lt: "Jul 10", v8: 61,   status: "mush — band swallows the price",
@@ -655,6 +716,31 @@
   var COLORS = { jackson: "var(--c-jackson)", bellows: "var(--c-bellows)", shah: "var(--c-shah)",
                  wood: "var(--c-wood)", mills: "var(--c-mills)", none: "var(--ink-3)" };
   var ANCHOR = 0.596;
+
+  // Joint pairwise market (created 2026-07-11): pair data frozen at creation
+  // (19:00 UTC). pair.c = pair-implied conditional (ratio of the two X-vs-
+  // Collins answers), pair.q = matchup mass (their sum), pair.p = nominee
+  // probability at creation (carry math). Band = same carry law as the board
+  // (hedged-ratio trade) + the 1%-price-grid floor / matchup mass.
+  var BUCKET = { name: "Another Dem (bucket)", key: "none", p: 0.247, pX: 0.247, c: null,
+    pool: null, lt: null, v8: null, bucket: true,
+    status: "joint market's catch-all — Shah, Wood, Mills, and the rest of the field",
+    pairDem: "lS8yOQsNdO", pairRep: "tLPN082OLs",
+    pair: { c: 0.454, q: 0.229, p: 0.247 } };
+
+  var VIEW = "board";
+  var VIEWNOTES = {
+    board: "The conditional board, frozen 2026-07-10 — the pre-registered record.",
+    pair: "Pair-implied conditionals from the joint market, frozen at its creation (Jul 11, 19:00 UTC): " +
+      "ĉ = P(X defeats Collins) ÷ P(the X-vs-Collins matchup). Bands: the board's carry law " +
+      "(hedged-ratio trade) plus the 1%-price-grid floor ÷ matchup mass. Beyond the front-runners, " +
+      "candidates are bucketed — no individual price. These are incentive floors — unchanged at 100× " +
+      "the liquidity; what today's thin depth (M$175 vs the board's M$3,000) adds is an attention haze " +
+      "≈3× the board's, which flow or subsidy removes. The drawn band is the subsidized limit.",
+    both: "Circle / upper bar: conditional board (frozen Jul 10). Square / lower bar: joint market, " +
+      "pair-implied (frozen Jul 11). Same carry law in both; the joint market adds a price-grid floor " +
+      "but prices the bucket the board leaves blank."
+  };
 
   // ---- band math (shared by board, anatomy table, ladder, readout) ----
   var T_LIVE = 120, T_NA = 15;   // days: snapshot -> Nov 3, snapshot -> Jul 27
@@ -674,6 +760,11 @@
   }
   function bandE(d) { var k = carryParts(d); return k.live + k.na; }
   function nettedE(d) { return carryParts(d).live; }
+  function pairBandE(pr) {   // joint-market pair band: carry (same law) + price-grid floor
+    var rd = state.r / 100 / 30, rho = state.loans ? RHO : 0;
+    var carry = pr.c * rd * (effDays(T_LIVE, rho) + effDays(T_NA, rho) * (1 - pr.p) / pr.p);
+    return carry + 0.01 / pr.q;
+  }
   var C_ATTN = 1, DEPTH_CAL = 670 / 528;  // M$ per unit price move per M$ of pool (Jackson-calibrated)
   function attnE(d) { return Math.sqrt(2 * d.c * C_ATTN / (d.pX * d.pool * DEPTH_CAL)); }
   function pp(e) { return (e * 100).toFixed(1); }
@@ -700,6 +791,7 @@
       ms[2].answers.forEach(function (a) { LIVE.pair[a.id] = a.probability; });
       LIVE.at = new Date(); LIVE.on = true;
       btn.disabled = false; btn.classList.add("on"); btn.textContent = "hide live prices";
+      document.getElementById("refreshbtn").style.display = "";
       document.getElementById("livenote").style.display = "";
       document.getElementById("livenotetext").textContent =
         "live price, fetched " + LIVE.at.toISOString().slice(11, 16) + " UTC — overlay only, the frozen record is unchanged";
@@ -746,48 +838,85 @@
     rows += '<div class="gridline anchor" style="left: calc((100% - var(--label-w, 230px)) * ' + ANCHOR + ')">' +
             '<span class="glabel" style="left:1px">P(Dem win) 0.596</span></div>';
 
-    CANDS.forEach(function (d) {
+    var list = CANDS.slice();
+    if (VIEW !== "board") list.splice(2, 0, BUCKET);   // bucket row sits under the two priced pairs
+
+    list.forEach(function (d) {
       var col = COLORS[d.key];
-      var e = d.c === null ? null : bandE(d);
+      var both = VIEW === "both";
+      var showB = VIEW !== "pair" && d.c !== null;
+      var showP = VIEW !== "board" && d.pair;
+      var e = showB ? bandE(d) : null;
+      var eP = showP ? pairBandE(d.pair) : null;
+      var bandCls = both ? " slim" : "", posB = both ? " pos-up" : "", posP = both ? " pos-dn" : "";
       rows += '<div class="row"><div class="who">' +
         '<div class="l1"><span class="swatch" style="background:' + col + '"></span>' +
         '<span class="name">' + d.name + "</span>" +
         (d.withdrawn ? ' <span class="chip">withdrawn</span>' : "") +
+        (d.bucket ? ' <span class="chip">joint mkt only</span>' : "") +
         "</div>" +
         '<div class="l2"><span class="masstrack"><span class="massfill" style="display:block;width:' +
           (d.p * 100) + "%; background:" + col + '"></span></span>' +
         '<span class="pnom">nom ' + d.p.toFixed(3).replace(/^0/, "") + "</span></div>" +
         "</div>" +
-        '<div class="lane" data-name="' + d.name + '" data-p="' + d.p + '" data-c="' + (d.c === null ? "" : d.c) +
-        '" data-e="' + (e === null ? "" : e.toFixed(3)) + '" data-lt="' + (d.lt || "") + '" data-v8="' + (d.v8 === null ? "" : d.v8) +
-        '" data-lc="' + (LIVE.on && d.condId && LIVE.cond[d.condId] !== undefined ? LIVE.cond[d.condId].toFixed(3) : "") +
+        '<div class="lane" data-name="' + d.name + '" data-p="' + d.p + '" data-c="' + (showB ? d.c : "") +
+        '" data-e="' + (e === null ? "" : e.toFixed(3)) +
+        '" data-pc="' + (showP ? d.pair.c.toFixed(3) : "") +
+        '" data-pe="' + (eP === null ? "" : eP.toFixed(3)) + '" data-lt="' + (d.lt || "") + '" data-v8="' + (d.v8 === null ? "" : d.v8) +
+        '" data-lc="' + (showB && LIVE.on && d.condId && LIVE.cond[d.condId] !== undefined ? LIVE.cond[d.condId].toFixed(3) : "") +
         '" data-lp="' + (LIVE.on && d.nomId && LIVE.nom[d.nomId] !== undefined ? LIVE.nom[d.nomId].toFixed(3) : "") +
+        '" data-plc="' + (function () { var v = showP ? pairImplied(d) : null; return v === null ? "" : v.toFixed(3); })() +
         '" data-status="' + d.status + '">';
-      if (d.c !== null) {
+      if (showB) {
         var lo = Math.max(0, d.c - e), hi = Math.min(1, d.c + e);
-        rows += '<div class="band' + (d.withdrawn ? " fossil" : "") + '" style="left:' + (lo * 100) + "%; width:" +
+        rows += '<div class="band' + bandCls + posB + (d.withdrawn ? " fossil" : "") + '" style="left:' + (lo * 100) + "%; width:" +
           ((hi - lo) * 100) + '%; color:' + col + "; background: color-mix(in srgb, " + col + " calc(var(--band-alpha) * 100%), transparent)" + '"></div>';
-        rows += '<div class="dotmark' + (d.withdrawn ? " hollow" : "") + '" style="left:' + (d.c * 100) + "%; background:" + col + "; color:" + col + '"></div>';
-        rows += '<div class="cval" style="left:' + (d.c * 100) + '%">' + d.c.toFixed(3).replace(/^0/, "") + "</div>";
+        rows += '<div class="dotmark' + posB + (d.withdrawn ? " hollow" : "") + '" style="left:' + (d.c * 100) + "%; background:" + col + "; color:" + col + '"></div>';
+        if (VIEW === "board") {
+          rows += '<div class="cval" style="left:' + (d.c * 100) + '%">' + d.c.toFixed(3).replace(/^0/, "") + "</div>";
+        }
         if (LIVE.on && d.condId && LIVE.cond[d.condId] !== undefined) {
-          rows += '<div class="livemark" style="left:' + (LIVE.cond[d.condId] * 100) + "%; color:" + col + '"></div>';
+          rows += '<div class="livemark' + posB + '" style="left:' + (LIVE.cond[d.condId] * 100) + "%; color:" + col + '"></div>';
+        }
+      }
+      if (showP) {
+        var loP = Math.max(0, d.pair.c - eP), hiP = Math.min(1, d.pair.c + eP);
+        rows += '<div class="band sq' + bandCls + posP + '" style="left:' + (loP * 100) + "%; width:" +
+          ((hiP - loP) * 100) + '%; color:' + col + "; background: color-mix(in srgb, " + col + " calc(var(--band-alpha) * 100%), transparent)" + '"></div>';
+        rows += '<div class="sqmark' + posP + '" style="left:' + (d.pair.c * 100) + "%; background:" + col + "; color:" + col + '"></div>';
+        if (VIEW === "pair") {
+          rows += '<div class="cval" style="left:' + (d.pair.c * 100) + '%">' + d.pair.c.toFixed(3).replace(/^0/, "") + "</div>";
         }
         var ph = pairImplied(d);
         if (ph !== null) {
-          rows += '<div class="pairmark" style="left:' + (ph * 100) + "%; color:" + col + '"></div>';
+          rows += '<div class="livemark' + posP + '" style="left:' + (ph * 100) + "%; color:" + col + '"></div>';
         }
+      }
+      if (!showB && !showP) {
+        rows += '<div class="bucketnote">' + (d.withdrawn
+          ? "not in the joint market (withdrawn before its creation)"
+          : d.c === null && !d.pair
+            ? (VIEW === "pair" ? "bucketed — see “Another Dem” above" : "no conditional priced")
+            : "bucketed — see “Another Dem” above") + "</div>";
       }
       rows += '<div class="hit"></div></div></div>';
     });
     rows += "</div>";
     board.innerHTML = axis + rows;
 
+    document.getElementById("circlegend").style.display = VIEW === "both" ? "" : "none";
+    document.getElementById("pairlegend").style.display = VIEW === "board" ? "none" : "";
+    document.getElementById("fossillegend").style.display = VIEW === "pair" ? "none" : "";
+
     board.querySelectorAll(".lane").forEach(function (lane) {
       lane.addEventListener("mousemove", function (ev) {
         var d = lane.dataset;
         var html = "<strong>" + d.name + "</strong><br>P(nominee) = <span class='num'>" + d.p + "</span>";
-        if (d.c) html += "<br>P(win | nominee) = <span class='num'>" + d.c + "</span> ± <span class='num'>" + d.e +
+        if (d.c) html += "<br>board P(win | nominee) = <span class='num'>" + d.c + "</span> ± <span class='num'>" + d.e +
           "</span> <span class='num'>(" + fmtSetting() + ")</span>";
+        if (d.pc) html += "<br>joint mkt pair-implied ĉ = <span class='num'>" + d.pc + "</span> ± <span class='num'>" +
+          d.pe + "</span> <span class='num'>(carry + 1% grid)</span>";
+        if (d.plc) html += "<br>pair-implied live = <span class='num'>" + d.plc + "</span>";
         if (d.lt) html += "<br>last traded " + d.lt + " · M$<span class='num'>" + d.v8 + "</span> since withdrawal";
         if (d.lc || d.lp) {
           html += "<br><span class='num'>live now:</span>";
@@ -888,14 +1017,48 @@
   }
 
   function drawPair() {
-    document.getElementById("pairlegend").style.display = LIVE.on && LIVE.pair ? "" : "none";
     document.querySelectorAll("#pairtable td[data-aid]").forEach(function (td) {
-      var v = LIVE.on && LIVE.pair ? LIVE.pair[td.dataset.aid] : undefined;
-      td.textContent = v === undefined ? "—" : v.toFixed(3).replace(/^0/, ".");
+      var v = LIVE.pair ? LIVE.pair[td.dataset.aid] : undefined;
+      td.textContent = v === undefined ? "—" : v.toFixed(3).replace(/^0/, "");
     });
   }
 
-  function update() { drawBoard(); drawAnatomy(); drawLadder(); drawReadout(); drawPair(); }
+  // ---- S1 tracker: board conditional vs pair-implied, live when available ----
+  // Frozen bands are the pre-registered (r=2%/mo, no loans) values; creation
+  // numbers are the Jul-11 19:00 UTC fallback when live fetch is unavailable.
+  var S1ROWS = [
+    { i: 0, band: 0.054, createC: 0.620, createHat: 0.609 },
+    { i: 1, band: 0.063, createC: 0.590, createHat: 0.546 }
+  ];
+  function drawS1() {
+    var tbl = document.getElementById("s1track");
+    if (!tbl) return;
+    var have = LIVE.cond && LIVE.pair;
+    document.getElementById("s1when").textContent = have
+      ? "live, fetched " + LIVE.at.toISOString().slice(11, 16) + " UTC"
+      : "at creation (Jul 11, 19:00 UTC)";
+    S1ROWS.forEach(function (s) {
+      var d = CANDS[s.i];
+      var c = have && LIVE.cond[d.condId] !== undefined ? LIVE.cond[d.condId] : s.createC;
+      var hat = s.createHat;
+      if (have) {
+        var pd = LIVE.pair[d.pairDem], pr = LIVE.pair[d.pairRep];
+        if (pd !== undefined && pr !== undefined && pd + pr > 0) hat = pd / (pd + pr);
+      }
+      var div = Math.abs(hat - c);
+      var row = tbl.querySelector('tr[data-i="' + s.i + '"]');
+      row.innerHTML = "<td>" + d.name + "</td>" +
+        '<td class="num">' + c.toFixed(3) + "</td>" +
+        '<td class="num">' + hat.toFixed(3) + "</td>" +
+        '<td class="num">' + (div * 100).toFixed(1) + " pts</td>" +
+        '<td class="num">±' + (s.band * 100).toFixed(1) + "</td>" +
+        "<td>" + (div <= s.band
+          ? '<span class="yes">✓</span> <span class="small">inside</span>'
+          : '<span class="no">✗</span> <span class="small">outside — the anchors should be firing</span>') + "</td>";
+    });
+  }
+
+  function update() { drawBoard(); drawAnatomy(); drawLadder(); drawReadout(); drawPair(); drawS1(); }
 
   var slider = document.getElementById("rslider");
   var loansbox = document.getElementById("loansbox");
@@ -911,8 +1074,19 @@
     slider.value = FROZEN_R; loansbox.checked = FROZEN_LOANS; update();
   });
   document.getElementById("livebtn").addEventListener("click", toggleLive);
+  document.getElementById("refreshbtn").addEventListener("click", fetchLive);
+  document.querySelectorAll("#viewsel button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      VIEW = b.dataset.view;
+      document.querySelectorAll("#viewsel button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      document.getElementById("viewnote").textContent = VIEWNOTES[VIEW];
+      update();
+    });
+  });
+  document.getElementById("viewnote").textContent = VIEWNOTES.board;
 
   update();
+  fetchLive();   // live layer loads by default; the frozen record stands regardless
 
   // coherence stacked bar, domain 0..0.7
   var SEGS = [
