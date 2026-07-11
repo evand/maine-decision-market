@@ -366,7 +366,7 @@
       <span class="item" id="pairlegend" style="display:none"><span class="sqdemo"></span> joint market, pair-implied — ratio of the two "X vs Collins" answers</span>
       <span class="item"><span class="banddemo"></span> carry band (±ε at <span class="num dyn" id="legendR">r = 2%/mo</span>) — cost of locked capital</span>
       <span class="item" id="gridlegend" style="display:none"><span class="gridemo"></span> price-grid cell — joints quote on Manifold’s 1% grid</span>
-            <span class="item"><span class="fogdemo"></span> attention/granularity haze out to the noticing floor (min trade <span class="num dyn" id="fogC">M$1</span>, frozen depth) — subsidy removes it</span>
+            <span class="item"><span class="fogdemo"></span> attention/granularity haze out to the noticing floor (min trade <span class="num dyn" id="fogC">M$1</span>, <span id="fogdepth">frozen depth</span>) — subsidy removes it</span>
       <span class="item" id="fossillegend"><span class="fossildemo"></span> withdrawn — price is conditional on un-withdrawing</span>
       <span class="item"><span class="num" style="color:var(--accent)">│</span> market's overall P(Dem win) = <span class="num" id="anchorval">0.596</span></span>
       <span class="item"><button class="liveb" id="livebtn">overlay live prices</button></span>
@@ -425,8 +425,7 @@
   masthead price toggle; Kleban and below omitted as in the tables above — the shrink only grows
   further down):</p>
   <div class="tablewrap" id="netting"></div>
-  <p class="prose">Every "mush" row becomes an "informative" row: the whole board lands at the
-  front-runners' ±3–5 points, and the ranking trade's 2× haircut disappears with it.</p>
+  <p class="prose" id="nettingverdict"></p>
   <p class="prose small muted">Design footnote: the refund machinery is already per-answer (we verified the
   resolution code), so netting is an accounting change, not a resolution change. The missing piece is that
   in independent-answer markets Manifold has no way to <em>know</em> the conditions are exclusive — it
@@ -454,10 +453,14 @@
   (mana earning 2%/month elsewhere) carry binds and subsidy is nearly futile. For <em>patient</em> capital —
   idle mana, hobby attention, r ≈ 0 — only the attention floor binds, and there subsidy is the whole game.
   The bet-feed audit above is evidence for the patient regime: the tail answers trade at all, at prices far
-  inside any carry band. And in that regime the arithmetic turns sharp: M$10k per answer drops the
-  attention floor to about <strong>±1.3 points per side — 2.6 combined, under the 3-point
-  Jackson–Bellows gap</strong>. If the patient-capital reading is right, subsidy alone can buy the ranking;
-  the ladder below is the pessimistic case.</p>
+  inside any carry band. <span id="subsidyverdict"></span></p>
+  <p class="prose small muted">Corrected Jul 11, when this sentence became computed: the pre-publication
+  text read "±1.3 per side — 2.6 combined", which reused Jackson's floor for Bellows (her
+  p<sub>B</sub> = 0.271 makes hers ±1.9) and combined the legs by doubling. The correct combination for
+  the <em>ranking</em> trade is quadrature — one act of noticing covers both legs, per-leg prizes are
+  quadratic, so the widest hidable gap is √(ε²<sub>J</sub>+ε²<sub>B</sub>) (derivation in the min-trade
+  footnote). At the frozen prices the corrected claim is <em>stronger</em>: ±2.3 combined at M$10k/answer,
+  break-even ≈ M$5.7k/answer (≈ M$11.5k under the skeptic's model that charges the pair two noticings).</p>
 
   <h3>The anatomy of a band</h3>
   <p class="prose">Each published band is a sum of floors, and the floors respond to different levers. The
@@ -491,16 +494,20 @@
     <tr><td>Jackson vs Platner</td><td class="num">0.483</td><td><span class="yes">✓</span> <span class="small num">±24 comb.</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
     <tr><td>Jackson vs Wood</td><td class="num">0.220</td><td><span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±21</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
     <tr><td>Jackson vs Mills</td><td class="num">0.202</td><td><span class="no">✗</span> <span class="small num">±37</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
-    <tr><td><strong>Jackson vs Bellows</strong> (the live choice)</td><td class="num">0.030</td><td><span class="no">✗</span> <span class="small num">±12</span></td><td><span class="no">✗</span> <span class="small num">±10</span></td><td><span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±2.4</span></td></tr>
+    <tr><td><strong>Jackson vs Bellows</strong> (the live choice)</td><td class="num">0.030</td><td><span class="no">✗</span> <span class="small num">±12</span></td><td><span class="no">✗</span> <span class="small num">±10</span></td><td><span class="yes">✓</span> <span class="small num">±2.3</span></td></tr>
     <tr><td>Shah vs Bellows</td><td class="num">0.010</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span> — genuinely tied</td></tr>
   </table></div>
   <p class="prose small muted">Cells show the combined band of the pair; ✓ = gap exceeds it. Every column
-  assumes the floor is actually reached — i.e., every column silently assumes the subsidy lever too.</p>
+  assumes the floor is actually reached — i.e., every column silently assumes the subsidy lever too.
+  Combination rules (corrected Jul 11): the carry columns add the two legs linearly — carry is a separable
+  per-mana cost, a below-floor leg can't be cross-subsidized. The patient-capital column is the
+  attention-only floor at the reference M$10k/answer subsidy, legs combined in quadrature — one act of
+  noticing covers the whole pair trade (derivation in the min-trade footnote).</p>
 
   <p class="prose"><strong>Today's market, funded, can rule out the tail</strong> — barely.
   <strong>Netting buys the establishment question</strong> ("is Mills really worse?" becomes answerable).
   <strong>Jackson-vs-Bellows needs either the full reform stack — or the patient-capital regime plus real
-  subsidy</strong> (the ±1.3-point arithmetic above). Shah-vs-Bellows is beyond every rung and both regimes —
+  subsidy</strong> (the quadrature arithmetic above). Shah-vs-Bellows is beyond every rung and both regimes —
   at these prices that comparison is a genuine tie, and no market mechanism will pretend otherwise.</p>
   <p class="prose">The house-money case: reforms take engineering
   and time this decision doesn't have, but the subsidy lever exists <em>today</em> — and Manifold's own
@@ -666,6 +673,21 @@
     prize floor are conflated deliberately; they are the same order of magnitude here. Note what
     lowers m in the real world: better UI. That is the quiet argument for a purpose-built
     conditional-markets viewer.</p>
+    <p class="prose"><strong>How the floors combine over a pair trade</strong> (added Jul 11). The ranking
+    question is a <em>pair</em> trade — YES on one conditional, NO on the other — and the two ends of this
+    knob combine differently across its legs. The mechanical end is per-leg: Manifold's API enforces
+    amount ≥ M$1 <em>per bet call</em> (and quantizes resting limit orders to whole percentage points), so
+    tick floors add linearly. The bother end is per-trade: the thinking cost C attaches to the entire
+    trade — "the J–B gap is mispriced" is one insight, the second click is nearly free. The prize for
+    correcting a mispricing ε on leg i is quadratic, C·(ε/ε<sub>i</sub>*)², so the gap errors the market
+    can hide from a pair trader form the ellipse (ε<sub>A</sub>/ε<sub>A</sub>*)² +
+    (ε<sub>B</sub>/ε<sub>B</sub>*)² ≤ 1 — and the widest hidable gap is
+    <span class="num">√(ε<sub>A</sub>*² + ε<sub>B</sub>*²)</span>: the attention floors combine in
+    quadrature. (The hiding allocation sits inside each single-leg floor too, so single-leg correctors
+    can't see it either.) Carry, by contrast, is a separable per-mana cost — a below-floor leg has
+    negative marginal value at any size and can't be cross-subsidized — so carry floors add linearly.
+    A skeptic who charges the pair trade two noticings scales the quadrature term by √2; that bound is
+    quoted alongside the headline numbers where it matters.</p>
   </details>
 
   <details class="fnote"><summary>Where the bands come from (the derivation)</summary>
@@ -745,7 +767,8 @@
     2026-07-11 (the joint market, at its creation) — and never move; that is what pre-registered means
     here. <span class="dyn">Highlighted</span> numbers re-derive from the capital controls. And the
     masthead toggle switches the charts between the frozen record and <strong>live Manifold
-    prices</strong> fetched in your browser — live is the default when the fetch succeeds; where it is
+    prices and pool depths</strong> fetched in your browser (since Jul 11 the attention/granularity
+    floors follow live depth too) — live is the default when the fetch succeeds; where it is
     blocked, the page degrades to the frozen record. However the charts are set, the pre-registered
     claims are graded against the frozen numbers only.</p>
   </footer>
@@ -791,10 +814,11 @@
     pairDem: "lS8yOQsNdO", pairRep: "tLPN082OLs",
     pair: { c: 0.454, q: 0.229, p: 0.247, attn: 0.26, kc: 0.033 } };
   // pair.attn = attention/noticing floor at C≈M$1, from measured M$1 price
-  // impacts on the live pools 2026-07-11 ~20:15 UTC (M$175 total liquidity),
+  // impacts on the pools 2026-07-11 ~20:15 UTC (M$175 total liquidity),
   // converted to conditional units; kc = that impact per M$ (the joint
-  // tick/granularity slope). Static & dated — board rows compute attnE()/
-  // tickE() from their frozen 2026-07-10 pools instead.
+  // tick/granularity slope). These are the FROZEN record; in live mode
+  // mat() recomputes kc from the live pair pools (pairKcFromPools) and
+  // attn = √(2·kc) — the same law these constants satisfy.
 
   var VIEW = "board";
   function viewNote() {
@@ -807,7 +831,7 @@
       ": ĉ = P(X defeats Collins) ÷ P(the X-vs-Collins matchup). Bands: the board's carry law " +
       "(hedged-ratio trade) plus the 1%-price-grid floor ÷ matchup mass. Beyond the front-runners, " +
       "candidates are bucketed — no individual price. These are incentive floors — unchanged at 100× " +
-      "the liquidity; what today's thin depth (M$175 vs the board's M$3,000) adds is the haze layer, " +
+      "the liquidity; what today's thin depth (" + jointLiqTag() + " vs the board's M$3,000) adds is the haze layer, " +
       "which flow or subsidy removes. The hard band is the subsidized limit.";
     return "Circle / upper bar: conditional board; square / lower bar: joint market, pair-implied" +
       (live ? " — both at live prices" : " (board frozen Jul 10, joint frozen Jul 11)") +
@@ -821,7 +845,9 @@
   var DECISION = Date.parse("2026-07-27T12:00:00Z"), ELECTION = Date.parse("2026-11-03T12:00:00Z");
   function horizons() {
     if (PRICEMODE === "live") {
-      var now = Date.now();
+      // Keyed to the marketstate's timestamp, not the wall clock, so a
+      // loaded snapshot (roadmap iii) gets its own consistent horizons.
+      var now = LIVE.ms ? Date.parse(LIVE.ms.at) : Date.now();
       T_NA = Math.max(1, (DECISION - now) / 86400000);
       T_LIVE = Math.max(2, (ELECTION - now) / 86400000);
     } else { T_LIVE = 120; T_NA = 15; }
@@ -863,10 +889,39 @@
   function pairAttnE(pr) { return pr.attn * Math.sqrt(state.mbet); }
   function pairTickE(pr) { return state.mbet * pr.kc; }
   function pairHazeE(pr) { return Math.max(pairAttnE(pr), pairTickE(pr)); }
+  // ---- the ranking (gap) floor: how the per-leg floors combine over a
+  // pair trade (derived 2026-07-11, correcting the published arithmetic) --
+  // CARRY adds LINEARLY: a per-mana marginal cost, separable per leg — a
+  //   below-floor leg can't be cross-subsidized (its marginal value is
+  //   negative at any size).
+  // ATTENTION combines in QUADRATURE: one noticing cost C covers the whole
+  //   pair trade (the bother is thinking about the entire trade — evand
+  //   ruling 2026-07-11), per-leg prizes are quadratic, so the hidable-gap
+  //   region is the ellipse (εA/εA*)² + (εB/εB*)² ≤ 1 and the max hidable
+  //   gap is √(εA*² + εB*²). Charging the pair 2C would scale this by √2 —
+  //   the skeptic's bound, quoted in the correction note.
+  // TICKS add LINEARLY: the M$1 minimum is per place-bet API call, one per
+  //   leg (vendor: schema.ts amount ≥ 1; limit orders quantize to whole
+  //   percentage points, place-bet.ts).
+  function gapAttnE(A, B) { var a = attnE(A), b = attnE(B); return Math.sqrt(a * a + b * b); }
+  function gapHazeE(A, B) { return Math.max(tickE(A) + tickE(B), gapAttnE(A, B)); }
+  function attnAtDepth(d, S) {   // attention floor at S M$ of pool depth (subsidy scenarios)
+    return Math.sqrt(2 * d.c * state.mbet / (d.pX * S * DEPTH_CAL));
+  }
+  function gapAttnAtDepth(A, B, S) {
+    var a = attnAtDepth(A, S), b = attnAtDepth(B, S);
+    return Math.sqrt(a * a + b * b);
+  }
+  function liveDepth() { return PRICEMODE === "live" && LIVE.ms !== null; }
+  function depthTag() { return liveDepth() ? "live depth" : "frozen depth"; }
+  function jointLiqTag() {
+    return liveDepth() && LIVE.ms.jointLiq ? "M$" + Math.round(LIVE.ms.jointLiq) : "M$175";
+  }
   function pp(e) { return (e * 100).toFixed(1); }
   function dynv(t) { return "<span class='num dyn'>" + t + "</span>"; }
   function ppr(e) { var v = e * 100; return v >= 3 ? String(Math.round(v)) : v.toFixed(1); }
   function fmtM(m) { return "M$" + (m >= 10 ? String(Math.round(m)) : String(Math.round(m * 10) / 10)); }
+  function fmtMk(m) { return m >= 1000 ? "M$" + (m / 1000).toFixed(1).replace(/\.0$/, "") + "k" : fmtM(m); }
   function fmtSetting() {
     return "r = " + state.r.toFixed(1) + "%/mo" + (state.loans ? " + loans" : "") +
       (state.mbet !== FROZEN_MBET ? ", min trade " + fmtM(state.mbet) : "");
@@ -876,7 +931,35 @@
   var tip = document.getElementById("tip");
 
   // ---- live-price overlay (client-side fetch; never alters the frozen record) ----
-  var LIVE = { on: false, cond: null, nom: null, pair: null, at: null };
+  var LIVE = { on: false, cond: null, nom: null, pair: null, at: null, ms: null };
+  // A marketstate is the essay's single input object: every mode-dependent
+  // number on the page derives from one of these. The frozen literals in
+  // CANDS/BUCKET are marketstate #0 (the pre-registered record, kept as
+  // explicit quoted numbers on purpose). The shape is JSON-serializable by
+  // design: the snapshot library (roadmap iii) and counterfactual mode
+  // (roadmap iv) are just "more of these" from other sources.
+  function snapshotFromAPI(rs) {
+    var s = { at: new Date().toISOString(), cond: {}, nom: {}, pair: {},
+              demwin: rs[3].probability, jointLiq: rs[2].totalLiquidity || null };
+    rs[0].answers.forEach(function (a) { s.cond[a.id] = { p: a.probability, pool: a.pool ? a.pool.YES + a.pool.NO : null }; });
+    rs[1].answers.forEach(function (a) { s.nom[a.id] = { p: a.probability }; });
+    rs[2].answers.forEach(function (a) { s.pair[a.id] = { p: a.probability, y: a.pool ? a.pool.YES : null, n: a.pool ? a.pool.NO : null }; });
+    return s;
+  }
+  // Exact price move of an M$m YES market-order on one cpmm-1 pool (p=0.5).
+  // Ignores multi-answer auto-arbitrage, which only shrinks the move — so
+  // live joint ticks computed from this are (slightly) conservative.
+  function cpmmDelta(y, n, m) { var n2 = n + m, y2 = y * n / n2; return n2 / (y2 + n2) - n / (y + n); }
+  // Joint-market granularity slope kc: ĉ-impact per M$1, linearized at the
+  // live pools (probe: M$1 YES on the Dem answer; dĉ/dp_d = p_r/q²). The
+  // frozen kc constants in CANDS were measured the same way at creation.
+  function pairKcFromPools(ms, demId, repId) {
+    var A = ms.pair[demId], B = ms.pair[repId];
+    if (!A || !B || A.y === null || A.n === null) return null;
+    var q = A.p + B.p;
+    if (q <= 0) return null;
+    return cpmmDelta(A.y, A.n, 1) * B.p / (q * q);
+  }
   function fetchLive() {
     var btn = document.getElementById("livebtn");
     btn.disabled = true; btn.textContent = "fetching…";
@@ -885,13 +968,14 @@
       fetch("https://api.manifold.markets/v0/market/nqLE5L0yhs").then(function (r) { return r.json(); }),
       fetch("https://api.manifold.markets/v0/market/n2yLUz2l6q").then(function (r) { return r.json(); }),
       fetch("https://api.manifold.markets/v0/market/RcL0Q9O0EU").then(function (r) { return r.json(); })
-    ]).then(function (ms) {
+    ]).then(function (rs) {
+      LIVE.ms = snapshotFromAPI(rs);
       LIVE.cond = {}; LIVE.nom = {}; LIVE.pair = {};
-      ms[0].answers.forEach(function (a) { LIVE.cond[a.id] = a.probability; });
-      ms[1].answers.forEach(function (a) { LIVE.nom[a.id] = a.probability; });
-      ms[2].answers.forEach(function (a) { LIVE.pair[a.id] = a.probability; });
-      LIVE.demwin = ms[3].probability;
-      LIVE.at = new Date(); LIVE.on = true;
+      Object.keys(LIVE.ms.cond).forEach(function (id) { LIVE.cond[id] = LIVE.ms.cond[id].p; });
+      Object.keys(LIVE.ms.nom).forEach(function (id) { LIVE.nom[id] = LIVE.ms.nom[id].p; });
+      Object.keys(LIVE.ms.pair).forEach(function (id) { LIVE.pair[id] = LIVE.ms.pair[id].p; });
+      LIVE.demwin = LIVE.ms.demwin;
+      LIVE.at = new Date(LIVE.ms.at); LIVE.on = true;
       btn.disabled = false; btn.classList.add("on"); btn.textContent = "hide live prices";
       document.getElementById("refreshbtn").style.display = "";
       setPriceMode(PRICETOUCHED ? PRICEMODE : "live");
@@ -909,12 +993,16 @@
     update();
   }
   // Materialize a row datum under the current price mode: live prices, live
-  // nominee probs, live matchup mass. Depth-dependent floors (pools, kc,
-  // attn) stay at their frozen/measured values — labeled "frozen depth".
+  // nominee probs, live matchup mass — and, since stage (ii), live DEPTH
+  // too: board pools from the same fetch, joint kc/attn recomputed from the
+  // live pair pools (attn = √(2·kc), the same law the frozen measured
+  // constants satisfy: 0.17 = √(2·0.0145), 0.26 = √(2·0.033)). The frozen
+  // literals remain the pre-registered record.
   function mat(d) {
     if (PRICEMODE !== "live" || !LIVE.cond) return d;
     var o = Object.assign({}, d);
     if (d.condId && LIVE.cond[d.condId] !== undefined) o.c = LIVE.cond[d.condId];
+    if (d.condId && LIVE.ms && LIVE.ms.cond[d.condId] && LIVE.ms.cond[d.condId].pool) o.pool = LIVE.ms.cond[d.condId].pool;
     if (d.nomId && LIVE.nom[d.nomId] !== undefined) { o.p = LIVE.nom[d.nomId]; o.pX = Math.max(0.001, o.p); }
     if (d.bucket && LIVE.nom) {
       var nj = LIVE.nom[CANDS[0].nomId], nb = LIVE.nom[CANDS[1].nomId];
@@ -924,6 +1012,8 @@
       var pd = LIVE.pair[d.pairDem], pr = LIVE.pair[d.pairRep];
       if (pd !== undefined && pr !== undefined && pd + pr > 0) {
         o.pair = Object.assign({}, d.pair, { c: pd / (pd + pr), q: pd + pr, p: o.pX || d.pair.p });
+        var kc = LIVE.ms ? pairKcFromPools(LIVE.ms, d.pairDem, d.pairRep) : null;
+        if (kc) { o.pair.kc = kc; o.pair.attn = Math.sqrt(2 * kc); }
       }
     }
     return o;
@@ -1096,11 +1186,11 @@
         if (d.c) html += "<br>board P(win | nominee) = <span class='num'>" + d.c + "</span> ± <span class='num'>" + d.e +
           "</span> <span class='num'>(carry, " + fmtSetting() + ")</span>";
         if (d.ea) html += "<br>haze floor ±<span class='num'>" + (100 * d.ea).toFixed(1) +
-          "</span> pts (min trade " + fmtM(state.mbet) + ", frozen depth)";
+          "</span> pts (min trade " + fmtM(state.mbet) + ", " + depthTag() + ")";
         if (d.pc) html += "<br>joint mkt pair-implied ĉ = <span class='num'>" + d.pc + "</span> ± <span class='num'>" +
           d.pe + "</span> <span class='num'>(" + d.pdec + ")</span>";
         if (d.pea) html += "<br>joint haze floor ±<span class='num'>" + Math.round(100 * d.pea) +
-          "</span> pts at today's M$175 depth";
+          "</span> pts at " + (liveDepth() ? jointLiqTag() + " live" : "its creation M$175") + " depth";
         if (d.plc) html += "<br>pair-implied live = <span class='num'>" + d.plc + "</span>";
         if (d.lt) html += "<br>last traded " + d.lt + " · M$<span class='num'>" + d.v8 + "</span> since withdrawal";
         if (d.lc || d.lp) {
@@ -1122,7 +1212,7 @@
       '<th class="num">carry: live branch<br><span class="small">locked to Nov 3</span></th>' +
       '<th class="num">carry: refund branch<br><span class="small">idle to Jul 27</span></th>' +
       '<th class="num">= band ±ε</th>' +
-      '<th class="num">attention floor<br><span class="small">prize ≥ ' + fmtM(state.mbet) + ', frozen depth</span></th>' +
+      '<th class="num">attention floor<br><span class="small">prize ≥ ' + fmtM(state.mbet) + ', ' + depthTag() + '</span></th>' +
       '<th>drawn to scale<br><span class="small" style="text-transform:none; letter-spacing:0">' +
       '<span style="display:inline-block;width:10px;height:8px;border-radius:2px;background:var(--ink-2)"></span> live ' +
       '<span style="display:inline-block;width:10px;height:8px;border-radius:2px;background:color-mix(in srgb, var(--ink-2) 40%, transparent)"></span> refund ' +
@@ -1152,8 +1242,9 @@
     document.getElementById("anatomy").innerHTML = h;
     document.getElementById("anatomynote").innerHTML =
       "Points per side (±), at <span class='num'>" + fmtSetting() + "</span>. The carry columns follow the " +
-      "controls above the board; the attention floor follows depth (pools frozen 2026-07-10) and the " +
-      "min-trade knob (√), and is " +
+      "controls above the board; the attention floor follows depth (" +
+      (liveDepth() ? "live pools, fetched " + LIVE.at.toISOString().slice(11, 16) + " UTC" : "pools frozen 2026-07-10") +
+      ") and the min-trade knob (√), and is " +
       "untouched by the first two levers. <strong>Bold marks the larger — binding — floor</strong>; in " +
       "the bar, the binding floor is whatever reaches furthest right (solid = live branch, pale = refund " +
       "branch, │ = haze). The tick column — the price impact of one min-worthwhile trade — follows the " +
@@ -1166,11 +1257,20 @@
     { a: 0, b: 5, gap: 0.483, label: "Jackson vs Platner" },
     { a: 0, b: 3, gap: 0.220, label: "Jackson vs Wood" },
     { a: 0, b: 4, gap: 0.202, label: "Jackson vs Mills" },
-    { a: 0, b: 1, gap: 0.030, label: "<strong>Jackson vs Bellows</strong> (the live choice)",
-      pat: '<span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±2.4</span>' },
-    { a: 2, b: 1, gap: 0.010, label: "Shah vs Bellows",
-      pat: '<span class="no">✗</span> — genuinely tied' }
+    { a: 0, b: 1, gap: 0.030, label: "<strong>Jackson vs Bellows</strong> (the live choice)" },
+    { a: 2, b: 1, gap: 0.010, label: "Shah vs Bellows" }
   ];
+  // Patient-capital cell: carry → 0, so only the attention floor remains —
+  // computed at the reference M$10k/answer subsidy, legs in quadrature
+  // (was a hand-frozen "±2.4" until Jul 11; see the correction note above).
+  function patientCell(A, B, gap) {
+    var q = gapAttnAtDepth(A, B, SUBSIDY_S);
+    if (gap <= q && q > 2 * gap) return '<span class="no">✗</span> — genuinely tied <span class="small num">±' + ppr(q) + "</span>";
+    var ok = gap > q, barely = ok && gap < 1.25 * q;
+    return (ok ? '<span class="yes">✓</span>' : '<span class="no">✗</span>') +
+      (barely ? ' <span class="small">barely</span>' : "") +
+      ' <span class="small num">±' + ppr(q) + "</span>";
+  }
   function verdictCell(gap, comb) {
     if (comb < 0.002) {
       return '<span class="small muted">carry ~0 — attention decides →</span>';
@@ -1190,7 +1290,7 @@
         h += "<tr><td>" + pr.label + '</td><td class="num">' + pr.gap.toFixed(3) + "</td>" +
           "<td>" + verdictCell(pr.gap, bandE(A) + bandE(B)) + "</td>" +
           "<td>" + verdictCell(pr.gap, nettedE(A) + nettedE(B)) + "</td>" +
-          "<td>" + (pr.pat || '<span class="yes">✓</span>') + "</td></tr>";
+          "<td>" + patientCell(A, B, pr.gap) + "</td></tr>";
       });
       document.getElementById("ladder").innerHTML = h;
     });
@@ -1205,6 +1305,7 @@
     document.getElementById("anchorval").textContent =
       (PRICEMODE === "live" && LIVE.demwin ? LIVE.demwin : ANCHOR).toFixed(3);
     document.getElementById("fogC").textContent = fmtM(state.mbet);
+    document.getElementById("fogdepth").textContent = depthTag();
     document.querySelectorAll("#presets button").forEach(function (b) {
       b.classList.toggle("on", parseFloat(b.dataset.r) === state.r);
     });
@@ -1231,9 +1332,14 @@
       (carryOk ? "<strong>the ranking clears the carry floor</strong>" : "<strong>the ranking stays unresolvable</strong>") +
       " at " + dynv(fmtSetting()) + ".";
     if (carryOk) {
-      h += " Carry is only floor one: the haze floor (±" + dynv(pp(atJ)) +
-        " / ±" + dynv(pp(atB)) + ") still swallows the gap — cheap capital " +
-        "alone doesn't buy the ranking; depth has to move too.";
+      var gh = gapHazeE(J, B);
+      h += gh > gap
+        ? " Carry is only floor one: the pair's haze floor (±" + dynv(pp(gh)) +
+          ", per-leg floors ±" + dynv(pp(atJ)) + " / ±" + dynv(pp(atB)) +
+          " in quadrature — one noticing covers both legs) still swallows the gap — cheap capital " +
+          "alone doesn't buy the ranking; depth has to move too."
+        : " And the pair's haze floor (±" + dynv(pp(gh)) + ", per-leg floors in quadrature) sits " +
+          "under the gap too — at this depth and these settings the ranking is genuinely priced.";
     }
     return h;
   }
@@ -1245,7 +1351,7 @@
           "(p<sub>B</sub> <span class='num'>" + d.p.toFixed(2).replace(/^0/, "") + "</span> means the conditional usually matters). " +
           rankVerdict() + " The joint market reads him at ĉ <span class='num'>" + d.pair.c.toFixed(3).replace(/^0/, "") + "</span>; its tax is " +
           "different — a <span class='num'>" + pp(pairGridE(d.pair)) + "</span>-point grid cell plus ±" +
-          dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " of haze at today's M$175 depth.";
+          dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " of haze at today's " + jointLiqTag() + " depth.";
       case "bellows":
         return "Bellows carries the wider refund branch of the two front-runners (p<sub>B</sub> " +
           "<span class='num'>.271</span>: more worlds where capital idles to Jul 27). " + rankVerdict() +
@@ -1323,25 +1429,58 @@
              d.pair.attn ? 100 * pairHazeE(d.pair) : null) +
         '<span class="nums">ĉ <span class="num">' + d.pair.c.toFixed(3).replace(/^0/, "") + "</span> · carry ±" + dynv(pp(eC)) +
         " + grid <span class='num'>" + pp(eG) + "</span>" +
-        (d.pair.attn ? " · haze ±" + dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " <span class='small'>at M$175 depth</span>" : "") + "</span></div>";
+        (d.pair.attn ? " · haze ±" + dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " <span class='small'>at " + jointLiqTag() + " depth</span>" : "") + "</span></div>";
     }
     h += '<p class="dtext">' + explain(d) + "</p>";
     document.getElementById("detail").innerHTML = h;
   }
 
+  var MUSH_E = 0.10;   // the board table's implicit mush line: frozen bands ±5.4/6.3 are
+                       // "informative", ±15.7/20.6 are "mush" — 0.10 splits the population
   function drawNetting() {
     var el = document.getElementById("netting");
     if (!el) return;
     var h = '<table><tr><th>Candidate</th><th class="num">band ±ε<br><span class="small">' + fmtSetting() +
       "</span></th>" + '<th class="num">band under netting</th><th class="num">shrink</th></tr>';
+    var netted = [];
     CANDS.forEach(function (d0) {
       var d = mat(d0);
       if (d.c === null || d.withdrawn) return;
       var e = bandE(d), n = nettedE(d);
+      netted.push(n);
       h += "<tr><td>" + d.name + '</td><td class="num">±' + pp(e) + '</td><td class="num">±' + pp(n) +
         '</td><td class="num">' + (e / n).toFixed(1) + "×</td></tr>";
     });
     el.innerHTML = h + "</table>";
+    // Regime-keyed conclusion: both branch texts written out, the booleans pick.
+    var lo = Math.min.apply(null, netted), hi = Math.max.apply(null, netted);
+    var wide = netted.filter(function (n) { return n > MUSH_E; }).length;
+    document.getElementById("nettingverdict").innerHTML = wide === 0
+      ? "Every “mush” row becomes an “informative” row: the whole board lands at " +
+        dynv("±" + pp(lo) + "–" + pp(hi)) + " points, and the ranking trade’s 2× haircut disappears with it."
+      : "Netting tightens the whole board to " + dynv("±" + pp(lo) + "–" + pp(hi)) + " points at these settings — " +
+        "but " + dynv(String(wide)) + " row" + (wide === 1 ? "" : "s") + " stay" + (wide === 1 ? "s" : "") +
+        " wider than ±" + pp(MUSH_E) + ": at this cost of capital, netting alone no longer clears the mush.";
+  }
+  // ---- regime-keyed subsidy conclusion (the patient-capital arithmetic) ----
+  var SUBSIDY_S = 10000;   // the essay's reference subsidy scenario, M$ of depth per answer
+  function drawRegime() {
+    var el = document.getElementById("subsidyverdict");
+    if (!el) return;
+    var J = mat(CANDS[0]), B = mat(CANDS[1]);
+    var gap = Math.abs(J.c - B.c);
+    var quad = gapAttnAtDepth(J, B, SUBSIDY_S);
+    var breakEven = SUBSIDY_S * Math.pow(quad / gap, 2);   // attn ∝ 1/√depth
+    el.innerHTML = "And in that regime the arithmetic turns sharp: M$10k per answer drops the " +
+      "ranking’s combined attention floor to " + dynv("±" + pp(quad)) + " points" +
+      (quad < gap
+        ? " — <strong>under the " + dynv(pp(gap)) + "-point Jackson–Bellows gap</strong> (break-even ≈ " +
+          dynv(fmtMk(breakEven)) + "/answer). If the patient-capital reading is right, subsidy alone can " +
+          "buy the ranking; the ladder below is the pessimistic case."
+        : " — <strong>still above the " + dynv(pp(gap)) + "-point Jackson–Bellows gap</strong>; buying the " +
+          "ranking outright would take ≈ " + dynv(fmtMk(breakEven)) + "/answer of depth. At these prices " +
+          "even the patient regime needs more than the reference M$10k; the ladder below is the " +
+          "pessimistic case.");
   }
 
   function drawPair() {
@@ -1386,7 +1525,7 @@
     });
   }
 
-  function update() { horizons(); drawBoard(); drawAnatomy(); drawLadder(); drawNetting(); drawControls(); drawDetail(); drawPair(); drawS1(); }
+  function update() { horizons(); drawBoard(); drawAnatomy(); drawLadder(); drawNetting(); drawRegime(); drawControls(); drawDetail(); drawPair(); drawS1(); }
 
   var slider = document.getElementById("rslider");
   var loansbox = document.getElementById("loansbox");
@@ -1428,6 +1567,11 @@
   slider.value = state.r;
   loansbox.checked = state.loans;
   mslider.value = Math.log10(state.mbet);
+
+  // ?mode=frozen|live pins the price mode (shareable links; deterministic
+  // render checks). Without it, live becomes the default once fetched.
+  var qm = /[?&]mode=(frozen|live)\b/.exec(location.search);
+  if (qm) { PRICETOUCHED = true; PRICEMODE = qm[1]; }
 
   update();
   fetchLive();   // live layer loads by default; the frozen record stands regardless
