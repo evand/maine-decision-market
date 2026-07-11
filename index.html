@@ -421,16 +421,10 @@
   <p class="prose">Worst-case-loss margining (net capital = the maximum loss over the exclusive branches)
   deletes the <span class="num">(1−p_B)/p_B</span> term from the band formula for any trader running a
   book across answers: idle legs would no longer tie capital, so only the live branch's
-  <span class="num">c·r·T_live</span> remains. On today's board:</p>
-  <div class="tablewrap"><table>
-    <tr><th>Candidate</th><th class="num">band today</th><th class="num">band under netting</th><th class="num">shrink</th></tr>
-    <tr><td>Troy Jackson</td><td class="num">±0.054</td><td class="num">±0.050</td><td class="num">1.1×</td></tr>
-    <tr><td>Shenna Bellows</td><td class="num">±0.063</td><td class="num">±0.047</td><td class="num">1.3×</td></tr>
-    <tr><td>Nirav Shah</td><td class="num">±0.206</td><td class="num">±0.048</td><td class="num">4.3×</td></tr>
-    <tr><td>Jordan Wood</td><td class="num">±0.157</td><td class="num">±0.032</td><td class="num">4.9×</td></tr>
-    <tr><td>Janet Mills</td><td class="num">±0.317</td><td class="num">±0.033</td><td class="num">9.5×</td></tr>
-    <tr><td>Dan Kleban</td><td class="num">±0.504</td><td class="num">±0.044</td><td class="num">11.5×</td></tr>
-  </table></div>
+  <span class="num">c·r·T_live</span> remains. On the board (this table follows the controls and the
+  masthead price toggle; Kleban and below omitted as in the tables above — the shrink only grows
+  further down):</p>
+  <div class="tablewrap" id="netting"></div>
   <p class="prose">Every "mush" row becomes an "informative" row: the whole board lands at the
   front-runners' ±3–5 points, and the ranking trade's 2× haircut disappears with it.</p>
   <p class="prose small muted">Design footnote: the refund machinery is already per-answer (we verified the
@@ -489,8 +483,9 @@
     <p class="prose small muted" id="anatomynote"></p>
   </details>
 
-  <p class="prose">Freeze today's prices: <strong>which choices does the market become able to
-  distinguish, purely because the bands tighten?</strong></p>
+  <p class="prose">Take the frozen 2026-07-10 prices as fixed (this ladder deliberately ignores the
+  live toggle): <strong>which choices does the market become able to distinguish, purely because the
+  bands tighten?</strong></p>
   <div class="tablewrap"><table id="ladder">
     <tr><th>Comparison (frozen gap)</th><th class="num">gap</th><th>today<br><span class="small" id="ladderHdr">(r = 2%/mo)</span></th><th>+ netting</th><th>+ netting &amp;<br>patient capital</th></tr>
     <tr><td>Jackson vs Platner</td><td class="num">0.483</td><td><span class="yes">✓</span> <span class="small num">±24 comb.</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
@@ -586,7 +581,7 @@
       <p class="grade">Grade within 3 trading days of the announcement, alongside P2.</p></div></div>
   </div>
 
-  <h2>Hanson's objections, graded on live data</h2>
+  <h2>Hanson's objections, graded on this market family</h2>
   <div class="cards">
     <div class="cardx"><span class="verdict v-no">partly refuted</span>
       <h3>"Conditional markets are too thin to mean anything"</h3>
@@ -608,7 +603,11 @@
       <p>Riskless arbitrage is structurally repelled: the N/A refund branch breaks every static payout table
       (our own arb bot disabled its Maine conditional legs for exactly this). Only opinionated capital
       disciplines a conditional — unless you hedge with the conditioner market, which restores the joint at
-      exactly c·p and is how the family's consistency law (footnotes) becomes tradeable at all.</p></div>
+      exactly c·p and is how the family's consistency law (footnotes) becomes tradeable at all.</p>
+      <p class="small muted" style="margin-top:6px">Live demonstration, Jul 11 evening: hours after the
+      joint market launched, its Jackson ratio drifted ~10 points off the board — and the mechanical
+      anchors stayed (correctly) silent. Only opinionated or refund-aware capital can close it; the S1
+      tracker above is watching.</p></div>
     <div class="cardx"><span class="verdict v-mid">wrong objective</span>
       <h3>"Who chose the question?"</h3>
       <p>The markets condition on <em>a Democrat</em> winning. The anti-Collins coalition's objective is
@@ -707,7 +706,7 @@
     corrector.</p>
   </details>
 
-  <details class="fnote"><summary>Does the family even add up? (yes — to within about a point)</summary>
+  <details class="fnote"><summary>Does the family even add up? (yes — within a point, at the frozen 2026-07-10 prices)</summary>
     <p class="prose">Decision markets come with a consistency law:
     <span class="num">P(Dem&nbsp;win) = Σ&nbsp;P(nominee=X)·P(win|X)</span>. Multiply each row of the board
     and stack the products; the total should land on the directly-traded P(Dem win). It does.</p>
@@ -741,11 +740,14 @@
     joint pairwise market <a class="num" href="https://manifold.markets/EvanDaniel/maine-senate-election-result-collin">n2yLUz2l6q</a>.
     Band derivation, refund-semantics verification (against the Manifold open-source resolution code), and the
     market map live in the project task directory (<span class="num">tasks/maine_decision_market/</span>).
-    Numbers on this page are intentionally frozen — that is what pre-registered means. Two clearly-marked
-    live layers sit on top of the frozen record without touching it: the band controls re-derive ±ε
-    from the frozen prices under different capital-cost assumptions, and current prices are fetched from
-    the Manifold API in your browser on load (the board overlay, the joint-market table, and the S1
-    tracker). Where cross-origin fetches are blocked, the page degrades to the frozen record.</p>
+    Numbers on this page come in three kinds, and the styling says which. Plain numbers in the claims
+    and prose are the <strong>pre-registered record</strong> — frozen 2026-07-10 (the board family) and
+    2026-07-11 (the joint market, at its creation) — and never move; that is what pre-registered means
+    here. <span class="dyn">Highlighted</span> numbers re-derive from the capital controls. And the
+    masthead toggle switches the charts between the frozen record and <strong>live Manifold
+    prices</strong> fetched in your browser — live is the default when the fetch succeeds; where it is
+    blocked, the page degrades to the frozen record. However the charts are set, the pre-registered
+    claims are graded against the frozen numbers only.</p>
   </footer>
 </div>
 
@@ -795,18 +797,23 @@
   // tickE() from their frozen 2026-07-10 pools instead.
 
   var VIEW = "board";
-  var VIEWNOTES = {
-    board: "The conditional board, frozen 2026-07-10 — the pre-registered record.",
-    pair: "Pair-implied conditionals from the joint market, frozen at its creation (Jul 11, 19:00 UTC): " +
-      "ĉ = P(X defeats Collins) ÷ P(the X-vs-Collins matchup). Bands: the board's carry law " +
+  function viewNote() {
+    var live = PRICEMODE === "live" && LIVE.cond;
+    if (VIEW === "board") return live
+      ? "The conditional board at live prices and live horizons. The pre-registered record is one click away (masthead: frozen 2026-07-10)."
+      : "The conditional board, frozen 2026-07-10 — the pre-registered record.";
+    if (VIEW === "pair") return "Pair-implied conditionals from the joint market" +
+      (live ? ", at live prices and live horizons" : ", frozen at its creation (Jul 11, 19:00 UTC)") +
+      ": ĉ = P(X defeats Collins) ÷ P(the X-vs-Collins matchup). Bands: the board's carry law " +
       "(hedged-ratio trade) plus the 1%-price-grid floor ÷ matchup mass. Beyond the front-runners, " +
       "candidates are bucketed — no individual price. These are incentive floors — unchanged at 100× " +
-      "the liquidity; what today's thin depth (M$175 vs the board's M$3,000) adds is an attention haze " +
-      "≈3× the board's, which flow or subsidy removes. The drawn band is the subsidized limit.",
-    both: "Circle / upper bar: conditional board (frozen Jul 10). Square / lower bar: joint market, " +
-      "pair-implied (frozen Jul 11). Same carry law in both; the joint market adds a price-grid floor " +
-      "but prices the bucket the board leaves blank."
-  };
+      "the liquidity; what today's thin depth (M$175 vs the board's M$3,000) adds is the haze layer, " +
+      "which flow or subsidy removes. The hard band is the subsidized limit.";
+    return "Circle / upper bar: conditional board; square / lower bar: joint market, pair-implied" +
+      (live ? " — both at live prices" : " (board frozen Jul 10, joint frozen Jul 11)") +
+      ". Same carry law in both; the joint market adds a coarser price-grid floor but prices the " +
+      "bucket the board leaves blank.";
+  }
 
   // ---- band math (shared by board, anatomy table, ladder, readout) ----
   var T_LIVE = 120, T_NA = 15;   // days: snapshot -> Nov 3, snapshot -> Jul 27
@@ -1194,6 +1201,7 @@
     document.getElementById("legendR").textContent = fmtSetting();
     document.getElementById("rval").textContent = "r = " + state.r.toFixed(1) + "%/mo";
     document.getElementById("mval").textContent = fmtM(state.mbet);
+    document.getElementById("viewnote").textContent = viewNote();
     document.getElementById("anchorval").textContent =
       (PRICEMODE === "live" && LIVE.demwin ? LIVE.demwin : ANCHOR).toFixed(3);
     document.getElementById("fogC").textContent = fmtM(state.mbet);
@@ -1321,6 +1329,21 @@
     document.getElementById("detail").innerHTML = h;
   }
 
+  function drawNetting() {
+    var el = document.getElementById("netting");
+    if (!el) return;
+    var h = '<table><tr><th>Candidate</th><th class="num">band ±ε<br><span class="small">' + fmtSetting() +
+      "</span></th>" + '<th class="num">band under netting</th><th class="num">shrink</th></tr>';
+    CANDS.forEach(function (d0) {
+      var d = mat(d0);
+      if (d.c === null || d.withdrawn) return;
+      var e = bandE(d), n = nettedE(d);
+      h += "<tr><td>" + d.name + '</td><td class="num">±' + pp(e) + '</td><td class="num">±' + pp(n) +
+        '</td><td class="num">' + (e / n).toFixed(1) + "×</td></tr>";
+    });
+    el.innerHTML = h + "</table>";
+  }
+
   function drawPair() {
     document.querySelectorAll("#pairtable td[data-aid]").forEach(function (td) {
       var v = LIVE.pair ? LIVE.pair[td.dataset.aid] : undefined;
@@ -1363,7 +1386,7 @@
     });
   }
 
-  function update() { horizons(); drawBoard(); drawAnatomy(); drawLadder(); drawControls(); drawDetail(); drawPair(); drawS1(); }
+  function update() { horizons(); drawBoard(); drawAnatomy(); drawLadder(); drawNetting(); drawControls(); drawDetail(); drawPair(); drawS1(); }
 
   var slider = document.getElementById("rslider");
   var loansbox = document.getElementById("loansbox");
@@ -1387,11 +1410,9 @@
     b.addEventListener("click", function () {
       VIEW = b.dataset.view;
       document.querySelectorAll("#viewsel button[data-view]").forEach(function (x) { x.classList.toggle("on", x === b); });
-      document.getElementById("viewnote").textContent = VIEWNOTES[VIEW];
       update();
     });
   });
-  document.getElementById("viewnote").textContent = VIEWNOTES.board;
   [["pmlive", "live"], ["pmfrozen", "frozen"]].forEach(function (pair) {
     document.getElementById(pair[0]).addEventListener("click", function () {
       PRICETOUCHED = true;
