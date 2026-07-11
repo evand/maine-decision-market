@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Pre-registered read of the Manifold decision-market family for the 2026 Maine Senate nomination: conditional prices with honest error bars, frozen before the party's July 27 choice.">
+<title>The Committee &amp; the Market — Maine Senate 2026</title>
+<style>
+  :root {
+    --bg: #F7F8F6;
+    --card: #FFFFFF;
+    --ink: #1C2B25;
+    --ink-2: #4A5B53;
+    --ink-3: #7A8A81;
+    --line: #DDE3DE;
+    --line-strong: #B9C4BC;
+    --accent: #0C6E85;          /* spruce-teal, link/emphasis */
+    --alert: #C24E27;           /* buoy orange — deadline & warnings only */
+    --band-alpha: 0.16;
+    --c-jackson: #0C82A0;
+    --c-bellows: #7A5CC4;
+    --c-shah:    #B0771E;
+    --c-wood:    #5E8A3C;
+    --c-mills:   #A84B6F;
+    --dem: #3E6FB0;
+    --rep: #B5433C;
+    --chip-ok-bg: #E3EEE6; --chip-ok-ink: #2E6141;
+    --chip-no-bg: #F4E4DC; --chip-no-ink: #9C3D1B;
+    --chip-mid-bg: #EDEAD9; --chip-mid-ink: #6E6320;
+    --chip-na-bg: #E7E9E7; --chip-na-ink: #57655D;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14201B; --card: #1B2922; --ink: #E6ECE8; --ink-2: #A9B8AF;
+      --ink-3: #74857B; --line: #2C3B33; --line-strong: #435449;
+      --accent: #5BB8CF; --alert: #E07A50; --band-alpha: 0.22;
+      --c-jackson: #3FA9C6; --c-bellows: #A08BE0; --c-shah: #D19A3F;
+      --c-wood: #7FAF5C; --c-mills: #CC7495;
+      --dem: #6E97D0; --rep: #D0716A;
+      --chip-ok-bg: #23402E; --chip-ok-ink: #9CCFAC;
+      --chip-no-bg: #46281C; --chip-no-ink: #E5A183;
+      --chip-mid-bg: #3D3A20; --chip-mid-ink: #D3C566;
+      --chip-na-bg: #28332D; --chip-na-ink: #9FB0A6;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14201B; --card: #1B2922; --ink: #E6ECE8; --ink-2: #A9B8AF;
+    --ink-3: #74857B; --line: #2C3B33; --line-strong: #435449;
+    --accent: #5BB8CF; --alert: #E07A50; --band-alpha: 0.22;
+    --c-jackson: #3FA9C6; --c-bellows: #A08BE0; --c-shah: #D19A3F;
+    --c-wood: #7FAF5C; --c-mills: #CC7495;
+    --dem: #6E97D0; --rep: #D0716A;
+    --chip-ok-bg: #23402E; --chip-ok-ink: #9CCFAC;
+    --chip-no-bg: #46281C; --chip-no-ink: #E5A183;
+    --chip-mid-bg: #3D3A20; --chip-mid-ink: #D3C566;
+    --chip-na-bg: #28332D; --chip-na-ink: #9FB0A6;
+  }
+  :root[data-theme="light"] {
+    --bg: #F7F8F6; --card: #FFFFFF; --ink: #1C2B25; --ink-2: #4A5B53;
+    --ink-3: #7A8A81; --line: #DDE3DE; --line-strong: #B9C4BC;
+    --accent: #0C6E85; --alert: #C24E27; --band-alpha: 0.16;
+    --c-jackson: #0C82A0; --c-bellows: #7A5CC4; --c-shah: #B0771E;
+    --c-wood: #5E8A3C; --c-mills: #A84B6F;
+    --dem: #3E6FB0; --rep: #B5433C;
+    --chip-ok-bg: #E3EEE6; --chip-ok-ink: #2E6141;
+    --chip-no-bg: #F4E4DC; --chip-no-ink: #9C3D1B;
+    --chip-mid-bg: #EDEAD9; --chip-mid-ink: #6E6320;
+    --chip-na-bg: #E7E9E7; --chip-na-ink: #57655D;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.55; margin: 0; padding: 0 20px 80px;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; }
+  .prose { max-width: 68ch; }
+  h1, h2, h3 { font-family: "Palatino Linotype", Palatino, "Book Antiqua", "URW Palladio L", Georgia, serif; text-wrap: balance; }
+  h1 { font-size: clamp(2rem, 5vw, 3rem); line-height: 1.12; margin: 0.4em 0 0.25em; font-weight: 600; }
+  h2 { font-size: 1.45rem; margin: 2.6em 0 0.5em; font-weight: 600; }
+  h3 { font-size: 1.08rem; margin: 1.6em 0 0.4em; font-weight: 600; }
+  p { margin: 0.65em 0; color: var(--ink); }
+  .muted { color: var(--ink-2); }
+  .small { font-size: 0.86rem; }
+  a { color: var(--accent); }
+  code, .num { font-family: ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+  .num { font-size: 0.95em; }
+
+  .eyebrow {
+    font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--ink-2); margin-top: 40px; display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+  }
+  .eyebrow .dot { color: var(--line-strong); }
+  .frozen {
+    display: inline-block; border: 1px solid var(--alert); color: var(--alert);
+    padding: 1px 8px; border-radius: 3px; letter-spacing: 0.14em;
+  }
+  .lede { font-size: 1.12rem; color: var(--ink-2); max-width: 62ch; }
+
+  /* timeline */
+  .timeline { display: flex; gap: 0; margin: 34px 0 8px; border-top: 2px solid var(--line-strong); flex-wrap: wrap; }
+  .tl { flex: 1 1 140px; padding: 10px 14px 0 0; position: relative; min-width: 130px; }
+  .tl::before { content: ""; position: absolute; top: -7px; left: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--ink-3); }
+  .tl.done::before { background: var(--ink); }
+  .tl.next::before { background: var(--alert); }
+  .tl .d { font-size: 0.74rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-3); font-family: ui-monospace, Menlo, monospace; }
+  .tl.next .d { color: var(--alert); font-weight: 600; }
+  .tl .t { font-size: 0.92rem; margin-top: 2px; }
+
+  /* board */
+  .board { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 22px 22px 14px; margin-top: 18px; overflow-x: auto; }
+  .board-inner { min-width: 640px; }
+  .axis { position: relative; height: 22px; margin-left: var(--label-w, 230px); font-size: 0.72rem; color: var(--ink-3); }
+  .axis span { position: absolute; transform: translateX(-50%); font-family: ui-monospace, Menlo, monospace; }
+  .rows { position: relative; }
+  .gridline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); margin-left: var(--label-w, 230px); }
+  .gridline.anchor { background: var(--accent); width: 2px; opacity: 0.75; }
+  .gridline .glabel { position: absolute; top: -20px; transform: translateX(-50%); font-size: 0.7rem; color: var(--accent); white-space: nowrap; font-family: ui-monospace, Menlo, monospace; }
+  .row { display: grid; grid-template-columns: var(--label-w, 230px) 1fr; align-items: center; min-height: 52px; position: relative; }
+  .row + .row { border-top: 1px solid var(--line); }
+  .who { padding: 6px 14px 6px 0; }
+  .who .l1 { display: flex; align-items: baseline; gap: 8px; }
+  .who .l2 { display: flex; align-items: center; gap: 8px; margin-top: 3px; }
+  .who .name { font-weight: 600; font-size: 0.95rem; white-space: nowrap; }
+  .who .pnom { font-size: 0.76rem; color: var(--ink-2); font-family: ui-monospace, Menlo, monospace; white-space: nowrap; }
+  .swatch { width: 9px; height: 9px; border-radius: 2px; display: inline-block; flex: none; align-self: center; }
+  .masstrack { width: 72px; height: 5px; background: var(--line); border-radius: 2.5px; overflow: hidden; flex: none; }
+  .massfill { height: 100%; border-radius: 2.5px; }
+  .lane { position: relative; height: 44px; }
+  .band { position: absolute; top: 50%; transform: translateY(-50%); height: 16px; border-radius: 8px; }
+  .band.fossil { border: 1px dashed currentColor; background: none !important; opacity: 0.75; }
+  .dotmark { position: absolute; top: 50%; width: 13px; height: 13px; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 0 2px var(--card); }
+  .dotmark.hollow { background: var(--card) !important; border: 2.5px solid currentColor; }
+  .cval { position: absolute; top: 2px; transform: translateX(-50%); font-size: 0.74rem; font-family: ui-monospace, Menlo, monospace; color: var(--ink-2); }
+  .chip { font-size: 0.66rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 1px 6px; border-radius: 3px; background: var(--chip-na-bg); color: var(--chip-na-ink); white-space: nowrap; }
+  .hit { position: absolute; inset: 0; cursor: help; }
+  #tip { position: fixed; z-index: 10; background: var(--ink); color: var(--bg); padding: 7px 10px; border-radius: 5px; font-size: 0.8rem; pointer-events: none; display: none; max-width: 300px; line-height: 1.4; }
+  #tip .num { color: inherit; }
+
+  /* controls */
+  .controls { display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center;
+    background: var(--card); border: 1px solid var(--line); border-radius: 6px;
+    padding: 14px 18px 12px; margin-top: 18px; font-size: 0.88rem; }
+  .controls .grp { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .controls .glabel2 { font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; }
+  .controls input[type="range"] { width: 170px; accent-color: var(--accent); }
+  .controls .rval { font-family: ui-monospace, Menlo, monospace; min-width: 78px; display: inline-block; font-variant-numeric: tabular-nums; }
+  .controls .presets { display: flex; gap: 6px; flex-wrap: wrap; }
+  .controls .presets button, .controls .resetb { font: inherit; font-size: 0.75rem;
+    padding: 2px 10px; border-radius: 12px; border: 1px solid var(--line-strong);
+    background: none; color: var(--ink-2); cursor: pointer; }
+  .controls .presets button.on { border-color: var(--accent); color: var(--accent); font-weight: 600; }
+  .controls .resetb { border-color: var(--alert); color: var(--alert); }
+  .controls .switch { display: flex; align-items: center; gap: 7px; cursor: pointer; user-select: none; }
+  .controls .switch input { accent-color: var(--accent); width: 16px; height: 16px; margin: 0; }
+  .ctl-note { flex-basis: 100%; font-size: 0.8rem; color: var(--ink-3); margin: 0; }
+  .ctl-note .warn { color: var(--alert); font-weight: 600; }
+  .readout { flex-basis: 100%; font-size: 0.87rem; color: var(--ink-2);
+    border-top: 1px dashed var(--line); padding-top: 10px; margin: 2px 0 0; }
+
+  /* live overlay */
+  .livemark { position: absolute; top: 50%; transform: translate(-50%, -50%); width: 3px; height: 28px;
+    border-radius: 1.5px; background: currentColor; box-shadow: 0 0 0 2px var(--card); }
+  .liveb { font: inherit; font-size: 0.76rem; padding: 2px 10px; border-radius: 12px;
+    border: 1px solid var(--line-strong); background: none; color: var(--ink-2); cursor: pointer; }
+  .liveb.on { border-color: var(--accent); color: var(--accent); }
+  .liveb:disabled { opacity: 0.55; cursor: default; }
+  .livedemo { width: 3px; height: 14px; border-radius: 1.5px; background: var(--ink-2); display: inline-block; }
+
+  /* legend */
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.8rem; color: var(--ink-2); margin: 12px 2px 0; }
+  .legend .item { display: flex; align-items: center; gap: 6px; }
+  .legend .banddemo { width: 26px; height: 10px; border-radius: 5px; background: color-mix(in srgb, var(--ink-2) 25%, transparent); }
+  .legend .fossildemo { width: 26px; height: 10px; border-radius: 5px; border: 1px dashed var(--ink-2); }
+
+  /* stacked coherence bar */
+  .stack { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 22px; margin-top: 16px; overflow-x: auto; }
+  .stack-inner { min-width: 560px; }
+  .sbar { position: relative; height: 34px; margin: 30px 0 6px; }
+  .seg { position: absolute; top: 0; height: 34px; }
+  .seg + .seg { border-left: 2px solid var(--card); }
+  .seg.uncov { background: repeating-linear-gradient(45deg, var(--ink-3) 0 3px, transparent 3px 7px); opacity: 0.55; }
+  .anchor-tick { position: absolute; top: -14px; bottom: -14px; width: 2px; background: var(--ink); }
+  .anchor-tick .alabel { position: absolute; top: -22px; transform: translateX(-50%); font-size: 0.68rem; white-space: nowrap; font-family: ui-monospace, Menlo, monospace; color: var(--ink-2); }
+  .sscale { position: relative; height: 16px; font-size: 0.7rem; color: var(--ink-3); }
+  .sscale span { position: absolute; transform: translateX(-50%); font-family: ui-monospace, Menlo, monospace; }
+
+  table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+  th { text-align: left; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-2); font-weight: 600; padding: 8px 12px 6px 0; border-bottom: 2px solid var(--line-strong); }
+  td { padding: 7px 12px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  td.num, th.num { text-align: right; font-family: ui-monospace, Menlo, monospace; font-variant-numeric: tabular-nums; }
+  .tablewrap { overflow-x: auto; }
+
+  .formula { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 14px 18px; font-family: ui-monospace, Menlo, monospace; font-size: 0.95rem; overflow-x: auto; margin: 14px 0; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 14px; margin-top: 16px; }
+  .cardx { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; }
+  .cardx h3 { margin: 0 0 6px; font-size: 1rem; }
+  .cardx p { font-size: 0.9rem; color: var(--ink-2); margin: 6px 0 0; }
+  .verdict { font-size: 0.68rem; letter-spacing: 0.09em; text-transform: uppercase; font-weight: 700; padding: 2px 8px; border-radius: 3px; display: inline-block; margin-bottom: 8px; }
+  .v-ok { background: var(--chip-ok-bg); color: var(--chip-ok-ink); }
+  .v-no { background: var(--chip-no-bg); color: var(--chip-no-ink); }
+  .v-mid { background: var(--chip-mid-bg); color: var(--chip-mid-ink); }
+  .v-na { background: var(--chip-na-bg); color: var(--chip-na-ink); }
+
+  .prereg { border: 2px solid var(--ink); border-radius: 6px; padding: 6px 22px 18px; margin-top: 18px; background: var(--card); }
+  .prereg h3 { display: flex; align-items: center; gap: 10px; }
+  .claim { display: grid; grid-template-columns: 46px 1fr; gap: 10px; padding: 10px 0; border-top: 1px solid var(--line); }
+  .claim .cid { font-family: ui-monospace, Menlo, monospace; font-weight: 700; color: var(--accent); }
+  .claim p { margin: 0; font-size: 0.94rem; }
+  .claim .grade { font-size: 0.82rem; color: var(--ink-2); margin-top: 4px; }
+
+  .pending { border: 1px dashed var(--line-strong); border-radius: 6px; padding: 16px 20px; margin-top: 16px; color: var(--ink-2); background: color-mix(in srgb, var(--card) 55%, transparent); }
+
+  details { margin: 10px 0; }
+  summary { cursor: pointer; color: var(--accent); font-size: 0.9rem; }
+  .fnote { background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 4px 20px 10px; margin: 14px 0; }
+  .fnote summary { font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); padding: 8px 0; }
+  .fnote[open] summary { border-bottom: 1px solid var(--line); margin-bottom: 10px; }
+  .yes { color: var(--chip-ok-ink); font-weight: 700; }
+  .no { color: var(--ink-3); font-weight: 700; }
+  footer { margin-top: 64px; border-top: 1px solid var(--line-strong); padding-top: 18px; font-size: 0.82rem; color: var(--ink-2); }
+  @media (prefers-reduced-motion: no-preference) {
+    .band, .dotmark { transition: opacity 0.15s ease; }
+  }
+</style>
+
+<div class="wrap">
+  <div class="eyebrow">
+    <span class="frozen">Pre-registered snapshot</span>
+    <span class="dot">·</span> <span>2026-07-10</span>
+    <span class="dot">·</span> <span>Manifold play-money prices (M$)</span>
+    <span class="dot">·</span> <span>graded after 2026-11-03</span>
+  </div>
+  <h1>The Committee &amp; the Market</h1>
+  <p class="lede">Maine Democrats must name a Senate nominee by <strong>July 27</strong> — no primary
+  runoff, a party committee decides. Prediction markets already price every branch of that decision.
+  This page freezes what the markets said <em>before</em> the choice, with honest error bars, so the
+  claim "the market knew" can be graded instead of asserted.</p>
+
+  <div class="timeline">
+    <div class="tl done"><div class="d">Jun 9</div><div class="t">Platner wins the Democratic primary</div></div>
+    <div class="tl done"><div class="d">Jul 8</div><div class="t">Platner withdraws after allegations</div></div>
+    <div class="tl done"><div class="d">Jul 10</div><div class="t"><strong>This snapshot</strong></div></div>
+    <div class="tl next"><div class="d">Jul 27</div><div class="t">Party committee names the nominee</div></div>
+    <div class="tl"><div class="d">Nov 3</div><div class="t">General election vs. Susan Collins</div></div>
+  </div>
+
+  <h2>The board</h2>
+  <p class="prose">Each row is a candidate the party could pick. The dot is the market's
+  <strong>P(Democrat wins the seat | this person is the nominee)</strong> — a conditional market that
+  refunds all bets if the person isn't chosen. The shaded band is the <em>no-correction band</em>: how
+  wrong the price can be before any rational trader would profit by fixing it (derivation below). The
+  small meter under each name is <strong>nomination probability</strong> — how likely the conditional
+  is to ever matter.</p>
+
+  <div class="controls" id="controls">
+    <div class="grp">
+      <span class="glabel2">Cost of capital</span>
+      <input type="range" id="rslider" min="0" max="5" step="0.1" value="2" aria-label="opportunity rate, percent per month">
+      <span class="rval" id="rval">r = 2.0%/mo</span>
+      <span class="presets" id="presets">
+        <button data-r="0">patient 0%</button>
+        <button data-r="0.9">margin rate 0.9%</button>
+        <button data-r="2" class="on">frozen 2%</button>
+        <button data-r="5">scarce 5%</button>
+      </span>
+    </div>
+    <div class="grp">
+      <span class="glabel2">Free loans</span>
+      <label class="switch"><input type="checkbox" id="loansbox"> claim daily (1%/day reclaim)</label>
+      <button class="resetb" id="resetb" style="display:none">reset to frozen</button>
+    </div>
+    <p class="ctl-note" id="ctlnote">Exploration only. The pre-registered record — every number in the
+    prose and the P-claims — is frozen at <span class="num">r = 2%/mo, no loans</span>. Moving the
+    controls re-derives the bands from the frozen 2026-07-10 prices; it does not move the record.</p>
+    <p class="readout" id="readout"></p>
+  </div>
+
+  <div class="board"><div class="board-inner" id="board"></div>
+    <div class="legend">
+      <span class="item"><span class="banddemo"></span> no-correction band (±ε at <span id="legendR">r = 2%/mo</span>)</span>
+      <span class="item"><span class="fossildemo"></span> withdrawn — price is conditional on un-withdrawing</span>
+      <span class="item"><span class="num" style="color:var(--accent)">│</span> market's overall P(Dem win) = 0.596</span>
+      <span class="item"><button class="liveb" id="livebtn">overlay live prices</button></span>
+      <span class="item" id="livenote" style="display:none"><span class="livedemo"></span> <span id="livenotetext"></span></span>
+    </div>
+  </div>
+
+  <p class="prose">Read it plainly: the market prices Jackson <span class="num">0.620</span> and Bellows
+  <span class="num">0.590</span> with bands of ±<span class="num">5–6</span> points — <strong>each measured
+  well, their 3-point difference not measured at all</strong>. Below the front-runners, prices exist but
+  the bands swallow them. The market is a confident <strong>tail-pruner</strong> and a useless
+  <strong>argmax-finder</strong>.</p>
+  <p class="prose">One check we ran rather than assumed: are the tail prices <em>stale</em>? No — the bet
+  feed says every row traded within the last two days, and the two "dead" candidates repriced hardest
+  after the withdrawal (Platner: M$<span class="num">3,001</span> of flow since Jul 8 — his
+  <span class="num">0.137</span> is a fresh price on the "he un-withdraws by Jul 13" world, not a leftover;
+  Mills: M$<span class="num">167</span>, last trade Jul 9). The wide bands are an <em>incentive</em> bound,
+  not evidence of neglect: small opinionated money keeps these prices current even where rational carry says
+  it shouldn't bother.</p>
+
+  <details><summary>The board as a table (the frozen record: r = 2%/mo, no loans)</summary>
+    <div class="tablewrap"><table>
+      <tr><th>Candidate</th><th class="num">P(nominee)</th><th class="num">P(win | nominee)</th><th class="num">band ±ε</th><th>last traded</th><th class="num">M$ since Jul 8</th><th>status</th></tr>
+      <tr><td>Troy Jackson</td><td class="num">0.564</td><td class="num">0.620</td><td class="num">0.054</td><td>Jul 10</td><td class="num">666</td><td>informative</td></tr>
+      <tr><td>Shenna Bellows</td><td class="num">0.271</td><td class="num">0.590</td><td class="num">0.063</td><td>Jul 10</td><td class="num">1,470</td><td>informative</td></tr>
+      <tr><td>Nirav Shah</td><td class="num">0.037</td><td class="num">0.600</td><td class="num">0.206</td><td>Jul 10</td><td class="num">448</td><td>mush</td></tr>
+      <tr><td>Jordan Wood</td><td class="num">0.031</td><td class="num">0.400</td><td class="num">0.157</td><td>Jul 10</td><td class="num">61</td><td>mush</td></tr>
+      <tr><td>Janet Mills</td><td class="num">0.015</td><td class="num">0.418</td><td class="num">0.317</td><td>Jul 9</td><td class="num">167</td><td>live but wide</td></tr>
+      <tr><td>Dan Kleban</td><td class="num">0.012</td><td class="num">0.545</td><td class="num">0.504</td><td>Jul 10</td><td class="num">26</td><td>decorative</td></tr>
+      <tr><td>Valli Geiger</td><td class="num">0.007</td><td class="num">0.450</td><td class="num">&gt;0.5</td><td>Jul 9</td><td class="num">11</td><td>decorative</td></tr>
+      <tr><td>Graham Platner</td><td class="num">0.008</td><td class="num">0.137</td><td class="num">0.183</td><td>Jul 9</td><td class="num">3,001</td><td>withdrawn; prices un-withdrawal</td></tr>
+      <tr><td>Paige Loud</td><td class="num">—</td><td class="num">0.476</td><td class="num">unbounded</td><td>Jul 9</td><td class="num">886</td><td>not in nominee market</td></tr>
+      <tr><td>Field / other</td><td class="num">0.083</td><td class="num">—</td><td class="num">—</td><td>—</td><td class="num">—</td><td>no conditional priced</td></tr>
+    </table></div>
+  </details>
+
+  <h2>The capital tax</h2>
+  <p class="prose">There is a second force widening these bands beyond trading economics (the bands
+  themselves are derived in the footnotes), and it is a pure market-design artifact. The nine conditions
+  are <strong>mutually exclusive</strong> — exactly one candidate gets the nomination, so at most one
+  answer can ever cost a multi-answer bettor money. But Manifold margins every answer independently:
+  full stake posted on every leg, even the ones that are <em>guaranteed refunds</em>.</p>
+  <p class="prose">How much this costs depends on the shape of the book — nobody bets equal stakes on all
+  nine, so here is the realistic spectrum. A conviction-weighted book over the live candidates posts about
+  <strong>1.6–2×</strong> its worst-case loss. The pairwise <em>ranking</em> trade — YES on one conditional,
+  NO on another, the trade that answers the committee's actual question — posts exactly <strong>2×</strong>
+  (only one leg can ever lose). A uniform market-making quote across the whole board — the participant a
+  decision market needs most — pays the full <strong>9×</strong>. Every realistic shape pays; the deepest
+  tax lands on the most useful participants, and the only untaxed shape is the single-leg directional bet,
+  which carries the least decision information.</p>
+  <p class="prose">Worst-case-loss margining (net capital = the maximum loss over the exclusive branches)
+  deletes the <span class="num">(1−p_B)/p_B</span> term from the band formula for any trader running a
+  book across answers: idle legs would no longer tie capital, so only the live branch's
+  <span class="num">c·r·T_live</span> remains. On today's board:</p>
+  <div class="tablewrap"><table>
+    <tr><th>Candidate</th><th class="num">band today</th><th class="num">band under netting</th><th class="num">shrink</th></tr>
+    <tr><td>Troy Jackson</td><td class="num">±0.054</td><td class="num">±0.050</td><td class="num">1.1×</td></tr>
+    <tr><td>Shenna Bellows</td><td class="num">±0.063</td><td class="num">±0.047</td><td class="num">1.3×</td></tr>
+    <tr><td>Nirav Shah</td><td class="num">±0.206</td><td class="num">±0.048</td><td class="num">4.3×</td></tr>
+    <tr><td>Jordan Wood</td><td class="num">±0.157</td><td class="num">±0.032</td><td class="num">4.9×</td></tr>
+    <tr><td>Janet Mills</td><td class="num">±0.317</td><td class="num">±0.033</td><td class="num">9.5×</td></tr>
+    <tr><td>Dan Kleban</td><td class="num">±0.504</td><td class="num">±0.044</td><td class="num">11.5×</td></tr>
+  </table></div>
+  <p class="prose">Every "mush" row becomes an "informative" row: the whole board lands at the
+  front-runners' ±3–5 points, and the ranking trade's 2× haircut disappears with it.</p>
+  <p class="prose small muted">Design footnote: the refund machinery is already per-answer (we verified the
+  resolution code), so netting is an accounting change, not a resolution change. The missing piece is that
+  in independent-answer markets Manifold has no way to <em>know</em> the conditions are exclusive — it
+  would take a creator-declared "exclusive conditions" flag, with the margin relief scoped to it. That flag
+  is arguably the single cheapest infrastructure change that would make platform decision markets work.</p>
+
+  <h2>The price of precision</h2>
+  <p class="prose">Suppose someone — realistically, Manifold itself, with house money — wanted to make this
+  board sharper before July 27. There are two levers, and they are orthogonal:</p>
+  <p class="prose"><strong>Reforms lower the floors.</strong> The bands are incentive floors set by trading
+  economics; no amount of liquidity moves them. Netting (above) deletes the conditional-specific penalty.
+  Cheaper carry — patient capital that prices locked mana at, say, 0.5%/month instead of 2% — scales every
+  floor down linearly.</p>
+  <p class="prose"><strong>Subsidy pays someone to reach the floors — and for patient capital, subsidy
+  <em>is</em> the floor.</strong> The carry floor is a marginal condition (edge per mana vs. interest per
+  mana), so pool depth cancels out of it — but the <em>total</em> prize for correcting a mispricing ε
+  scales with depth, and a trader with fixed attention cost C participates only if the prize covers it.
+  That gives a second floor, ε ≈ √(2cC/p<sub>B</sub>D), which tightens as <strong>1/√depth</strong>.
+  Calibration: correcting a band-edge error on the Jackson conditional pays about <strong>M$1</strong>
+  today — this is a market that pays one mana for a five-point insight. (Not a coincidence, a
+  measurement: at C ≈ M$1 the attention floor and the carry floor coincide at today's depth.) The min-bet
+  granularity floor, for comparison, is ~0.15 points here — subsidy solved that constraint at the first
+  M$100; rates, not tick size, set today's bands.</p>
+  <p class="prose">Which floor binds depends on who sets marginal prices. For capital-constrained traders
+  (mana earning 2%/month elsewhere) carry binds and subsidy is nearly futile. For <em>patient</em> capital —
+  idle mana, hobby attention, r ≈ 0 — only the attention floor binds, and there subsidy is the whole game.
+  The bet-feed audit above is evidence for the patient regime: the tail answers trade at all, at prices far
+  inside any carry band. And in that regime the arithmetic turns sharp: M$10k per answer drops the
+  attention floor to about <strong>±1.3 points per side — 2.6 combined, under the 3-point
+  Jackson–Bellows gap</strong>. If the patient-capital reading is right, subsidy alone can buy the ranking;
+  the ladder below is the pessimistic case.</p>
+
+  <h3>The anatomy of a band</h3>
+  <p class="prose">Each published band is a sum of floors, and the floors respond to different levers. The
+  <strong>tick</strong> floor (min-bet granularity, ~0.2 points here) was solved by the first M$100 of
+  liquidity. The <strong>carry</strong> floor splits into two branches: capital locked until November if the
+  candidate is picked, and capital parked until July 27 in the (likely, for tail candidates) refund branch —
+  the slider above moves both. The <strong>attention</strong> floor is what's left when capital is free:
+  someone still has to notice, and the prize must cover the noticing.</p>
+  <p class="prose">The loans toggle exists because Manifold's leverage system changes the carry arithmetic
+  more than any plausible disagreement about r. A position holder can reclaim <strong>1% of position value
+  per day</strong> as an interest-free loan (linear, so a position is fully recycled in ~100 days; paid
+  members reclaim 2–3%/day). We verified against the resolution source that this is safe even on the refund
+  branch: the loan is repaid by deduction from the N/A refund, so the holder stays whole in every world —
+  and meanwhile had the capital back. Loans shrink the four-month live branch by ~<span class="num">2.4×</span>
+  and the two-week refund branch by only ~<span class="num">7%</span> — so they tighten exactly the
+  front-runner bands that were already the informative ones. The platform's margin-loan rate
+  (<span class="num">0.03%</span>/day ≈ <span class="num">0.9%</span>/mo) is also the honest anchor for r
+  itself: nobody rational carries at 5%/mo while the house lends at 0.9%. Fine print: loan capacity per
+  answer is capped at 5% of a trader's equity, so the <em>no-loans</em> column is still the right model for
+  a single whale trying to buy a correction alone.</p>
+  <div class="tablewrap" id="anatomy"></div>
+  <p class="prose small muted" id="anatomynote"></p>
+
+  <p class="prose">Now freeze today's prices and ask the pitch question: <strong>which choices does the
+  market become able to distinguish, purely because the bands tighten?</strong></p>
+  <div class="tablewrap"><table id="ladder">
+    <tr><th>Comparison (frozen gap)</th><th class="num">gap</th><th>today<br><span class="small" id="ladderHdr">(r = 2%/mo)</span></th><th>+ netting</th><th>+ netting &amp;<br>patient capital</th></tr>
+    <tr><td>Jackson vs Platner</td><td class="num">0.483</td><td><span class="yes">✓</span> <span class="small num">±24 comb.</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+    <tr><td>Jackson vs Wood</td><td class="num">0.220</td><td><span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±21</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
+    <tr><td>Jackson vs Mills</td><td class="num">0.202</td><td><span class="no">✗</span> <span class="small num">±37</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
+    <tr><td><strong>Jackson vs Bellows</strong> (the live choice)</td><td class="num">0.030</td><td><span class="no">✗</span> <span class="small num">±12</span></td><td><span class="no">✗</span> <span class="small num">±10</span></td><td><span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±2.4</span></td></tr>
+    <tr><td>Shah vs Bellows</td><td class="num">0.010</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span> — genuinely tied</td></tr>
+  </table></div>
+  <p class="prose small muted">Cells show the combined band of the pair; ✓ = gap exceeds it. Every column
+  assumes the floor is actually reached — i.e., every column silently assumes the subsidy lever too.</p>
+
+  <p class="prose">Read as a menu: <strong>today's market, funded, can rule out the tail</strong> — barely.
+  <strong>Netting buys the establishment question</strong> ("is Mills really worse?" becomes answerable).
+  <strong>Jackson-vs-Bellows needs either the full reform stack — or the patient-capital regime plus real
+  subsidy</strong> (the ±1.3-point arithmetic above). Shah-vs-Bellows is beyond every rung and both regimes —
+  at these prices that comparison is a genuine tie, and no market mechanism will pretend otherwise.</p>
+  <p class="prose">The house-money case writes itself from the table's fine print: reforms take engineering
+  and time this decision doesn't have, but the subsidy lever exists <em>today</em> — and Manifold's own
+  tooling can aim it at single answers (ordinary users can't; whole-market subsidy would spray ~78% of it
+  onto the decorative tail). The expected cost is unusually low, because of the same N/A asymmetry that
+  taxes traders: subsidy parked in answers that resolve N/A comes back, in full, on July 27 — the house
+  risks real exposure only on the one answer that survives the decision. A few thousand mana, aimed at
+  Jackson, Bellows, and Shah, for two weeks, mostly refunded: that is the entire price of making this
+  decision market worth the committee's glance.</p>
+  <p class="prose small muted">Mechanism note: per-answer subsidy targeting is currently internal-only API
+  surface; a pending mechanism upgrade (cpmm-multi-2) would open it to everyone — for a two-answer aim
+  that's ~4.5× more of each subsidized mana landing on target — and would stop the current liquidity-add
+  discarding a small slice of every contribution. Better if merged; nothing above depends on it.</p>
+
+  <h2>Hanson's objections, graded on live data</h2>
+  <div class="cards">
+    <div class="cardx"><span class="verdict v-no">partly refuted</span>
+      <h3>"Conditional markets are too thin to mean anything"</h3>
+      <p>For the two live front-runners the bands are ±5–6 points on M$600-ish pools — genuinely informative.
+      The objection survives only in the tail (±16 to ±50 points) and for slow-resolving conditions. Thinness
+      is a function of p<sub>B</sub> and the decision clock, not a blanket property.</p></div>
+    <div class="cardx"><span class="verdict v-ok">confirmed</span>
+      <h3>"It can't actually rank the options"</h3>
+      <p>Jackson leads Bellows by 3 points; both bands are ±5–6. The market prices each candidate well and
+      their difference not at all. It prunes tails loudly (not Platner: 0.137; probably not Mills: 0.418)
+      and shrugs at the actual choice the committee faces.</p></div>
+    <div class="cardx"><span class="verdict v-ok">confirmed</span>
+      <h3>"Conditional prices are confounded — evidential, not causal"</h3>
+      <p>These prices are P(win | the party chose X), not P(win | do(nominate X)). Mills' 0.418 is the poster
+      child: the worlds where a committee reaches past two front-runners for the ex-governor are worlds where
+      something else went wrong. The market's most contrarian claim is also its most confounded.</p></div>
+    <div class="cardx"><span class="verdict v-no">refuted mechanically</span>
+      <h3>"Arbitrage will keep conditionals honest"</h3>
+      <p>Riskless arbitrage is structurally repelled: the N/A refund branch breaks every static payout table
+      (our own arb bot disabled its Maine conditional legs for exactly this). Only opinionated capital
+      disciplines a conditional — unless you hedge with the conditioner market, which restores the joint at
+      exactly c·p and is how the identity above becomes tradeable at all.</p></div>
+    <div class="cardx"><span class="verdict v-mid">wrong objective</span>
+      <h3>"Who chose the question?"</h3>
+      <p>The markets condition on <em>a Democrat</em> winning. The anti-Collins coalition's objective is
+      <em>Collins losing</em> — in an RCV state that elected Angus King, those differ in every strong-independent
+      world. The party market prices "Other" at 0.000: door closed, by assumption. Whoever writes the market
+      writes the objective function.</p></div>
+    <div class="cardx"><span class="verdict v-na">untested here</span>
+      <h3>"If the decision follows the market, the market breaks"</h3>
+      <p>The committee never committed to follow these prices, so the self-reference regime — manipulation,
+      self-fulfilling equilibria, he-who-sets-incentives — stays untested. With ~64 traders and M$3,000 of
+      subsidy, a committed decision rule would be trivially cheap to lean on. This is the experiment nobody
+      has run.</p></div>
+  </div>
+
+  <h2>Pre-registration</h2>
+  <div class="prereg">
+    <h3>Claims frozen 2026-07-10, before the committee's choice</h3>
+    <div class="claim"><span class="cid">P1</span><div>
+      <p>The nominee will be Jackson or Bellows.</p>
+      <p class="grade">Market: 0.835 combined. Grade at the announcement (~Jul 27).</p></div></div>
+    <div class="claim"><span class="cid">P2</span><div>
+      <p><strong>The collapse test.</strong> Within 3 trading days of the official nomination of candidate X,
+      the deep P(Dem win) market will sit inside X's frozen band: Jackson → 0.620 ± 0.054;
+      Bellows → 0.590 ± 0.063; anyone else → that candidate's (wide) band.</p>
+      <p class="grade">This is the falsifiable core of "the conditional price meant something": nomination
+      makes the conditional unconditional, so the board's row must become the market. Grade ~Jul 30.</p></div></div>
+    <div class="claim"><span class="cid">P3</span><div>
+      <p>Nothing observable will ever resolve whether Jackson-over-Bellows was "right": the gap (3 points) is
+      inside both bands, and November is a single sample. We pre-commit to <em>not</em> claiming vindication
+      either way — and note that anyone who does is overreading.</p>
+      <p class="grade">Grades itself: this claim is about what cannot be graded.</p></div></div>
+    <div class="claim"><span class="cid">P4</span><div>
+      <p>Seat outcome vs. the frozen P(Dem win) = 0.596.</p>
+      <p class="grade">One Brier sample in November — weak evidence by construction, recorded anyway.</p></div></div>
+  </div>
+
+  <div class="pending">
+    <strong>Model read: pending.</strong> Our statistical-arbitrage Congress model (a 470-dimension joint
+    over every 2026 race) has this family wired in — nominee dimension, the conditionals as hedged-pair joint
+    constraints at c·p, eleven constraints total. The fitting run is deliberately on hold: a new diagnostic
+    caught our sampler misbehaving on an unrelated axis, and we don't publish reads from a sampler we don't
+    trust. If it's repaired before July 27, the model's joint read lands here with its own timestamp.
+  </div>
+
+  <h2>Footnotes</h2>
+
+  <details class="fnote"><summary>Where the bands come from (the derivation)</summary>
+    <p class="prose">A conditional market that refunds on N/A has a peculiar incentive structure, and it is
+    <em>computable</em>. A trader who thinks the price is off by ε and bets faces two futures:</p>
+    <div class="tablewrap"><table>
+      <tr><th>Branch</th><th class="num">Probability</th><th>What happens</th><th>Capital locked</th></tr>
+      <tr><td>Candidate <strong>not</strong> picked</td><td class="num">1 − p<sub>B</sub></td><td>full refund (verified against Manifold source)</td><td>~2 weeks — until Jul 27</td></tr>
+      <tr><td>Candidate picked</td><td class="num">p<sub>B</sub></td><td>bet rides; edge ε pays off</td><td>~4 months — until Nov 3</td></tr>
+    </table></div>
+    <p class="prose">Setting expected profit against the cost of locked capital (rate r) gives the
+    no-correction band — prices inside it are invisible to rational money:</p>
+    <div class="formula">ε* ≈ c · r · ( T<sub>live</sub> + T<sub>N/A</sub> · (1−p<sub>B</sub>)/p<sub>B</sub> )   +   tick(pool)</div>
+    <p class="prose">Three things fall out. <strong>First</strong>, conditionality is nearly free for
+    front-runners: because the N/A branch resolves in two weeks, the conditional-specific penalty
+    <span class="num">(1−p_B)/p_B·T_NA</span> only explodes below p<sub>B</sub> ≈ 0.15. The folk objection
+    "thin conditional markets can't price anything" is really about longshot conditions with slow resolution.
+    <strong>Second</strong>, the fee-free minimum bet (M$1 moves these pools ~0.1–0.2 points) means carry is
+    the entire floor — the bands on the board <em>are</em> the market's resolution. <strong>Third</strong>, a band
+    is a statement about incentives, not freshness: prices can also simply be <em>old</em>. That failure mode
+    needs its own check (we ran it — the bet-feed audit under the board; this market passes), and a
+    price's evidential value decays with world-change since its last meaningful trade, not with today's
+    p<sub>B</sub>. Sensitivity: ε* is linear in r; we quote r = 2%/month — halve or 2.5× the bands for
+    1% or 5%, or move the slider above the board.</p>
+    <p class="prose"><strong>The loans extension</strong> (added 2026-07-11, before publication; the frozen
+    bands remain the no-loan case). Manifold's daily free loan returns ρ = 1% of a position's value per day,
+    linearly, interest-free, repaid by deduction at resolution — including N/A resolution, which is why it is
+    safe on the refund branch (verified against the resolution source: the deduction extinguishes the loan,
+    the holder keeps the loan cash, net whole in every world). Locked capital at day t is then
+    max(0, 1 − ρt) of the stake, so a horizon of T days costs only</p>
+    <div class="formula">E(T) = T − ρT²/2   (for T ≤ 1/ρ; capped at 1/2ρ = 50 locked-day equivalents)</div>
+    <p class="prose">and the band becomes ε* ≈ c · r · ( E(T<sub>live</sub>) + E(T<sub>N/A</sub>) ·
+    (1−p<sub>B</sub>)/p<sub>B</sub> ). Two consequences: no Manifold position ever costs more than ~100
+    locked-day equivalents of carry, whatever its horizon; and because E compresses long horizons and spares
+    short ones, loans shrink the live branch (×0.42 at four months) far more than the two-week refund branch
+    (×0.93) — the front-runners' bands tighten ~2.2×, the tails' barely move. Caps (5% of equity per answer,
+    10%/day portfolio-wide) mean this discount belongs to diversified capital, not to a single concentrated
+    corrector.</p>
+  </details>
+
+  <details class="fnote"><summary>Does the family even add up? (yes — to within about a point)</summary>
+    <p class="prose">Decision markets come with a consistency law:
+    <span class="num">P(Dem&nbsp;win) = Σ&nbsp;P(nominee=X)·P(win|X)</span>. Multiply each row of the board
+    and stack the products; the total should land on the directly-traded P(Dem win). It does.</p>
+    <div class="stack"><div class="stack-inner">
+      <div class="sbar" id="sbar"></div>
+      <div class="sscale" id="sscale"></div>
+      <p class="small muted" style="margin-top:14px">Stacked: nominee-probability × conditional, per candidate; hatched = the
+      <span class="num">0.057</span> of nominee mass with no conditional priced (shown at 0.40–0.55, midpoint drawn).
+      Ticks: the three directly-traded P(Dem win) prices. Sum ≈ <span class="num">0.583–0.592</span> vs. direct
+      <span class="num">0.578 / 0.584 / 0.596</span>.</p>
+    </div></div>
+    <p class="prose">The Republican side is equally tidy: Collins-wins-reelection trades at
+    <span class="num">0.391</span> against party-Republican at <span class="num">0.423</span>, and the
+    <span class="num">0.032</span> wedge is separately priced — a "Collins clears 95% in her primary" market
+    sits at <span class="num">0.966</span>, i.e. ~3.4% primary-loss risk. Even the redundancies agree: a
+    standalone "Troy Jackson wins the seat" market trades at <span class="num">0.357</span> vs. the board's
+    implied <span class="num">0.564 × 0.620 = 0.350</span>. Whatever these markets are, they are not
+    internally silly.</p>
+  </details>
+
+  <footer>
+    <p><strong>Provenance.</strong> All prices are Manifold Markets play-money (M$; very roughly M$150–200 ≈ $1),
+    snapshotted 2026-07-10 (evening UTC−4). Key markets: conditional board
+    <span class="num">ZI29Oy5URc</span>; nominee <span class="num">nqLE5L0yhs</span>; P(Dem win) deep/thin
+    <span class="num">RcL0Q9O0EU</span>/<span class="num">L6Lll6upng</span>; party <span class="num">UzNUOlCZgt</span>;
+    Collins <span class="num">cdzE85PIEz</span>; Jackson standalone <span class="num">lchuI99Qlc</span>.
+    Band derivation, refund-semantics verification (against the Manifold open-source resolution code), and the
+    market map live in the project task directory (<span class="num">tasks/maine_decision_market/</span>).
+    Numbers on this page are intentionally frozen — that is what pre-registered means. Two clearly-marked
+    interactive layers sit on top of the frozen record without touching it: the band controls re-derive ±ε
+    from the frozen prices under different capital-cost assumptions, and the optional live-price overlay
+    fetches current prices from the Manifold API in your browser (it degrades to unavailable where
+    cross-origin fetches are blocked).</p>
+  </footer>
+</div>
+
+<div id="tip"></div>
+
+<script>
+(function () {
+  // ---- frozen snapshot data (2026-07-10) ----
+  // pX: precise nominee probability used for band math (back-solved so the
+  // frozen default reproduces the published bands exactly; p is the display
+  // rounding). pool: per-answer AMM pool (YES+NO shares) frozen 2026-07-10.
+  var CANDS = [
+    { name: "Troy Jackson",  key: "jackson", p: 0.564, pX: 0.564,   c: 0.620, pool: 528, lt: "Jul 10", v8: 666,  status: "informative",
+      condId: "tRLLSAgRns", nomId: "qEttS2EgSl" },
+    { name: "Shenna Bellows",key: "bellows", p: 0.271, pX: 0.271,   c: 0.590, pool: 632, lt: "Jul 10", v8: 1470, status: "informative",
+      condId: "c56R9zZt2U", nomId: "QOLgZ26pQ8" },
+    { name: "Nirav Shah",    key: "shah",    p: 0.037, pX: 0.0366,  c: 0.600, pool: 607, lt: "Jul 10", v8: 448,  status: "mush — band swallows the price",
+      condId: "UNuAAzg2cu", nomId: "6sU9hhdpSc" },
+    { name: "Jordan Wood",   key: "wood",    p: 0.031, pX: 0.0310,  c: 0.400, pool: 520, lt: "Jul 10", v8: 61,   status: "mush — band swallows the price",
+      condId: "y5RUNduAqN", nomId: "zIhEdQg9pC" },
+    { name: "Janet Mills",   key: "mills",   p: 0.015, pX: 0.01453, c: 0.418, pool: 694, lt: "Jul 9",  v8: 167,  status: "live but wide",
+      condId: "9O6O9tuCU8", nomId: "tuzytsnlll" },
+    { name: "Graham Platner",key: "none",    p: 0.008, pX: 0.0079,  c: 0.137, pool: 723, lt: "Jul 9",  v8: 3001, withdrawn: true, status: "withdrawn — prices the un-withdrawal world",
+      condId: "qs6O2P6C0O", nomId: "2AtI5uP2t2" },
+    { name: "Field / other", key: "none",    p: 0.083, pX: null,    c: null,  pool: null, lt: null, v8: null, status: "no conditional priced" }
+  ];
+  var COLORS = { jackson: "var(--c-jackson)", bellows: "var(--c-bellows)", shah: "var(--c-shah)",
+                 wood: "var(--c-wood)", mills: "var(--c-mills)", none: "var(--ink-3)" };
+  var ANCHOR = 0.596;
+
+  // ---- band math (shared by board, anatomy table, ladder, readout) ----
+  var T_LIVE = 120, T_NA = 15;   // days: snapshot -> Nov 3, snapshot -> Jul 27
+  var RHO = 0.01;                // daily free-loan reclaim: 1%/day of position, linear
+  var FROZEN_R = 2.0, FROZEN_LOANS = false;   // the pre-registered setting
+  var state = { r: FROZEN_R, loans: FROZEN_LOANS };
+
+  function effDays(T, rho) {     // effective locked-days under linear reclaim
+    if (!rho) return T;
+    var full = 1 / rho;
+    return T < full ? T - rho * T * T / 2 : full / 2;
+  }
+  function carryParts(d) {
+    var rd = state.r / 100 / 30, rho = state.loans ? RHO : 0;
+    return { live: d.c * rd * effDays(T_LIVE, rho),
+             na:   d.c * rd * effDays(T_NA, rho) * (1 - d.pX) / d.pX };
+  }
+  function bandE(d) { var k = carryParts(d); return k.live + k.na; }
+  function nettedE(d) { return carryParts(d).live; }
+  var C_ATTN = 1, DEPTH_CAL = 670 / 528;  // M$ per unit price move per M$ of pool (Jackson-calibrated)
+  function attnE(d) { return Math.sqrt(2 * d.c * C_ATTN / (d.pX * d.pool * DEPTH_CAL)); }
+  function pp(e) { return (e * 100).toFixed(1); }
+  function ppr(e) { var v = e * 100; return v >= 3 ? String(Math.round(v)) : v.toFixed(1); }
+  function fmtSetting() { return "r = " + state.r.toFixed(1) + "%/mo" + (state.loans ? " + loans" : ""); }
+  function isFrozen() { return state.r === FROZEN_R && state.loans === FROZEN_LOANS; }
+
+  var board = document.getElementById("board");
+  var tip = document.getElementById("tip");
+
+  // ---- live-price overlay (client-side fetch; never alters the frozen record) ----
+  var LIVE = { on: false, cond: null, nom: null, at: null };
+  function fetchLive() {
+    var btn = document.getElementById("livebtn");
+    btn.disabled = true; btn.textContent = "fetching…";
+    Promise.all([
+      fetch("https://api.manifold.markets/v0/market/ZI29Oy5URc").then(function (r) { return r.json(); }),
+      fetch("https://api.manifold.markets/v0/market/nqLE5L0yhs").then(function (r) { return r.json(); })
+    ]).then(function (ms) {
+      LIVE.cond = {}; LIVE.nom = {};
+      ms[0].answers.forEach(function (a) { LIVE.cond[a.id] = a.probability; });
+      ms[1].answers.forEach(function (a) { LIVE.nom[a.id] = a.probability; });
+      LIVE.at = new Date(); LIVE.on = true;
+      btn.disabled = false; btn.classList.add("on"); btn.textContent = "hide live prices";
+      var note = document.getElementById("livenote");
+      note.style.display = "";
+      document.getElementById("livenotetext").textContent =
+        "live price, fetched " + LIVE.at.toISOString().slice(11, 16) + " UTC — overlay only, the frozen record is unchanged";
+      update();
+    }).catch(function () {
+      btn.disabled = true; btn.textContent = "live fetch unavailable here";
+    });
+  }
+  function toggleLive() {
+    if (!LIVE.on && LIVE.cond === null) { fetchLive(); return; }
+    LIVE.on = !LIVE.on;
+    var btn = document.getElementById("livebtn");
+    btn.classList.toggle("on", LIVE.on);
+    btn.textContent = LIVE.on ? "hide live prices" : "overlay live prices";
+    document.getElementById("livenote").style.display = LIVE.on ? "" : "none";
+    update();
+  }
+
+  function showTip(html, ev) {
+    tip.innerHTML = html;
+    tip.style.display = "block";
+    tip.style.left = Math.min(ev.clientX + 14, window.innerWidth - 310) + "px";
+    tip.style.top = (ev.clientY + 14) + "px";
+  }
+
+  // ---- the board ----
+  function drawBoard() {
+    var axis = '<div class="axis">';
+    [0, 0.25, 0.5, 0.75, 1].forEach(function (v) {
+      axis += '<span style="left:' + (v * 100) + '%">' + Math.round(v * 100) + "%</span>";
+    });
+    axis += "</div>";
+
+    var rows = '<div class="rows">';
+    [0.25, 0.5, 0.75].forEach(function (v) {
+      rows += '<div class="gridline" style="left: calc((100% - var(--label-w, 230px)) * ' + v + ')"></div>';
+    });
+    rows += '<div class="gridline anchor" style="left: calc((100% - var(--label-w, 230px)) * ' + ANCHOR + ')">' +
+            '<span class="glabel" style="left:1px">P(Dem win) 0.596</span></div>';
+
+    CANDS.forEach(function (d) {
+      var col = COLORS[d.key];
+      var e = d.c === null ? null : bandE(d);
+      rows += '<div class="row"><div class="who">' +
+        '<div class="l1"><span class="swatch" style="background:' + col + '"></span>' +
+        '<span class="name">' + d.name + "</span>" +
+        (d.withdrawn ? ' <span class="chip">withdrawn</span>' : "") +
+        "</div>" +
+        '<div class="l2"><span class="masstrack"><span class="massfill" style="display:block;width:' +
+          (d.p * 100) + "%; background:" + col + '"></span></span>' +
+        '<span class="pnom">nom ' + d.p.toFixed(3).replace(/^0/, "") + "</span></div>" +
+        "</div>" +
+        '<div class="lane" data-name="' + d.name + '" data-p="' + d.p + '" data-c="' + (d.c === null ? "" : d.c) +
+        '" data-e="' + (e === null ? "" : e.toFixed(3)) + '" data-lt="' + (d.lt || "") + '" data-v8="' + (d.v8 === null ? "" : d.v8) +
+        '" data-lc="' + (LIVE.on && d.condId && LIVE.cond[d.condId] !== undefined ? LIVE.cond[d.condId].toFixed(3) : "") +
+        '" data-lp="' + (LIVE.on && d.nomId && LIVE.nom[d.nomId] !== undefined ? LIVE.nom[d.nomId].toFixed(3) : "") +
+        '" data-status="' + d.status + '">';
+      if (d.c !== null) {
+        var lo = Math.max(0, d.c - e), hi = Math.min(1, d.c + e);
+        rows += '<div class="band' + (d.withdrawn ? " fossil" : "") + '" style="left:' + (lo * 100) + "%; width:" +
+          ((hi - lo) * 100) + '%; color:' + col + "; background: color-mix(in srgb, " + col + " calc(var(--band-alpha) * 100%), transparent)" + '"></div>';
+        rows += '<div class="dotmark' + (d.withdrawn ? " hollow" : "") + '" style="left:' + (d.c * 100) + "%; background:" + col + "; color:" + col + '"></div>';
+        rows += '<div class="cval" style="left:' + (d.c * 100) + '%">' + d.c.toFixed(3).replace(/^0/, "") + "</div>";
+        if (LIVE.on && d.condId && LIVE.cond[d.condId] !== undefined) {
+          rows += '<div class="livemark" style="left:' + (LIVE.cond[d.condId] * 100) + "%; color:" + col + '"></div>';
+        }
+      }
+      rows += '<div class="hit"></div></div></div>';
+    });
+    rows += "</div>";
+    board.innerHTML = axis + rows;
+
+    board.querySelectorAll(".lane").forEach(function (lane) {
+      lane.addEventListener("mousemove", function (ev) {
+        var d = lane.dataset;
+        var html = "<strong>" + d.name + "</strong><br>P(nominee) = <span class='num'>" + d.p + "</span>";
+        if (d.c) html += "<br>P(win | nominee) = <span class='num'>" + d.c + "</span> ± <span class='num'>" + d.e +
+          "</span> <span class='num'>(" + fmtSetting() + ")</span>";
+        if (d.lt) html += "<br>last traded " + d.lt + " · M$<span class='num'>" + d.v8 + "</span> since withdrawal";
+        if (d.lc || d.lp) {
+          html += "<br><span class='num'>live now:</span>";
+          if (d.lc) html += " P(win|nom) <span class='num'>" + d.lc + "</span>";
+          if (d.lp) html += " · P(nom) <span class='num'>" + d.lp + "</span>";
+        }
+        html += "<br><em>" + d.status + "</em>";
+        showTip(html, ev);
+      });
+      lane.addEventListener("mouseleave", function () { tip.style.display = "none"; });
+    });
+  }
+
+  // ---- anatomy of a band ----
+  function drawAnatomy() {
+    var h = '<table><tr><th>Candidate</th><th class="num">tick</th>' +
+      '<th class="num">carry: live branch<br><span class="small">locked to Nov 3</span></th>' +
+      '<th class="num">carry: refund branch<br><span class="small">idle to Jul 27</span></th>' +
+      '<th class="num">= band ±ε</th>' +
+      '<th class="num">attention floor<br><span class="small">C ≈ M$1, frozen depth</span></th></tr>';
+    CANDS.forEach(function (d) {
+      if (d.c === null) return;
+      var k = carryParts(d), tot = k.live + k.na, at = attnE(d);
+      var carryBinds = tot >= at;
+      h += "<tr><td>" + d.name + (d.withdrawn ? ' <span class="chip">withdrawn</span>' : "") + "</td>" +
+        '<td class="num muted">≈0.2</td>' +
+        '<td class="num">' + pp(k.live) + "</td>" +
+        '<td class="num">' + pp(k.na) + "</td>" +
+        '<td class="num">' + (carryBinds ? "<strong>" + pp(tot) + "</strong>" : pp(tot)) + "</td>" +
+        '<td class="num">' + (carryBinds ? pp(at) : "<strong>" + pp(at) + "</strong>") + "</td></tr>";
+    });
+    h += "</table>";
+    document.getElementById("anatomy").innerHTML = h;
+    document.getElementById("anatomynote").innerHTML =
+      "Points per side (±), at <span class='num'>" + fmtSetting() + "</span>. The carry columns follow the " +
+      "controls above the board; the attention floor follows only depth (pools frozen 2026-07-10) and is " +
+      "untouched by both levers. <strong>Bold marks the larger — binding — floor.</strong> The tick column " +
+      "(min-bet price impact) is excluded from ε and already solved by existing liquidity. Kleban, Geiger " +
+      "and Loud are omitted for the reasons in the board table.";
+  }
+
+  // ---- distinguishability ladder ----
+  var PAIRS = [
+    { a: 0, b: 5, gap: 0.483, label: "Jackson vs Platner" },
+    { a: 0, b: 3, gap: 0.220, label: "Jackson vs Wood" },
+    { a: 0, b: 4, gap: 0.202, label: "Jackson vs Mills" },
+    { a: 0, b: 1, gap: 0.030, label: "<strong>Jackson vs Bellows</strong> (the live choice)",
+      pat: '<span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±2.4</span>' },
+    { a: 2, b: 1, gap: 0.010, label: "Shah vs Bellows",
+      pat: '<span class="no">✗</span> — genuinely tied' }
+  ];
+  function verdictCell(gap, comb) {
+    if (comb < 0.002) {
+      return '<span class="small muted">carry ~0 — attention decides →</span>';
+    }
+    var ok = gap > comb;
+    var barely = ok && gap < 1.25 * comb;
+    return (ok ? '<span class="yes">✓</span>' : '<span class="no">✗</span>') +
+      (barely ? ' <span class="small">barely</span>' : "") +
+      ' <span class="small num">±' + ppr(comb) + "</span>";
+  }
+  function drawLadder() {
+    var h = '<tr><th>Comparison (frozen gap)</th><th class="num">gap</th><th>today<br><span class="small" id="ladderHdr">(' +
+      fmtSetting() + ')</span></th><th>+ netting</th><th>+ netting &amp;<br>patient capital</th></tr>';
+    PAIRS.forEach(function (pr) {
+      var A = CANDS[pr.a], B = CANDS[pr.b];
+      h += "<tr><td>" + pr.label + '</td><td class="num">' + pr.gap.toFixed(3) + "</td>" +
+        "<td>" + verdictCell(pr.gap, bandE(A) + bandE(B)) + "</td>" +
+        "<td>" + verdictCell(pr.gap, nettedE(A) + nettedE(B)) + "</td>" +
+        "<td>" + (pr.pat || '<span class="yes">✓</span>') + "</td></tr>";
+    });
+    document.getElementById("ladder").innerHTML = h;
+  }
+
+  // ---- readout + controls ----
+  function drawReadout() {
+    var J = CANDS[0], B = CANDS[1];
+    var eJ = bandE(J), eB = bandE(B), comb = eJ + eB;
+    var atJ = attnE(J), atB = attnE(B);
+    var carryOk = 0.030 > comb;
+    var html = "At <span class='num'>" + fmtSetting() + "</span>: Jackson ±<span class='num'>" + pp(eJ) +
+      "</span>, Bellows ±<span class='num'>" + pp(eB) + "</span> — combined ±<span class='num'>" + pp(comb) +
+      "</span> against their <span class='num'>3.0</span>-point gap: " +
+      (carryOk ? "<strong>the ranking clears the carry floor</strong>" : "<strong>the ranking stays unresolvable</strong>") +
+      " (by carry alone).";
+    if (carryOk) {
+      html += " Carry is only floor one: at today's depth the attention floor (±<span class='num'>" + pp(atJ) +
+        "</span> / ±<span class='num'>" + pp(atB) + "</span>) still swallows the gap — cheap capital alone " +
+        "doesn't buy the ranking; depth (subsidy) has to move too. See the anatomy table below.";
+    }
+    document.getElementById("readout").innerHTML = html;
+    document.getElementById("legendR").textContent = fmtSetting();
+    document.getElementById("rval").textContent = "r = " + state.r.toFixed(1) + "%/mo";
+    document.getElementById("resetb").style.display = isFrozen() ? "none" : "";
+    document.querySelectorAll("#presets button").forEach(function (b) {
+      b.classList.toggle("on", parseFloat(b.dataset.r) === state.r);
+    });
+  }
+
+  function update() { drawBoard(); drawAnatomy(); drawLadder(); drawReadout(); }
+
+  var slider = document.getElementById("rslider");
+  var loansbox = document.getElementById("loansbox");
+  slider.addEventListener("input", function () { state.r = parseFloat(slider.value); update(); });
+  loansbox.addEventListener("change", function () { state.loans = loansbox.checked; update(); });
+  document.querySelectorAll("#presets button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      state.r = parseFloat(b.dataset.r); slider.value = b.dataset.r; update();
+    });
+  });
+  document.getElementById("resetb").addEventListener("click", function () {
+    state.r = FROZEN_R; state.loans = FROZEN_LOANS;
+    slider.value = FROZEN_R; loansbox.checked = FROZEN_LOANS; update();
+  });
+  document.getElementById("livebtn").addEventListener("click", toggleLive);
+
+  update();
+
+  // coherence stacked bar, domain 0..0.7
+  var SEGS = [
+    { name: "Jackson",  key: "jackson", v: 0.564 * 0.620 },
+    { name: "Bellows",  key: "bellows", v: 0.271 * 0.590 },
+    { name: "Shah",     key: "shah",    v: 0.037 * 0.600 },
+    { name: "Wood",     key: "wood",    v: 0.031 * 0.400 },
+    { name: "Mills",    key: "mills",   v: 0.015 * 0.418 },
+    { name: "tail (Kleban, Geiger, Platner)", key: "none", v: 0.0117 * 0.545 + 0.0072 * 0.450 + 0.0079 * 0.137 }
+  ];
+  var UNCOV = 0.0565 * 0.475; // midpoint of 0.40-0.55 on unpriced mass
+  var DOMAIN = 0.7;
+  var sbar = document.getElementById("sbar");
+  var html = "", acc = 0;
+  SEGS.forEach(function (s) {
+    html += '<div class="seg" data-tt="' + s.name + ": <span class=\'num\'>" + s.v.toFixed(3) + "</span>" +
+      '" style="left:' + (acc / DOMAIN * 100) + "%; width:" + (s.v / DOMAIN * 100) + "%; background:" + COLORS[s.key] + '"></div>';
+    acc += s.v;
+  });
+  html += '<div class="seg uncov" data-tt="unpriced nominee mass 0.057 × ~0.475: <span class=\'num\'>' + UNCOV.toFixed(3) +
+    '</span>" style="left:' + (acc / DOMAIN * 100) + "%; width:" + (UNCOV / DOMAIN * 100) + '%"></div>';
+  acc += UNCOV;
+  // Anchor ticks only — the caption enumerates the three values (labels at
+  // these x-positions would collide: 0.578 and 0.596 are ~17px apart here).
+  [0.5775, 0.5836, 0.5955].forEach(function (a) {
+    html += '<div class="anchor-tick" data-tt="direct P(Dem win): <span class=\'num\'>' + a.toFixed(4) +
+      '</span>" style="left:' + (a / DOMAIN * 100) + '%"></div>';
+  });
+  sbar.innerHTML = html;
+  var sscale = document.getElementById("sscale");
+  var sh = "";
+  [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7].forEach(function (v) {
+    sh += '<span style="left:' + (v / DOMAIN * 100) + '%">' + v.toFixed(1) + "</span>";
+  });
+  sscale.innerHTML = sh;
+  sbar.querySelectorAll(".seg, .anchor-tick").forEach(function (seg) {
+    seg.addEventListener("mousemove", function (ev) {
+      tip.innerHTML = seg.dataset.tt;
+      tip.style.display = "block";
+      tip.style.left = Math.min(ev.clientX + 14, window.innerWidth - 310) + "px";
+      tip.style.top = (ev.clientY + 14) + "px";
+    });
+    seg.addEventListener("mouseleave", function () { tip.style.display = "none"; });
+  });
+})();
+</script>
