@@ -300,7 +300,7 @@
   else; on the live question — Jackson or Bellows — it is silent within its own error
   bars</strong>, and making it speak has a price, which we compute below</span>.</p>
   <div class="eyebrow" style="margin-top: 20px">
-    <span class="frozen">Pre-registered snapshot</span>
+    <span class="frozen" id="eyebrowMode">Pre-registered snapshot</span>
     <span class="dot">·</span> <span>Manifold play-money prices (M$)</span>
     <span class="dot">·</span> <span>graded after 2026-11-03</span>
   </div>
@@ -404,7 +404,7 @@
 
   <p class="prose" id="roShapes">The headline is in the shapes. The market is a narrower <strong>pruner</strong> than it looks — ruling a longshot out charges the longshot's row too, and only Platner's gap survives that arithmetic — and a useless <strong>ranker</strong>: each front-runner is measured to <span class="num dyn">±8.2–10.8</span> points (carry and attention together), but the 3-point gap <em>between</em> Jackson and Bellows, the committee's actual question, is not measured at all.</p>
 
-  <details><summary>The same prices as a table (the frozen record: r = 2%/mo, no loans)</summary>
+  <details><summary>The frozen record as a table (2026-07-10: r = 2%/mo, no loans)</summary>
     <div class="tablewrap"><table>
       <tr><th>Candidate</th><th class="num">P(nominee)</th><th class="num">P(win | nominee)</th><th class="num">band ±ε</th><th>last traded</th><th class="num">M$ traded Jul 8–10</th><th>status</th></tr>
       <tr><td>Troy Jackson</td><td class="num">0.564</td><td class="num">0.620</td><td class="num">0.054</td><td>Jul 10</td><td class="num">666</td><td>informative</td></tr>
@@ -483,7 +483,7 @@
   <a href="#fn-mintrade">min-trade footnote</a>). The patient column is the attention-only floor —
   carry zeroed (r = 0) — at the reference M$10k/answer subsidy. A gap at or below Manifold's 1% price
   grid is scored as a genuine tie — the market's working precision, which no amount of depth fixes.</p>
-  <p class="prose">And one comfort the committee should actually enjoy: <strong>whatever it
+  <p class="prose" id="comfort">And one comfort the committee should actually enjoy: <strong>whatever it
   chooses, no one will ever prove the market would have chosen better.</strong> The gap is inside
   the bands, and November is a single coin flip. We pre-commit <a href="#prereg">below (claim P3)</a> to not claiming
   vindication either way — and note that anyone who does claim it is overreading.</p>
@@ -497,8 +497,8 @@
   for. The <strong>attention</strong> floor is what remains when the waiting is free: someone still
   has to notice the error, and the prize has to cover the noticing — at the settings in view it,
   not carry, is what binds the front-runners.</p>
-  <p class="prose"><strong>Carry, and the refund-branch penalty.</strong> For a front-runner,
-  conditionality is nearly free — Jackson's band is almost all ordinary locked-to-November carry.
+  <p class="prose"><strong>Carry, and the refund-branch penalty.</strong> <span id="carryFrontrunner">For a front-runner,
+  conditionality is nearly free — <span class="num dyn">82%</span> of Jackson's band is ordinary locked-to-November carry.</span>
   For a longshot it's brutal: a bet on Mills's row idles to July 27 for a refund in <span class="num" id="millsIdle">98.5%</span> of
   worlds, so her carry band balloons to ±<span class="num dyn" id="millsBand">28</span>. Manifold's interest-free loans
   (a holder can reclaim 1% of a position per day, safely even on the refund branch) shrink the
@@ -528,8 +528,8 @@
   For capital-constrained traders (mana earning 2%/month elsewhere), carry binds and subsidy is
   nearly futile. For <em>patient</em> capital — idle mana, hobby attention — only the attention
   floor binds, and that floor tightens with the square root of pool depth: deepen the pools and the
-  same error pays a bigger prize. The freshness audit above is evidence the patient regime is the
-  real one here: the tail answers trade at all, at prices far inside any carry band. Calibration, at the Jul-10 snapshot's depth: correcting a band-edge error
+  same error pays a bigger prize. <span id="patientEvidence">The freshness audit above is evidence the patient regime is the
+  real one here: the tail answers trade at all, at prices far inside any carry band.</span> Calibration, at the Jul-10 snapshot's depth: correcting a band-edge error
   on Jackson's row paid about <strong>M$1</strong> — a market that pays one mana for a five-point
   insight. <span id="subsidyverdict"></span></p>
   <p class="prose small muted">Corrected Jul 11, when this sentence became computed: the pre-publication
@@ -556,7 +556,7 @@
   <p class="prose" id="pitch">The house-money case: reforms take engineering and time this decision doesn't have, but the subsidy lever exists <em>today</em> — and Manifold's own tooling can aim it at single answers (ordinary users can't; at the odds in view, ~<span class="num">78%</span> of a whole-market subsidy would land outside the two live rows). The refund asymmetry keeps the cost low: subsidy parked in answers that end in refunds comes back, in full, on July 27 — the house risks real exposure only on the one answer that survives the decision. Given the prices, liquidity, and assumptions in view, <strong>depth is the wrong lever at these settings</strong>: the waiting cost alone (<span class="num dyn">±5.9</span> combined) swallows the 3-point gap, so no pool size pays a corrector who is still paying to wait at <span class="num dyn">r = 2.0%/mo + loans</span>. Cheaper capital — the cost-of-capital slider, loans, or the margin reform above — has to come first; set r to 0 and this paragraph prices the patient-capital case.</p>
   <p class="prose small muted">Mechanism note: per-answer subsidy targeting is currently internal-only API
   surface; a pending mechanism upgrade (cpmm-multi-2) would open it to everyone — for a two-answer aim
-  that's ~4.5× more of each subsidized mana landing on target — and would stop the current liquidity-add
+  that's ~<span class="num" id="mechAim">4.5×</span> more of each subsidized mana landing on target — and would stop the current liquidity-add
   discarding a small slice of every contribution. Better if merged; nothing above depends on it.</p>
 
   <h2>What the theorists would tell the committee</h2>
@@ -731,11 +731,15 @@
     no-correction band — prices inside it are invisible to rational money:</p>
     <div class="formula">ε* ≈ c · r · ( T<sub>live</sub> + T<sub>N/A</sub> · (1−p<sub>B</sub>)/p<sub>B</sub> )   +   tick(pool)</div>
     <p class="prose">Three things fall out. <strong>First</strong>, conditionality is nearly free for
-    front-runners: because the N/A branch resolves in two weeks, the conditional-specific penalty
-    <span class="num">(1−p_B)/p_B·T_NA</span> only explodes below p<sub>B</sub> ≈ 0.15. The folk objection
+    front-runners: <span id="fnFirst">because the N/A branch resolves in <span class="num">15</span> days (the horizon
+    in view), the conditional-specific penalty <span class="num">(1−p_B)/p_B·T_NA</span> only overtakes the ordinary
+    locked-to-November carry below p<sub>B</sub> ≈ <span class="num dyn">0.22</span>.</span> The folk objection
     "thin conditional markets can't price anything" is really about longshot conditions with slow resolution.
-    <strong>Second</strong>, the fee-free minimum bet (M$1 moves these pools ~0.1–0.2 points) means carry is
-    the entire floor — the bands on the chart <em>are</em> the market's working precision. <strong>Third</strong>, a band
+    <strong>Second</strong>, <span id="fnSecond">the fee-free minimum bet keeps the tick floor negligible (M$1 moves
+    these pools at most ~<span class="num">0.1</span> points at the depth in view) — but carry is only the
+    <em>capital</em> part of the floor: the attention floor (the min-trade footnote above) sits on top, and at the
+    settings in view it, not carry, is what binds the front-runners — the chart's carry band and its attention
+    layer, together, are the market's working precision.</span> <strong>Third</strong>, a band
     is a statement about incentives, not freshness: prices can also simply be <em>old</em>. That failure mode
     needs its own check — the freshness audit in <a href="#trust">"Can these prices be
     trusted"</a>, which this market passes — and a
@@ -755,8 +759,10 @@
     <p class="prose">and the band becomes ε* ≈ c · r · ( E(T<sub>live</sub>) + E(T<sub>N/A</sub>) ·
     (1−p<sub>B</sub>)/p<sub>B</sub> ). Two consequences: no Manifold position ever costs more than ~100
     locked-day equivalents of carry, whatever its horizon; and because E compresses long horizons and spares
-    short ones, loans shrink the live branch (×0.42 at four months) far more than the two-week refund branch
-    (×0.93) — the front-runners' bands tighten ~2.2×, the tails' barely move. Caps (5% of equity per answer,
+    short ones, <span id="fnLoans">loans shrink the live branch (×<span class="num">0.42</span> at the
+    <span class="num">120</span>-day horizon in view) far more than the <span class="num">15</span>-day refund branch
+    (×<span class="num">0.93</span>) — the front-runners' bands tighten <span class="num">1.8–2.2×</span>, the tails'
+    barely move</span>. Caps (5% of equity per answer,
     10%/day portfolio-wide) mean this discount belongs to diversified capital, not to a single concentrated
     corrector.</p>
   </details>
@@ -777,7 +783,7 @@
     <em>ratio</em>, ĉ&nbsp;=&nbsp;P(X&nbsp;defeats&nbsp;Collins)&nbsp;÷&nbsp;P(matchup), is the joint
     market's implied P(X wins, given the matchup) — the <strong>pair-implied conditional</strong>, this
     structure's answer to the conditional market's question. (One wedge: it also conditions on Collins being the
-    Republican nominee, a ~3% risk the family prices separately.) At creation: Jackson
+    Republican nominee, a ~<span class="num" id="fnCollinsWedge">3.4%</span> risk the family prices separately.) At creation: Jackson
     <span class="num">0.609</span> (conditional market: <span class="num">0.620</span>), Bellows
     <span class="num">0.546</span> (conditional market: <span class="num">0.590</span>) — a 1–4 point divergence at
     birth, inside the conditional market's bands. The chart at the top has a <strong>structure selector</strong>:
@@ -814,7 +820,12 @@
     pre-registered claim, frozen number, and computation is unchanged. That separation — prose as a
     replaceable view over a frozen record — is the point of the page. On 2026-07-12 the computed
     verdicts moved to sum semantics (carry + attention charged together; dated note beside the
-    ladder) — a model revision, disclosed because it changes conclusions at a given setting.</p>
+    ladder) — a model revision, disclosed because it changes conclusions at a given setting.
+    Later that day the last hand-frozen prose went computed: the derivation footnote's
+    illustrative numbers (loan shrink factors, the p<sub>B</sub> threshold, the tick bound, the
+    Collins-primary wedge) now follow the marketstate and horizons in view, and that footnote's
+    pre-revision "carry is the entire floor" line was corrected to the three-floor model it had
+    fallen behind.</p>
     <p><strong>Criticism wanted.</strong> The fastest way to improve this page is to break it: an
     error in the band derivation, a hole in the one-noticing attention model, a Manifold margining
     detail that sinks the netting pitch.
@@ -1471,6 +1482,11 @@
 
   // ---- controls chrome ----
   function drawControls() {
+    // Masthead chip follows the mode: don't brand a live render as "the snapshot".
+    var eb = document.getElementById("eyebrowMode");
+    if (eb) eb.textContent = PRICEMODE === "live" && LIVE.cond
+      ? "Live essay — frozen 2026-07-10 record one toggle away"
+      : "Pre-registered snapshot";
     document.getElementById("legendR").textContent = fmtSetting();
     document.getElementById("rval").textContent = "r = " + state.r.toFixed(1) + "%/mo";
     document.getElementById("mval").textContent = fmtM(state.mbet);
@@ -1794,17 +1810,29 @@
   // Freshness clause: frozen text = the Jul-10 audit; live mode appends the
   // board market's most-recent-trade age from the same fetch (market-level
   // lastBetTime — the per-row audit stays a frozen-record claim).
+  // freshState() is the ONE freshness computation — the trust verdict, the
+  // freshness clause, and the patient-regime evidence clause all read it, so
+  // they can never disagree about whether the market is being watched.
+  function freshState() {
+    if (PRICEMODE === "live" && LIVE.ms && LIVE.ms.boardLastBet) {
+      var mins = Math.max(0, (Date.parse(LIVE.ms.at) - LIVE.ms.boardLastBet) / 60000);
+      return { mins: mins, ok: mins <= 2880 };   // the record's own bar: traded within two days
+    }
+    return { mins: null, ok: true };   // frozen record: the Jul-10 audit passed
+  }
+  function fmtAgo(mins) {
+    return mins < 90 ? Math.round(mins) + " minutes"
+      : mins < 2880 ? Math.round(mins / 60) + " hours"
+      : Math.round(mins / 1440) + " days";
+  }
   function drawFresh() {
     var el = document.getElementById("freshclause");
     if (!el) return;
     var base = "the Jul-10 bet feed shows every row traded within the prior two days";
-    if (PRICEMODE === "live" && LIVE.ms && LIVE.ms.boardLastBet) {
-      var mins = Math.max(0, (Date.parse(LIVE.ms.at) - LIVE.ms.boardLastBet) / 60000);
-      var ago = mins < 90 ? Math.round(mins) + " minutes"
-        : mins < 2880 ? Math.round(mins / 60) + " hours"
-        : Math.round(mins / 1440) + " days";
+    var fs = freshState();
+    if (fs.mins !== null) {
       el.innerHTML = base + " — and as of the live fetch, the conditional market's most recent trade is " +
-        dynv(ago) + " old";
+        dynv(fmtAgo(fs.mins)) + " old";
     } else { el.innerHTML = base; }
   }
 
@@ -2006,8 +2034,7 @@
     // -- the section-opening verdict --
     var tvEl = document.getElementById("trustverdict");
     if (tvEl) {
-      var freshMins = live && ms.boardLastBet ? (Date.parse(ms.at) - ms.boardLastBet) / 60000 : null;
-      var freshOk = freshMins === null || freshMins <= 2880;   // the record's own bar: traded within two days
+      var freshOk = freshState().ok;
       tvEl.innerHTML = freshOk && cohTier === 0 ? "Two checks, both passing."
         : freshOk && cohTier === 1 ? "Two checks: freshness passes; coherence has a seam opening (below)."
         : freshOk ? "Two checks, and one is failing: freshness holds, but the family no longer adds up (below)."
@@ -2166,7 +2193,9 @@
     var gap = Math.abs(J.c - B.c), comb = gapCombE(J, B), att = gapHazeE(J, B);
     var total = comb + att;
     // tie doctrine first: a sub-grid gap is never "priced", whatever the floors
-    var rankOk = gap > total && gap > BOARD_GRID + 1e-9;
+    var tied = gap <= BOARD_GRID + 1e-9;
+    var rankOk = gap > total && !tied;
+    var carryBinds = bandE(J) >= hazeE(J);   // which floor binds the front-runner (floorsPara + fn-bands)
     var tv = tailVerdicts();
     var lead = J.c >= B.c ? { n: "Jackson", c: J.c } : { n: "Bellows", c: B.c };
     var trail = J.c >= B.c ? { n: "Bellows", c: B.c } : { n: "Jackson", c: J.c };
@@ -2255,7 +2284,6 @@
           "and measures the <em>comparison between the top two</em>, the actual decision, not at all.";
     }
     if ((el = document.getElementById("floorsPara"))) {
-      var carryBinds = bandE(J) >= hazeE(J);
       el.innerHTML = "Each band is a sum of three floors, and each floor answers to a different " +
         "lever. The <strong>tick</strong> floor — the price step from the smallest trade anyone " +
         "makes, " + dynv("±" + pp(tickE(J))) + " points at the depth in view — was " +
@@ -2272,6 +2300,106 @@
     if ((el = document.getElementById("millsBand"))) el.textContent = ppr(bandE(M));
     if ((el = document.getElementById("loanLive"))) el.textContent = (T_LIVE / effDays(T_LIVE, RHO)).toFixed(1) + "×";
     if ((el = document.getElementById("loanNA"))) el.textContent = Math.round(100 * (1 - effDays(T_NA, RHO) / T_NA)) + "%";
+    // The "comfort" paragraph must not contradict the ranking verdicts above
+    // it (rojb, cardRank, dek all branch on rankOk/tie; this one now does too
+    // — the P3 pre-commitment itself stays a frozen claim block).
+    if ((el = document.getElementById("comfort"))) {
+      var pre = 'We pre-commit <a href="#prereg">below (claim P3)</a> to not claiming ' +
+        "vindication either way — and note that anyone who does claim it is overreading.";
+      el.innerHTML = tied
+        ? "And one comfort the committee should actually enjoy: <strong>whatever it chooses, no one " +
+          "will ever prove the market would have chosen better.</strong> The gap sits at the platform's " +
+          "1% price grid — a tie at the market's working precision — and November is a single coin flip. " + pre
+        : rankOk
+          ? "One comfort survives even with the ranking priced: <strong>November is a single coin flip, " +
+            "and one sample settles nothing.</strong> The " + pp1(gap) + "-point gap clears its floors at " +
+            "the settings in view, but no single election can vindicate an edge that size. " + pre
+          : "And one comfort the committee should actually enjoy: <strong>whatever it chooses, no one " +
+            "will ever prove the market would have chosen better.</strong> The gap is inside the bands, " +
+            "and November is a single coin flip. " + pre;
+    }
+    // Front-runner carry share: "conditionality is nearly free" was a frozen
+    // reading; the share is now computed (moves with the loans toggle).
+    if ((el = document.getElementById("carryFrontrunner"))) {
+      var cpJ = carryParts(J), cTot = cpJ.live + cpJ.na, naSh = cTot > 0 ? cpJ.na / cTot : 0;
+      el.innerHTML = cTot <= 1e-12
+        ? "With capital free (r = 0 in view), carry — conditional or ordinary — costs nothing, " +
+          "and the refund-branch penalty is moot; what remains of every band is the attention floor."
+        : naSh < 0.25
+          ? "For a front-runner, conditionality is nearly free — " + dynv(Math.round(100 * (1 - naSh)) + "%") +
+            " of Jackson's band is ordinary locked-to-November carry."
+          : "At the horizons in view conditionality is no longer negligible even for the front-runner — " +
+            dynv(Math.round(100 * naSh) + "%") + " of Jackson's band is refund-branch idling, not " +
+            "ordinary locked-to-November carry.";
+    }
+    // Patient-regime evidence rests on the freshness check, which is live —
+    // so this clause follows it instead of asserting a frozen pass forever.
+    if ((el = document.getElementById("patientEvidence"))) {
+      var fsp = freshState();
+      el.innerHTML = fsp.ok
+        ? "The freshness audit above is evidence the patient regime is the real one here: the tail " +
+          "answers trade at all, at prices far inside any carry band."
+        : "The freshness audit above has stopped supporting that reading for now: the conditional " +
+          "market's most recent trade is " + dynv(fmtAgo(fsp.mins)) + " old, so patient attention " +
+          "is an assumption here, not an observation.";
+    }
+    // fn-bands, point one: the p_B threshold where the refund-branch penalty
+    // overtakes ordinary carry — E(T_NA)/(E(T_NA)+E(T_live)) at the horizons
+    // and loans setting in view (the hand-quoted ≈0.15 retired Jul 12).
+    if ((el = document.getElementById("fnFirst"))) {
+      var rhoF = state.loans ? RHO : 0;
+      var pStar = effDays(T_NA, rhoF) / (effDays(T_NA, rhoF) + effDays(T_LIVE, rhoF));
+      var dNA = Math.round(T_NA);
+      el.innerHTML = "because the N/A branch resolves in <span class='num'>" + dNA + "</span> day" +
+        (dNA === 1 ? "" : "s") + " (the horizon in view), the conditional-specific penalty " +
+        "<span class='num'>(1−p_B)/p_B·T_NA</span> only overtakes the ordinary locked-to-November " +
+        "carry below p<sub>B</sub> ≈ " + dynv(pStar.toFixed(2)) + ".";
+    }
+    // fn-bands, point two: tick floor at the depth in view (literal M$1, not
+    // the knob), and the three-floor correction — carry is only the capital
+    // part; which part binds follows the same computation as floorsPara.
+    if ((el = document.getElementById("fnSecond"))) {
+      var hiTick = 0;
+      CANDS.forEach(function (d0) {
+        var d = mat(d0);
+        if (d.c !== null && d.pool) hiTick = Math.max(hiTick, d.c / (d.pool * DEPTH_CAL));
+      });
+      el.innerHTML = "the fee-free minimum bet keeps the tick floor negligible (M$1 moves these pools " +
+        "at most ~<span class='num'>" + pp(hiTick) + "</span> points at the depth in view) — but carry " +
+        "is only the <em>capital</em> part of the floor: the attention floor (the min-trade footnote " +
+        "above) sits on top, and at the settings in view " +
+        (carryBinds ? "carry is the binding part for the front-runners"
+          : "it, not carry, is what binds the front-runners") +
+        " — the chart's carry band and its attention layer, together, are the market's working precision.";
+    }
+    // fn-bands, loans consequences: shrink factors and the tighten range are
+    // pure functions of the horizons in view (linear in r, so r cancels).
+    if ((el = document.getElementById("fnLoans"))) {
+      var sLive = effDays(T_LIVE, RHO) / T_LIVE, sNA = effDays(T_NA, RHO) / T_NA;
+      function tightenOf(d) {
+        var kf = (1 - d.pX) / d.pX;
+        return (T_LIVE + T_NA * kf) / (effDays(T_LIVE, RHO) + effDays(T_NA, RHO) * kf);
+      }
+      var tJ = tightenOf(J), tB = tightenOf(B);
+      var tLo = Math.min(tJ, tB).toFixed(1), tHi = Math.max(tJ, tB).toFixed(1);
+      var maxShrink = Math.max(1, Math.round(100 * (1 - Math.min(sLive, sNA))));
+      el.innerHTML = sLive > 0.9
+        ? "at the horizons in view (a <span class='num'>" + Math.round(T_LIVE) + "</span>-day live branch, a " +
+          "<span class='num'>" + Math.round(T_NA) + "</span>-day refund branch) loans barely bite — neither " +
+          "branch shrinks by more than ~<span class='num'>" + maxShrink + "%</span>, and the bands hardly move"
+        : "loans shrink the live branch (×<span class='num'>" + sLive.toFixed(2) +
+          "</span> at the <span class='num'>" + Math.round(T_LIVE) + "</span>-day horizon in view) far " +
+          "more than the <span class='num'>" + Math.round(T_NA) + "</span>-day refund branch " +
+          "(×<span class='num'>" + sNA.toFixed(2) + "</span>) — the front-runners' bands tighten " +
+          "<span class='num'>" + (tLo === tHi ? "~" + tLo + "×" : tLo + "–" + tHi + "×") +
+          "</span>, the tails' barely move";
+    }
+    // fn-joint: the Collins-primary wedge, from the marketstate in view
+    // (falls back to the record if the extra fetch failed).
+    if ((el = document.getElementById("fnCollinsWedge"))) {
+      var p95 = curMS().primary95 !== null ? curMS().primary95 : FROZEN_MS.primary95;
+      el.textContent = ((1 - p95) * 100).toFixed(1) + "%";
+    }
   }
   // The pitch is a computation: given the prices, liquidity, and assumptions
   // in view, does more funding help, and how much would it take? No narrative
@@ -2334,6 +2462,10 @@
       }
     }
     el.innerHTML = head + verdict;
+    // Mechanism note: whole-market subsidy spreads over N answers, a
+    // two-answer aim concentrates it — the factor is N/2 at the family in view.
+    var aim = document.getElementById("mechAim");
+    if (aim) aim.textContent = (N / 2).toFixed(1).replace(/\.0$/, "") + "×";
   }
 
   function update() { horizons(); drawDek(); drawFresh(); drawBoard(); drawAnatomy(); drawLadder(); drawNetting(); drawRegime(); drawControls(); drawDetail(); drawPair(); drawS1(); drawCoherence(); drawCards(); drawProse(); drawPitch(); }
