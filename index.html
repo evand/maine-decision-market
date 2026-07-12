@@ -400,11 +400,7 @@
     <a href="https://manifold.markets/Jack1/will-the-democratic-party-candidate-NQOPZAnOA8">P(Dem win)</a> ·
     <a href="https://manifold.markets/SaviorofPlant/will-susan-collins-win-reelection-t">Collins re-election</a></p>
 
-  <p class="prose" id="roShapes">The headline is in the shapes. The market is a confident
-  <strong>pruner</strong> and a useless <strong>ranker</strong>: each front-runner is measured to
-  ±<span class="num">2.5–3.4</span> points, so the longshots below them are loudly ruled out — but
-  the 3-point gap <em>between</em> Jackson and Bellows, the committee's actual question, is not
-  measured at all.</p>
+  <p class="prose" id="roShapes">The headline is in the shapes. The market is a confident <strong>pruner</strong> and a useless <strong>ranker</strong>: each front-runner is measured to <span class="num dyn">±8.2–10.8</span> points (carry and attention together), so the longshots below them are loudly ruled out — but the 3-point gap <em>between</em> Jackson and Bellows, the committee's actual question, is not measured at all.</p>
 
   <details><summary>The board as a table (the frozen record: r = 2%/mo, no loans)</summary>
     <div class="tablewrap"><table>
@@ -461,30 +457,20 @@
   choices. The worlds where a committee reaches past two front-runners for the ex-governor are
   mostly worlds where something else has already gone wrong. The market's most contrarian number
   is also its most confounded — a flag, not a verdict.</p>
-  <p class="prose" id="rojb"><strong>Do not read Jackson <span class="num">.620</span> over Bellows
-  <span class="num">.590</span> as advice.</strong> The 3-point gap is inside both bands: nobody is
-  being paid to make that difference meaningful, so it isn't. This is the board's central, least
-  intuitive lesson — it measures each candidate to a few points, and measures the <em>comparison
-  between the top two</em>, the actual decision, not at all.</p>
+  <p class="prose" id="rojb"><strong>Do not read Jackson <span class="num">.620</span> over Bellows <span class="num">.590</span> as advice.</strong> The 3-point gap is inside the pair's combined floor — carry <span class="num dyn">±5.9</span> plus attention <span class="num dyn">±9.3</span> = <span class="num dyn">±15.3</span>; a corrector pays to notice <em>on top of</em> paying to wait: nobody is being paid to make that difference meaningful, so it isn't. This is the board's central, least intuitive lesson — it measures each candidate to a few points, and measures the <em>comparison between the top two</em>, the actual decision, not at all.</p>
   <p class="prose">The full menu, as a ladder: which comparisons can the market make at the prices
   and settings in view — and which would become possible as its floors drop. (The reform columns
   are priced in the next section.)</p>
-  <div class="tablewrap"><table id="ladder">
-    <tr><th>Comparison</th><th class="num">gap<br><span class="small">frozen prices</span></th><th>today<br><span class="small" id="ladderHdr">(r = 2%/mo)</span></th><th>+ netting<br><span class="small"><a href="#everyleg">margining to worst-case loss (next section)</a></span></th><th>+ netting &amp; patient capital<br><span class="small">idle capital (r = 0) + M$10k subsidy</span></th></tr>
-    <tr><td>Jackson vs Platner</td><td class="num">0.483</td><td><span class="yes">✓</span> <span class="small num">±24 comb.</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
-    <tr><td>Jackson vs Wood</td><td class="num">0.220</td><td><span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±21</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
-    <tr><td>Jackson vs Mills</td><td class="num">0.202</td><td><span class="no">✗</span> <span class="small num">±37</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
-    <tr><td><strong>Jackson vs Bellows</strong> (the live choice)</td><td class="num">0.030</td><td><span class="no">✗</span> <span class="small num">±12</span></td><td><span class="no">✗</span> <span class="small num">±10</span></td><td><span class="yes">✓</span> <span class="small num">±2.3</span></td></tr>
-    <tr><td>Shah vs Bellows</td><td class="num">0.010</td><td><span class="no">✗</span></td><td><span class="no">✗</span></td><td><span class="no">✗</span> — genuinely tied</td></tr>
-  </table></div>
-  <p class="prose small muted">Cells show the combined band of the pair; ✓ = gap exceeds it. Every column
-  assumes the floor is actually reached — i.e., every column silently assumes the subsidy lever too.
-  Combination rules (corrected Jul 11): the carry columns add the two legs linearly — carry is a separable
-  per-mana cost, a below-floor leg can't be cross-subsidized. The patient-capital column is the
-  attention-only floor at the reference M$10k/answer subsidy, legs combined in quadrature (square root
-  of the sum of squares) — one act of noticing covers the whole pair trade (derivation in the
-  <a href="#fn-mintrade">min-trade footnote</a>). A gap at or below Manifold's 1% price grid is scored
-  as a genuine tie — the market's working resolution, which no amount of depth fixes.</p>
+  <div class="tablewrap"><table id="ladder"><tbody><tr><th>Comparison</th><th class="num">gap<br><span class="small">frozen prices</span></th><th>today<br><span class="small dyn" id="ladderHdr">carry + attention at r = 2.0%/mo + loans</span></th><th>+ netting<br><span class="small"><a href="#everyleg">margining to worst-case loss (next section)</a></span></th><th>+ netting &amp; patient capital<br><span class="small">idle capital (r = 0) + M$10k subsidy</span></th></tr><tr><td>Jackson vs Platner</td><td class="num">0.483</td><td><span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±39</span></td><td><span class="yes">✓</span> <span class="small num">±23</span></td><td><span class="yes">✓</span> <span class="small num">±5</span></td></tr><tr><td>Jackson vs Wood</td><td class="num">0.220</td><td><span class="no">✗</span> <span class="small num">±36</span></td><td><span class="no">✗</span> <span class="small num">±24</span></td><td><span class="yes">✓</span> <span class="small num">±5</span></td></tr><tr><td>Jackson vs Mills</td><td class="num">0.202</td><td><span class="no">✗</span> <span class="small num">±56</span></td><td><span class="no">✗</span> <span class="small num">±30</span></td><td><span class="yes">✓</span> <span class="small num">±7</span></td></tr><tr><td><strong>Jackson vs Bellows</strong> (the live choice)</td><td class="num">0.030</td><td><span class="no">✗</span> <span class="small num">±15</span></td><td><span class="no">✗</span> <span class="small num">±13</span></td><td><span class="yes">✓</span> <span class="small num">±2.3</span></td></tr><tr><td>Shah vs Bellows</td><td class="num">0.010</td><td><span class="no">✗</span> <span class="small num">±42</span></td><td><span class="no">✗</span> <span class="small num">±26</span></td><td><span class="no">✗</span> <span class="small">gap at Manifold's 1% price grid — genuine tie</span></td></tr></tbody></table></div>
+  <p class="prose small muted">Cells show the pair's combined floor — carry at that column's margining
+  regime <em>plus</em> the attention floor at the depth in view (revised Jul 12: the two add — a
+  corrector pays to notice on top of paying to wait); ✓ = gap exceeds it. Combination rules across the
+  two legs (corrected Jul 11): carry adds linearly — a separable per-mana cost, a below-floor leg can't
+  be cross-subsidized; attention combines in quadrature (square root of the sum of squares) — one act
+  of noticing covers the whole pair trade (derivation in the
+  <a href="#fn-mintrade">min-trade footnote</a>). The patient column is the attention-only floor —
+  carry zeroed (r = 0) — at the reference M$10k/answer subsidy. A gap at or below Manifold's 1% price
+  grid is scored as a genuine tie — the market's working resolution, which no amount of depth fixes.</p>
   <p class="prose">And one comfort the committee should actually enjoy: <strong>whatever it
   chooses, no one will ever prove the market would have chosen better.</strong> The gap is inside
   the bands, and November is a single coin flip. We pre-commit <a href="#prereg">below (claim P3)</a> to not claiming
@@ -501,8 +487,8 @@
   not carry, is what binds the front-runners.</p>
   <p class="prose"><strong>Carry, and the refund-branch penalty.</strong> For a front-runner,
   conditionality is nearly free — Jackson's band is almost all ordinary locked-to-November carry.
-  For a longshot it's brutal: a bet on Mills's row idles to July 27 for a refund in <span class="num dyn" id="millsIdle">98.5%</span> of
-  worlds, so her band balloons to ±<span class="num dyn" id="millsBand">28</span>. Manifold's interest-free loans
+  For a longshot it's brutal: a bet on Mills's row idles to July 27 for a refund in <span class="num" id="millsIdle">98.5%</span> of
+  worlds, so her carry band balloons to ±<span class="num dyn" id="millsBand">28</span>. Manifold's interest-free loans
   (a holder can reclaim 1% of a position per day, and we verified against the resolution source
   that this is safe even on the refund branch) shrink the live branch (to November) by
   ~<span class="num" id="loanLive">2.4×</span> and the short refund branch by only ~<span class="num" id="loanNA">7%</span> —
@@ -541,28 +527,21 @@
   quadratic, so the widest hidable gap is √(ε²<sub>J</sub>+ε²<sub>B</sub>) (derivation in the min-trade
   footnote). At the frozen prices the corrected claim is <em>stronger</em>: ±2.3 combined at M$10k/answer,
   break-even ≈ M$5.7k/answer (≈ M$11.5k under the skeptic's model that charges the pair two noticings).</p>
+  <p class="prose small muted">Revised Jul 12 (sum semantics): the page's computed verdicts now charge
+  carry and attention <em>together</em> — the combined no-correction gap is their sum, matching the
+  chart's stacked layers and the floors paragraph (derivation added to the
+  <a href="#fn-mintrade">min-trade footnote</a>). Earlier renders checked the two floors separately,
+  which understated the floor for capital that pays to wait. The subsidy break-evens above and in the
+  house-money pitch now target the gap's headroom <em>after</em> carry; at r = 0 they reproduce the
+  Jul-11 numbers exactly (a patient trader pays no carry — that regime is now literally the r = 0
+  setting). Pre-registered claims and all dated numbers are untouched.</p>
   <details><summary>Every candidate's floors, one table (click a board row for the same thing, one at a time)</summary>
     <div class="tablewrap" id="anatomy"></div>
     <p class="prose small muted" id="anatomynote"></p>
   </details>
 
-  <p class="prose" id="ladderconcl">So the ladder prices out as: <strong>the market in view,
-  funded, can rule out the tail</strong>. <strong>Netting buys the establishment question</strong>
-  ("is Mills really worse?" becomes answerable). <strong>Jackson-vs-Bellows needs either the full
-  reform stack — or patient capital plus real subsidy</strong> (the quadrature arithmetic above).
-  And Shah-vs-Bellows is beyond every rung and both regimes — at these prices that comparison is a
-  genuine tie, and no market mechanism will pretend otherwise.</p>
-  <p class="prose" id="pitch">The house-money case: reforms take engineering and time this decision
-  doesn't have, but the subsidy lever exists <em>today</em> — and Manifold's own tooling can aim it
-  at single answers (ordinary users can't; at the odds in view, ~<span class="num">78%</span> of a
-  whole-market subsidy would land outside the two live rows). The refund asymmetry keeps the cost
-  low: subsidy parked in answers that end in refunds comes back, in full, on July 27 — the house
-  risks real exposure only on the one answer that survives the decision. Given the prices,
-  liquidity, and assumptions in view, <strong>≈<span class="num">M$5.7k</span> of pool per answer
-  might buy the Jackson–Bellows ranking</strong> (today's front-runner pools:
-  <span class="num">M$528–632</span>), parked for <span class="num">15</span> days, mostly
-  refunded. That is the entire price of making this decision market worth the committee's
-  glance.</p>
+  <p class="prose" id="ladderconcl">So the ladder prices out as: <strong>the market in view can rule out only part of the tail</strong> (even netting doesn't finish it at these settings — patient capital plus subsidy does). <strong>Even netting doesn't reach the Mills question at these settings</strong>. <strong>Jackson-vs-Bellows needs either the full reform stack — or patient capital plus real subsidy</strong> (the quadrature arithmetic above). And Shah-vs-Bellows is not a funding problem at all: its gap sits at Manifold's 1% price grid — a tie at the market's working resolution, and no depth will pretend otherwise.</p>
+  <p class="prose" id="pitch">The house-money case: reforms take engineering and time this decision doesn't have, but the subsidy lever exists <em>today</em> — and Manifold's own tooling can aim it at single answers (ordinary users can't; at the odds in view, ~<span class="num">78%</span> of a whole-market subsidy would land outside the two live rows). The refund asymmetry keeps the cost low: subsidy parked in answers that end in refunds comes back, in full, on July 27 — the house risks real exposure only on the one answer that survives the decision. Given the prices, liquidity, and assumptions in view, <strong>depth is the wrong lever at these settings</strong>: the waiting cost alone (<span class="num dyn">±5.9</span> combined) swallows the 3-point gap, so no pool size pays a corrector who is paying <span class="num dyn">r = 2.0%/mo + loans</span> to hold. Cheaper capital — the cost-of-capital slider, loans, or the margin reform above — has to come first; set r to 0 and this paragraph prices the patient-capital case.</p>
   <p class="prose small muted">Mechanism note: per-answer subsidy targeting is currently internal-only API
   surface; a pending mechanism upgrade (cpmm-multi-2) would open it to everyone — for a two-answer aim
   that's ~4.5× more of each subsidized mana landing on target — and would stop the current liquidity-add
@@ -719,6 +698,17 @@
     negative marginal value at any size and can't be cross-subsidized — so carry floors add linearly.
     A skeptic who charges the pair trade two noticings scales the quadrature term by √2; that bound is
     quoted alongside the headline numbers where it matters.</p>
+    <p class="prose"><strong>How carry and attention combine</strong> (added Jul 12, when the page's
+    verdicts moved to sum semantics). A corrector who pays for waiting will not trade a price past its
+    carry edge ε<sub>c</sub> — below that, holding the position has negative marginal value at any
+    size — so on a gap g the claimable prize is the quadratic prize on the <em>excess</em>
+    (g − ε<sub>c</sub>), and covering one noticing cost requires
+    <span class="num">g ≥ ε<sub>c</sub> + ε<sub>a</sub></span>: carry and attention add, exactly.
+    The patient trader is the r = 0 slider setting, nothing more. Two deliberate non-additions: tick
+    and attention combine as max, not sum — they are two consequences of the same min-worthwhile
+    trade; and the 1% quote grid is not added as a flat floor — it acts as <em>increments</em> (the
+    tie rule), and at high depth market orders land between grid points anyway, so stacking it on the
+    bother floor would double-count.</p>
   </details>
 
   <details class="fnote" id="fn-bands"><summary>Where the bands come from (the derivation)</summary>
@@ -815,7 +805,9 @@
     <p><strong>Revision note.</strong> The prose on this page was rewritten 2026-07-11 — a briefing
     framing, plainer vocabulary, sections reordered around the committee's questions. Every
     pre-registered claim, frozen number, and computation is unchanged. That separation — prose as a
-    replaceable view over a frozen record — is the point of the page.</p>
+    replaceable view over a frozen record — is the point of the page. On 2026-07-12 the computed
+    verdicts moved to sum semantics (carry + attention charged together; dated note beside the
+    ladder) — a model revision, disclosed because it changes conclusions at a given setting.</p>
     <p><strong>Criticism wanted.</strong> The fastest way to improve this page is to break it: an
     error in the band derivation, a hole in the one-noticing attention model, a Manifold margining
     detail that sinks the netting pitch.
@@ -959,6 +951,17 @@
   //   percentage points, place-bet.ts).
   function gapAttnE(A, B) { var a = attnE(A), b = attnE(B); return Math.sqrt(a * a + b * b); }
   function gapHazeE(A, B) { return Math.max(tickE(A) + tickE(B), gapAttnE(A, B)); }
+  // SUM semantics (evand ruling 2026-07-12): a corrector paying rate r won't
+  // trade a gap below its carry edge, so the claimable prize is quadratic in
+  // the EXCESS over carry and the total no-correction gap is carry + attention
+  // — an exact sum (derivation in the min-trade footnote). The patient trader
+  // is the r = 0 slider setting, not a hidden regime. Tick and attention
+  // combine as max (two consequences of the same min-worthwhile trade); the
+  // 1% quote grid is NOT added — it acts as increments via the tie rule, and
+  // at high depth market orders land between grid points anyway (adding it
+  // would double-count the bother floor).
+  function gapCombE(A, B) { return bandE(A) + bandE(B); }
+  function gapTotalE(A, B) { return gapCombE(A, B) + gapHazeE(A, B); }
   function attnAtDepth(d, S) {   // attention floor at S M$ of pool depth (subsidy scenarios)
     return Math.sqrt(2 * d.c * state.mbet / (d.pX * S * DEPTH_CAL));
   }
@@ -1321,7 +1324,7 @@
     h += "</table>";
     document.getElementById("anatomy").innerHTML = h;
     document.getElementById("anatomynote").innerHTML =
-      "Points per side (±), at <span class='num'>" + fmtSetting() + "</span>. The carry columns follow the " +
+      "Points per side (±), at " + dynv(fmtSetting()) + ". The carry columns follow the " +
       "controls above the board; the attention floor follows depth (" +
       (liveDepth() ? "live pools, fetched " + LIVE.at.toISOString().slice(11, 16) + " UTC" : "pools frozen 2026-07-10") +
       ") and the min-trade knob (√), and is " +
@@ -1370,15 +1373,16 @@
   function drawLadder() {
     var h = '<tr><th>Comparison</th><th class="num">gap<br><span class="small">' +
       (PRICEMODE === "live" && LIVE.cond ? "live prices" : "frozen prices") +
-      '</span></th><th>today<br><span class="small" id="ladderHdr">(' +
-      fmtSetting() + ')</span></th><th>+ netting<br><span class="small"><a href="#everyleg">margining to worst-case loss (next section)</a></span></th><th>+ netting &amp; patient capital<br><span class="small">idle capital (r = 0) + M$10k subsidy</span></th></tr>';
+      '</span></th><th>today<br><span class="small dyn" id="ladderHdr">carry + attention at ' +
+      fmtSetting() + '</span></th><th>+ netting<br><span class="small"><a href="#everyleg">margining to worst-case loss (next section)</a></span></th><th>+ netting &amp; patient capital<br><span class="small">idle capital (r = 0) + M$10k subsidy</span></th></tr>';
     var rows = [];
     PAIRS.forEach(function (pr) {
       var A = mat(CANDS[pr.a]), B = mat(CANDS[pr.b]);
       var gap = Math.abs(A.c - B.c);
+      var attT = gapHazeE(A, B);   // sum semantics: every capital column charges attention too
       var r = { gap: gap,
-                today: vinfo(gap, bandE(A) + bandE(B)),
-                net: vinfo(gap, nettedE(A) + nettedE(B)),
+                today: vinfo(gap, bandE(A) + bandE(B) + attT),
+                net: vinfo(gap, nettedE(A) + nettedE(B) + attT),
                 pat: pinfo(A, B, gap) };
       rows.push(r);
       h += "<tr><td>" + pr.label + '</td><td class="num">' + gap.toFixed(3) + "</td>" +
@@ -1396,7 +1400,12 @@
     var c1 = (t0.today.ok && t1.today.ok)
       ? "<strong>the market in view, funded, can rule out the tail</strong>" +
         ((t0.today.barely || t1.today.barely) ? " — barely" : "")
-      : "<strong>the market in view can rule out only part of the tail</strong> (netting finishes the job)";
+      : "<strong>the market in view can rule out only part of the tail</strong> " +
+        ((t0.net.ok && t1.net.ok)
+          ? "(netting finishes the job)"
+          : (t0.pat.ok && t1.pat.ok)
+            ? "(even netting doesn't finish it at these settings — patient capital plus subsidy does)"
+            : "(and no rung on this ladder finishes it at these settings)");
     var c2 = m.today.ok
       ? "<strong>The establishment question (“is Mills really worse?”) is already answerable</strong>"
       : m.net.ok
@@ -1450,25 +1459,19 @@
   function rankVerdict() {   // the Jackson-vs-Bellows readout, shared by both front-runners
     var J = mat(CANDS[0]), B = mat(CANDS[1]);
     var gap = Math.abs(J.c - B.c);
-    var comb = bandE(J) + bandE(B), atJ = attnE(J), atB = attnE(B);
-    var carryOk = gap > comb;
-    var h = "The committee's real question — Jackson vs Bellows — needs their combined ±" +
-      dynv(pp(comb)) + " under the <span class='num'>" + pp(gap) + "</span>-point gap: " +
-      (carryOk ? "<strong>the ranking clears the carry floor</strong>" : "<strong>the ranking stays unresolvable</strong>") +
-      " at " + dynv(fmtSetting()) + ".";
-    if (carryOk) {
-      var gh = gapHazeE(J, B);
-      h += gh > gap
-        ? " Carry is only floor one: the pair's attention floor (±" + dynv(pp(gh)) +
-          ", per-leg floors ±" + dynv(pp(atJ)) + " / ±" + dynv(pp(atB)) +
-          " combined in quadrature — the square root of summed squares, since one act of noticing " +
-          "covers both legs) still swallows the gap — cheap capital " +
-          "alone doesn't buy the ranking; depth has to move too."
-        : " And the pair's attention floor (±" + dynv(pp(gh)) + ", per-leg floors in quadrature — " +
-          "√ of summed squares) sits " +
-          "under the gap too — at this depth and these settings the ranking is genuinely priced.";
-    }
-    return h;
+    var comb = gapCombE(J, B), atJ = attnE(J), atB = attnE(B);
+    var gh = gapHazeE(J, B), total = comb + gh;
+    var verdict = gap > total
+      ? "<strong>the ranking is priced</strong>"
+      : gap > comb
+        ? "<strong>the ranking stays unresolvable — the waiting cost is covered, the noticing prize isn't</strong>; depth has to move"
+        : "<strong>the ranking stays unresolvable</strong>";
+    return "The committee's real question — Jackson vs Bellows — needs the pair's combined floor " +
+      "— carry ±" + dynv(pp(comb)) + " plus attention ±" + dynv(pp(gh)) +
+      " (per-leg floors ±" + dynv(pp(atJ)) + " / ±" + dynv(pp(atB)) +
+      " in quadrature — the square root of summed squares, since one act of noticing covers both " +
+      "legs) = ±" + dynv(pp(total)) + " — under the <span class='num'>" + pp(gap) +
+      "</span>-point gap: " + verdict + " at " + dynv(fmtSetting()) + ".";
   }
   function explain(d) {
     var k = d.c !== null ? carryParts(d) : null;
@@ -1582,11 +1585,12 @@
     var lo = Math.min.apply(null, netted), hi = Math.max.apply(null, netted);
     var wide = netted.filter(function (n) { return n > MUSH_E; }).length;
     document.getElementById("nettingverdict").innerHTML = wide === 0
-      ? "Every swallowed row becomes a measured one: the whole board lands at " +
-        dynv("±" + pp(lo) + "–" + pp(hi)) + " points, and the ranking trade’s double deposit disappears with it."
-      : "Netting tightens the whole board to " + dynv("±" + pp(lo) + "–" + pp(hi)) + " points at these settings — " +
+      ? "Netting deletes the refund-branch penalty across the board: every row's carry component lands at " +
+        dynv("±" + pp(lo) + "–" + pp(hi)) + " points, and the ranking trade’s double deposit disappears with it. " +
+        "(Attention still adds its own floor on top — the ladder's netting column charges both.)"
+      : "Netting tightens the board's carry component to " + dynv("±" + pp(lo) + "–" + pp(hi)) + " points at these settings — " +
         "but " + dynv(String(wide)) + " row" + (wide === 1 ? "" : "s") + " stay" + (wide === 1 ? "s" : "") +
-        " wider than ±" + pp(MUSH_E) + ": at this cost of capital, netting alone no longer rescues the longshots.";
+        " wider than ±" + pp(MUSH_E) + " on carry alone: at this cost of capital, netting no longer rescues the longshots.";
   }
   // ---- regime-keyed subsidy conclusion (the patient-capital arithmetic) ----
   var SUBSIDY_S = 10000;   // the essay's reference subsidy scenario, M$ of depth per answer
@@ -1603,16 +1607,27 @@
         "floor to " + dynv("±" + pp(quad)) + " points; there is simply no gap left to measure.";
       return;
     }
-    var breakEven = SUBSIDY_S * Math.pow(quad / gap, 2);   // attn ∝ 1/√depth
+    var comb = gapCombE(J, B), headroom = gap - comb;   // sum semantics: subsidy targets the excess over carry
+    if (headroom <= 0) {
+      el.innerHTML = "And the arithmetic is sharp about the settings in view: carry alone (" +
+        dynv("±" + pp(comb)) + " combined) already swallows the " + dynv(pp(gap)) + "-point gap, " +
+        "so at " + dynv(fmtSetting()) + " no depth pays a corrector who is paying to wait — subsidy " +
+        "buys nothing until capital is cheaper. Set the cost-of-capital slider to 0 and this " +
+        "sentence re-derives for truly patient money.";
+      return;
+    }
+    var breakEven = SUBSIDY_S * Math.pow(quad / headroom, 2);   // attn ∝ 1/√depth
     el.innerHTML = "And in that regime the arithmetic turns sharp: M$10k per answer drops the " +
       "ranking’s combined attention floor to " + dynv("±" + pp(quad)) + " points" +
-      (quad < gap
-        ? " — <strong>under the " + dynv(pp(gap)) + "-point Jackson–Bellows gap</strong> (break-even ≈ " +
-          dynv(fmtMk(breakEven)) + "/answer). If the patient-capital reading is right, subsidy alone can " +
+      (quad < headroom
+        ? " — <strong>under the gap's headroom after carry (" + dynv(pp(gap)) + " − " + dynv(pp(comb)) +
+          " = " + dynv(pp(headroom)) + " pts; break-even ≈ " +
+          dynv(fmtMk(breakEven)) + "/answer)</strong>. At these settings subsidy alone can " +
           "buy the ranking; the ladder's patient column is the pessimistic case."
-        : " — <strong>still above the " + dynv(pp(gap)) + "-point Jackson–Bellows gap</strong>; buying the " +
-          "ranking outright would take ≈ " + dynv(fmtMk(breakEven)) + "/answer of depth. At these prices " +
-          "even the patient regime needs more than the reference M$10k; the ladder's patient column is the " +
+        : " — <strong>still above the gap's headroom after carry (" + dynv(pp(gap)) + " − " + dynv(pp(comb)) +
+          " = " + dynv(pp(headroom)) + " pts)</strong>; buying the " +
+          "ranking outright would take ≈ " + dynv(fmtMk(breakEven)) + "/answer of depth. At these settings " +
+          "the reference M$10k isn't enough; the ladder's patient column is the " +
           "pessimistic case.");
   }
 
@@ -1693,15 +1708,16 @@
       h += ", and " + (live ? "at live prices" : "at these prices") + " the Jackson–Bellows gap (" +
         dynv(pp(gap)) + " pts) sits at the platform's 1% price step — a tie, which no amount of " +
         "money makes speak";
-    } else if (gap > comb && gap > att) {
+    } else if (gap > comb + att) {
       h = "<strong>the market has confidently ruled out the longshots — and " +
         (live ? "at live prices" : "at these settings") + " the Jackson–Bellows gap (" +
-        dynv(pp(gap)) + " pts) is wider than every incentive floor we compute below (±" +
-        dynv(pp(Math.max(comb, att))) + ")</strong>: for once, the ranking is priced";
+        dynv(pp(gap)) + " pts) is wider than the combined floor we compute below (carry ±" +
+        dynv(pp(comb)) + " + attention ±" + dynv(pp(att)) + ")</strong>: for once, the ranking is priced";
     } else if (gap > comb) {
-      h += ", and cheap money alone won't make it speak — the cost of waiting is covered, but at " +
-        "today's pool depth an error must reach ±" + dynv(pp(att)) + " before fixing it is worth " +
-        "anyone's while, and the gap is only " + dynv(pp(gap)) + " pts: someone must pay to deepen the pools";
+      h += ", and cheap money alone won't make it speak — the waiting cost (±" + dynv(pp(comb)) +
+        ") is covered, but a corrector must also be paid to notice, and the full floor (±" +
+        dynv(pp(comb + att)) + " at today's pool depth) still clears the " + dynv(pp(gap)) +
+        "-pt gap: someone must pay to deepen the pools";
     } else {
       h += ", and making it speak has a price, which we compute below";
     }
@@ -1829,20 +1845,22 @@
   // notes are the only immovable text).
   function drawProse() {
     var J = mat(CANDS[0]), B = mat(CANDS[1]);
-    var gap = Math.abs(J.c - B.c), comb = bandE(J) + bandE(B), att = gapHazeE(J, B);
-    var rankOk = gap > comb && gap > att;
+    var gap = Math.abs(J.c - B.c), comb = gapCombE(J, B), att = gapHazeE(J, B);
+    var total = comb + att;
+    var rankOk = gap > total;
     var lead = J.c >= B.c ? { n: "Jackson", c: J.c } : { n: "Bellows", c: B.c };
     var trail = J.c >= B.c ? { n: "Bellows", c: B.c } : { n: "Jackson", c: J.c };
     var el;
     if ((el = document.getElementById("roShapes"))) {
-      var bLo = Math.min(bandE(J), bandE(B)), bHi = Math.max(bandE(J), bandE(B));
+      var tJ = bandE(J) + hazeE(J), tB = bandE(B) + hazeE(B);
+      var bLo = Math.min(tJ, tB), bHi = Math.max(tJ, tB);
       el.innerHTML = "The headline is in the shapes. The market is a confident <strong>pruner</strong> " +
         (rankOk
-          ? "and — unusually, at the prices and settings in view — a <strong>ranker</strong> too: each front-runner is measured to ±<span class='num'>" +
-            pp(bLo) + "–" + pp(bHi) + "</span> points, and the " + pp1(gap) +
-            "-point gap between Jackson and Bellows clears every floor."
-          : "and a useless <strong>ranker</strong>: each front-runner is measured to ±<span class='num'>" +
-            pp(bLo) + "–" + pp(bHi) + "</span> points, so the longshots below them are loudly ruled out — but the " +
+          ? "and — unusually, at the prices and settings in view — a <strong>ranker</strong> too: each front-runner is measured to " +
+            dynv("±" + pp(bLo) + "–" + pp(bHi)) + " points (carry and attention together), and the " + pp1(gap) +
+            "-point gap between Jackson and Bellows clears the pair's combined floor."
+          : "and a useless <strong>ranker</strong>: each front-runner is measured to " +
+            dynv("±" + pp(bLo) + "–" + pp(bHi)) + " points (carry and attention together), so the longshots below them are loudly ruled out — but the " +
             pp1(gap) + "-point gap <em>between</em> Jackson and Bellows, the committee's actual question, is not measured at all.");
     }
     if ((el = document.getElementById("roTail"))) {
@@ -1856,12 +1874,13 @@
       el.innerHTML = rankOk
         ? "<strong>For once, the ranking is priced: " + lead.n + " " + fmtc(lead.c) + " over " +
           trail.n + " " + fmtc(trail.c) + ".</strong> At the prices and settings in view, the " +
-          pp1(gap) + "-point gap clears the pair's combined floors (carry ±<span class='num'>" +
-          pp(comb) + "</span>, attention ±<span class='num'>" + pp(att) + "</span>): a rational " +
+          pp1(gap) + "-point gap clears the pair's combined floor (carry " + dynv("±" + pp(comb)) +
+          " + attention " + dynv("±" + pp(att)) + " = " + dynv("±" + pp(total)) + "): a rational " +
           "trader is being paid to disagree with the ordering, and isn't. Treat it as measured — at these settings."
         : "<strong>Do not read " + lead.n + " " + fmtc(lead.c) + " over " + trail.n + " " +
-          fmtc(trail.c) + " as advice.</strong> The " + pp1(gap) + "-point gap is inside " +
-          (gap > comb ? "the pair's attention floor (±<span class='num'>" + pp(att) + "</span>)" : "both bands") +
+          fmtc(trail.c) + " as advice.</strong> The " + pp1(gap) + "-point gap is inside the pair's " +
+          "combined floor — carry " + dynv("±" + pp(comb)) + " plus attention " + dynv("±" + pp(att)) +
+          " = " + dynv("±" + pp(total)) + "; a corrector pays to notice <em>on top of</em> paying to wait" +
           ": nobody is being paid to make that difference meaningful, so it isn't. This is the " +
           "board's central, least intuitive lesson — it measures each candidate to a few points, " +
           "and measures the <em>comparison between the top two</em>, the actual decision, not at all.";
@@ -1870,7 +1889,7 @@
       var carryBinds = bandE(J) >= hazeE(J);
       el.innerHTML = "Each band is a sum of three floors, and each floor answers to a different " +
         "lever. The <strong>tick</strong> floor — the price step from the smallest trade anyone " +
-        "makes, ±<span class='num'>" + pp(tickE(J)) + "</span> points at the depth in view — was " +
+        "makes, " + dynv("±" + pp(tickE(J))) + " points at the depth in view — was " +
         "solved by the market's first M$100 of depth. The <strong>carry</strong> floor: money " +
         "locked to November if the candidate is picked, money idled to July 27 for a refund if " +
         "not — both kinds of waiting have to be paid for" +
@@ -1897,7 +1916,7 @@
     var spray = Math.round(100 * (N - 2) / N);
     var days = Math.max(1, Math.round(T_NA));
     var quad = gapAttnAtDepth(J, B, SUBSIDY_S);
-    var needPool = gap > 0.001 ? SUBSIDY_S * Math.pow(quad / gap, 2) : Infinity;
+    var needPool;   // set in the headroom branch (sum semantics)
     var head = "The house-money case: reforms take engineering and time this decision doesn't " +
       "have, but the subsidy lever exists <em>today</em> — and Manifold's own tooling can aim it " +
       "at single answers (ordinary users can't; at the odds in view, ~<span class='num'>" + spray +
@@ -1905,7 +1924,8 @@
       "asymmetry keeps the cost low: subsidy parked in answers that end in refunds comes back, " +
       "in full, on July 27 — the house risks real exposure only on the one answer that survives " +
       "the decision. Given the prices, liquidity, and assumptions in view, ";
-    var comb = bandE(J) + bandE(B);
+    var comb = gapCombE(J, B);
+    var headroom = gap - comb;   // subsidy must push attention under THIS (sum semantics)
     var verdict;
     if (gap <= BOARD_GRID + 1e-9) {   // tie doctrine first: depth never breaks a grid tie
       verdict = "<strong>funding is not the binding constraint</strong>: the " + pp1(gap) +
@@ -1913,22 +1933,25 @@
         "small.” (A proxy, not a law: deep pools can be market-ordered between grid points. But " +
         "a gap this size is a tie at the market's working resolution, and depth would confirm " +
         "it, not break it.)";
-    } else if (attNow < gap && comb < gap) {
-      verdict = "<strong>more funding isn't needed</strong>: the pair's attention floor " +
-        "(±<span class='num'>" + pp(attNow) + "</span>) already sits under the " + pp1(gap) +
-        "-point Jackson–Bellows gap. What remains is whether opinionated money claims the prize.";
-    } else if (attNow < gap) {
-      // depth cleared, carry didn't: subsidy isn't the lever in this state
-      verdict = "<strong>more depth isn't what's missing</strong>: the pair's attention floor " +
-        "(±<span class='num'>" + pp(attNow) + "</span>) already sits under the " + pp1(gap) +
-        "-point Jackson–Bellows gap, but at the settings in view the cost of waiting (±" +
-        "<span class='num'>" + pp(comb) + "</span> combined) still swamps it. The lever here is " +
-        "cheaper capital or the margin reform above — not subsidy.";
+    } else if (comb + attNow < gap) {
+      verdict = "<strong>more funding isn't needed</strong>: the pair's combined floor (carry " +
+        dynv("±" + pp(comb)) + " + attention " + dynv("±" + pp(attNow)) + ") already sits under the " +
+        pp1(gap) + "-point Jackson–Bellows gap. What remains is whether opinionated money claims the prize.";
+    } else if (headroom <= 0) {
+      // carry alone swallows the gap: no pool size pays a trader who pays to wait
+      verdict = "<strong>depth is the wrong lever at these settings</strong>: the waiting cost alone (" +
+        dynv("±" + pp(comb)) + " combined) swallows the " + pp1(gap) + "-point gap, so no pool size " +
+        "pays a corrector who is paying " + dynv(fmtSetting()) + " to hold. Cheaper capital — the " +
+        "cost-of-capital slider, loans, or the margin reform above — has to come first; set r to 0 " +
+        "and this paragraph prices the patient-capital case.";
     } else {
+      needPool = SUBSIDY_S * Math.pow(quad / headroom, 2);
       verdict = "<strong>≈<span class='num'>" + fmtMk(needPool) + "</span> of pool per answer " +
-        "might buy the Jackson–Bellows ranking</strong> (today's front-runner pools: " +
+        "might buy the Jackson–Bellows ranking</strong>: subsidy must push the pair's attention floor " +
+        "under the gap's headroom after carry (" + pp1(gap) + " − " + dynv(pp(comb)) + " = " +
+        dynv(pp(headroom)) + " pts). Today's front-runner pools: " +
         "<span class='num'>" + fmtMkRange(Math.min(J.pool, B.pool), Math.max(J.pool, B.pool)) +
-        "</span>), parked for <span class='num'>" + days + "</span> day" + (days === 1 ? "" : "s") +
+        "</span>; the subsidy parks for <span class='num'>" + days + "</span> day" + (days === 1 ? "" : "s") +
         ", mostly refunded.";
       if (needPool >= 1e5) {
         var tot = 2 * needPool;
