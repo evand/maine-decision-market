@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Pre-registered read of the Manifold decision-market family for the 2026 Maine Senate nomination: conditional prices with honest error bars, frozen before the party's July 27 choice.">
+<meta name="description" content="A briefing for the committee choosing Maine's Democratic Senate nominee: what prediction-market prices can tell them, what the prices can't, and what a sharper answer would cost. Claims frozen before the July 27 decision.">
 <title>The Committee &amp; the Market — Maine Senate 2026</title>
 <style>
   :root {
@@ -287,22 +287,18 @@
 </style>
 
 <div class="wrap">
-  <div class="eyebrow">
+  <h1>The Committee &amp; the Market</h1>
+  <p class="lede">By <strong>July 27</strong>, a committee of Maine Democrats must name a Senate
+  nominee — the primary winner withdrew, there is no runoff, a room decides. Prediction markets
+  price every branch of that choice, and this page is the briefing the committee will never ask
+  for: <span id="dekverdict"><strong>the market has confidently ruled out the longshots; on the
+  live question — Jackson or Bellows — it is silent within its own error bars</strong>, and making
+  it speak has a price, which we compute below</span>.</p>
+  <div class="eyebrow" style="margin-top: 20px">
     <span class="frozen">Pre-registered snapshot</span>
-    <span class="dot">·</span>
-    <button data-pm="live" id="pmlive">live prices</button>
-    <button data-pm="frozen" id="pmfrozen" class="on">frozen 2026-07-10</button>
     <span class="dot">·</span> <span>Manifold play-money prices (M$)</span>
     <span class="dot">·</span> <span>graded after 2026-11-03</span>
   </div>
-  <h1>The Committee &amp; the Market</h1>
-  <p class="lede">Maine Democrats must name a Senate nominee by <strong>July 27</strong> — no primary
-  runoff, a party committee decides — and prediction markets price every branch of the choice. Their
-  verdict: <strong>the longshots are confidently priced out, but the live question — Jackson or
-  Bellows — sits inside the error bars</strong>, and cheap capital alone can't buy the answer. The
-  pre-registered claims — and the prices they rest on — were locked <em>before</em> the decision;
-  live prices update on top, the record underneath never moves. So "the market knew" gets graded,
-  not asserted.</p>
 
   <div class="timeline">
     <div class="tl done"><div class="d">Jun 9</div><div class="t">Platner wins the Democratic primary</div></div>
@@ -314,12 +310,24 @@
   </div>
 
   <h2>The board</h2>
-  <p class="prose">Each row is a candidate the party could pick. The dot is the market's
-  <strong>P(Democrat wins the seat | this person is the nominee)</strong> — a conditional market that
-  refunds all bets if the person isn't chosen. The shaded band is the <em>no-correction band</em>: how
-  wrong the price can be before any rational trader would profit by fixing it (derivation below).</p>
-
+  <p class="prose">Each row is a candidate the committee could pick. The dot is a market price: the
+  probability that a Democrat holds the seat in November <em>if this person is the nominee</em>.
+  These are conditional markets — every bet on a candidate who isn't chosen is refunded, so each
+  row is a clean what-if: bettors risk nothing on the branches the committee doesn't take.</p>
+  <p class="prose">The shaded band is the part most market-reading leaves out. A price only stays
+  correct if correcting it pays, and correcting these pays badly: money sits locked until November
+  if the candidate is picked, and idles until July 27 for a mere refund if not. The band is the
+  computed <strong>no-profit zone</strong> — how far the price can drift before fixing it beats
+  simply holding the money (derivation in the footnotes). Read each row like a poll with a margin
+  of error, except this margin comes from incentives, not sampling.</p>
   <div class="controls" id="controls">
+    <div class="grp">
+      <span class="glabel2">Prices</span>
+      <span class="presets">
+        <button data-pm="frozen" id="pmfrozen" class="on">frozen 2026-07-10</button>
+        <button data-pm="live" id="pmlive">live</button>
+      </span>
+    </div>
     <div class="grp">
       <span class="glabel2">Cost of capital</span>
       <input type="range" id="rslider" min="0" max="5" step="0.1" value="2" autocomplete="off" aria-label="opportunity rate, percent per month">
@@ -333,7 +341,7 @@
     </div>
     <div class="grp">
       <span class="glabel2">Free loans</span>
-      <label class="switch"><input type="checkbox" id="loansbox" autocomplete="off"> claim daily (1%/day reclaim)</label>
+      <label class="switch"><input type="checkbox" id="loansbox" autocomplete="off" checked> claim daily (1%/day reclaim)</label>
     </div>
     <div class="grp">
       <span class="glabel2">Min worthwhile trade</span>
@@ -345,10 +353,14 @@
         <button data-m="100">M$100</button>
       </span>
     </div>
-    <p class="ctl-note" id="ctlnote"><span class="dyn">Highlighted</span> numbers follow these
-    controls, re-derived from the frozen 2026-07-10 prices; plain numbers are the pre-registered
-    record (<span class="num">r = 2%/mo · no loans · min trade M$1</span>) and never move.
-    Third knob: footnote below.</p>
+    <p class="ctl-note" id="ctlnote">The essay follows these controls: its numbers, bands, and
+    conclusions re-derive from whichever snapshot the prices toggle pins — live Manifold prices
+    and depths (the default once the fetch succeeds) or the frozen 2026-07-10 pre-registration
+    snapshot. <span class="dyn">Highlighted</span> numbers follow the capital controls
+    specifically; loans start on — untick for the record's no-loans assumption
+    (<span class="num">r = 2%/mo · no loans · min trade M$1</span>). Anything carrying an explicit
+    date is the frozen record and never moves; the pre-registered claims are graded against the
+    frozen numbers only. Third knob: footnote below.</p>
   </div>
 
   <div class="viewsel" id="viewsel">
@@ -366,7 +378,7 @@
       <span class="item" id="pairlegend" style="display:none"><span class="sqdemo"></span> joint market, pair-implied — ratio of the two "X vs Collins" answers</span>
       <span class="item"><span class="banddemo"></span> carry band (±ε at <span class="num dyn" id="legendR">r = 2%/mo</span>) — cost of locked capital</span>
       <span class="item" id="gridlegend" style="display:none"><span class="gridemo"></span> price-grid cell — joints quote on Manifold’s 1% grid</span>
-            <span class="item"><span class="fogdemo"></span> attention/granularity haze out to the noticing floor (min trade <span class="num dyn" id="fogC">M$1</span>, <span id="fogdepth">frozen depth</span>) — subsidy removes it</span>
+            <span class="item"><span class="fogdemo"></span> attention floor (min trade <span class="num dyn" id="fogC">M$1</span>, <span id="fogdepth">frozen depth</span>) — errors this small aren't worth anyone's bother to fix; subsidy shrinks it</span>
       <span class="item" id="fossillegend"><span class="fossildemo"></span> withdrawn — price is conditional on un-withdrawing</span>
       <span class="item"><span class="num" style="color:var(--accent)">│</span> market's overall P(Dem win) = <span class="num" id="anchorval">0.596</span></span>
       <span class="item"><button class="liveb" id="livebtn">overlay live prices</button></span>
@@ -381,116 +393,77 @@
     <a href="https://manifold.markets/Jack1/will-the-democratic-party-candidate-NQOPZAnOA8">P(Dem win)</a> ·
     <a href="https://manifold.markets/SaviorofPlant/will-susan-collins-win-reelection-t">Collins re-election</a></p>
 
-  <p class="prose">The market is a confident <strong>tail-pruner</strong> and a useless
-  <strong>argmax-finder</strong>: each front-runner is measured to ±<span class="num">5–6</span> points;
-  their 3-point difference is not measured at all.</p>
-  <p class="prose">Are the tail prices <em>stale</em>? No — the bet feed says every row traded within
-  the last two days, and the two "dead" candidates repriced hardest after the withdrawal. The wide
-  bands are an <em>incentive</em> bound, not evidence of neglect: small opinionated money keeps these
-  prices current even where rational carry says it shouldn't bother.</p>
+  <p class="prose" id="roShapes">The headline is in the shapes. The market is a confident
+  <strong>pruner</strong> and a useless <strong>ranker</strong>: each front-runner is measured to
+  ±<span class="num">2.5–3.4</span> points, so the longshots below them are loudly ruled out — but
+  the 3-point gap <em>between</em> Jackson and Bellows, the committee's actual question, is not
+  measured at all.</p>
 
   <details><summary>The board as a table (the frozen record: r = 2%/mo, no loans)</summary>
     <div class="tablewrap"><table>
-      <tr><th>Candidate</th><th class="num">P(nominee)</th><th class="num">P(win | nominee)</th><th class="num">band ±ε</th><th>last traded</th><th class="num">M$ since Jul 8</th><th>status</th></tr>
+      <tr><th>Candidate</th><th class="num">P(nominee)</th><th class="num">P(win | nominee)</th><th class="num">band ±ε</th><th>last traded</th><th class="num">M$ traded Jul 8–10</th><th>status</th></tr>
       <tr><td>Troy Jackson</td><td class="num">0.564</td><td class="num">0.620</td><td class="num">0.054</td><td>Jul 10</td><td class="num">666</td><td>informative</td></tr>
       <tr><td>Shenna Bellows</td><td class="num">0.271</td><td class="num">0.590</td><td class="num">0.063</td><td>Jul 10</td><td class="num">1,470</td><td>informative</td></tr>
-      <tr><td>Nirav Shah</td><td class="num">0.037</td><td class="num">0.600</td><td class="num">0.206</td><td>Jul 10</td><td class="num">448</td><td>mush</td></tr>
-      <tr><td>Jordan Wood</td><td class="num">0.031</td><td class="num">0.400</td><td class="num">0.157</td><td>Jul 10</td><td class="num">61</td><td>mush</td></tr>
+      <tr><td>Nirav Shah</td><td class="num">0.037</td><td class="num">0.600</td><td class="num">0.206</td><td>Jul 10</td><td class="num">448</td><td>band swallows the price</td></tr>
+      <tr><td>Jordan Wood</td><td class="num">0.031</td><td class="num">0.400</td><td class="num">0.157</td><td>Jul 10</td><td class="num">61</td><td>band swallows the price</td></tr>
       <tr><td>Janet Mills</td><td class="num">0.015</td><td class="num">0.418</td><td class="num">0.317</td><td>Jul 9</td><td class="num">167</td><td>live but wide</td></tr>
-      <tr><td>Dan Kleban</td><td class="num">0.012</td><td class="num">0.545</td><td class="num">0.504</td><td>Jul 10</td><td class="num">26</td><td>decorative</td></tr>
-      <tr><td>Valli Geiger</td><td class="num">0.007</td><td class="num">0.450</td><td class="num">&gt;0.5</td><td>Jul 9</td><td class="num">11</td><td>decorative</td></tr>
+      <tr><td>Dan Kleban</td><td class="num">0.012</td><td class="num">0.545</td><td class="num">0.504</td><td>Jul 10</td><td class="num">26</td><td>too thin to read</td></tr>
+      <tr><td>Valli Geiger</td><td class="num">0.007</td><td class="num">0.450</td><td class="num">&gt;0.5</td><td>Jul 9</td><td class="num">11</td><td>too thin to read</td></tr>
       <tr><td>Graham Platner</td><td class="num">0.008</td><td class="num">0.137</td><td class="num">0.183</td><td>Jul 9</td><td class="num">3,001</td><td>withdrawn; prices un-withdrawal</td></tr>
       <tr><td>Paige Loud</td><td class="num">—</td><td class="num">0.476</td><td class="num">unbounded</td><td>Jul 9</td><td class="num">886</td><td>not in nominee market</td></tr>
       <tr><td>Field / other</td><td class="num">0.083</td><td class="num">—</td><td class="num">—</td><td>—</td><td class="num">—</td><td>no conditional priced</td></tr>
     </table></div>
   </details>
 
-  <h2>The capital tax</h2>
-  <p class="prose">There is a second force widening these bands beyond trading economics (the bands
-  themselves are derived in the footnotes), and it is a pure market-design artifact. The nine conditions
-  are <strong>mutually exclusive</strong> — exactly one candidate gets the nomination, so at most one
-  answer can ever cost a multi-answer bettor money. But Manifold margins every answer independently:
-  full stake posted on every leg, even the ones that are <em>guaranteed refunds</em>.</p>
-  <p class="prose">The cost depends on the shape of the book. A conviction-weighted book over the live
-  candidates posts about <strong>1.6–2×</strong> its worst-case loss. The pairwise <em>ranking</em> trade —
-  YES on one conditional, NO on another, the trade that answers the committee's actual question — posts
-  exactly <strong>2×</strong> (only one leg can ever lose). A uniform market-making quote across the whole
-  board — the participant a decision market needs most — pays the full <strong>9×</strong>. The deepest tax
-  lands on the most useful participants; the only untaxed shape is the single-leg directional bet, which
-  carries the least decision information.</p>
-  <p class="prose">Worst-case-loss margining (net capital = the maximum loss over the exclusive branches)
-  deletes the <span class="num">(1−p_B)/p_B</span> term from the band formula for any trader running a
-  book across answers: idle legs would no longer tie capital, so only the live branch's
-  <span class="num">c·r·T_live</span> remains. On the board (this table follows the controls and the
-  masthead price toggle; Kleban and below omitted as in the tables above — the shrink only grows
-  further down):</p>
-  <div class="tablewrap" id="netting"></div>
-  <p class="prose" id="nettingverdict"></p>
-  <p class="prose small muted">Design footnote: the refund machinery is already per-answer (we verified the
-  resolution code), so netting is an accounting change, not a resolution change. The missing piece is that
-  in independent-answer markets Manifold has no way to <em>know</em> the conditions are exclusive — it
-  would take a creator-declared "exclusive conditions" flag, with the margin relief scoped to it. That flag
-  is arguably the single cheapest infrastructure change that would make platform decision markets work.</p>
+  <h2>Can these prices be trusted at all?</h2>
+  <p class="prose">Two checks, both passing. <strong>Freshness</strong> first, because a wide band
+  could simply mean nobody is watching: <span id="freshclause">the Jul-10 bet feed shows every row traded within the prior two days</span>, and the two "dead" candidates repriced hardest after the withdrawal — Platner's row
+  alone saw M$<span class="num">3,001</span> of trading in the two days after he quit (Jul 8–10). The wide bands are
+  an incentive limit, not neglect: small opinionated money keeps these prices current even where
+  the carry math says it shouldn't bother.</p>
+  <p class="prose"><strong>Coherence</strong> second. A decision-market family comes with an
+  arithmetic identity: nominee odds × win odds, summed across the candidates, must equal the
+  directly traded P(Dem&nbsp;win). Stack the products and check —</p>
+  <div class="stack"><div class="stack-inner">
+    <div class="sbar" id="sbar"></div>
+    <div class="sscale" id="sscale"></div>
+    <p class="small muted" style="margin-top:14px">Stacked, frozen 2026-07-10: nominee-probability × conditional, per candidate; hatched = the
+    <span class="num">0.057</span> of nominee mass with no conditional priced (shown at 0.40–0.55, midpoint drawn).
+    Ticks: the three directly-traded P(Dem win) prices. Sum ≈ <span class="num">0.583–0.592</span> vs. direct
+    <span class="num">0.578 / 0.584 / 0.596</span>.</p>
+    <p class="small muted" id="cohbarlive" style="margin-top:6px"></p>
+  </div></div>
+  <p class="prose">— and, at the frozen 2026-07-10 prices, the family adds up to within a point.
+  The Republican side is equally tidy at the same snapshot:
+  Collins-wins-reelection trades at <span class="num">0.391</span> against party-Republican at
+  <span class="num">0.423</span>, and the <span class="num">0.032</span> wedge is separately priced —
+  a "Collins clears 95% in her primary" market sits at <span class="num">0.966</span>, i.e. ~3.4%
+  primary-loss risk. Even the redundancies agree: a standalone "Troy Jackson wins the seat" market
+  trades at <span class="num">0.357</span> vs. the board's implied
+  <span class="num">0.564 × 0.620 = 0.350</span>. Whatever these markets are, they are not
+  internally silly.</p>
+  <p class="prose small muted" id="cohlive"></p>
 
-  <h2>The price of precision</h2>
-  <p class="prose">Suppose someone — realistically, Manifold itself, with house money — wanted to make this
-  board sharper before July 27. There are two levers, and they are orthogonal:</p>
-  <p class="prose"><strong>Reforms lower the floors.</strong> The bands are incentive floors set by trading
-  economics; no amount of liquidity moves them. Netting (above) deletes the conditional-specific penalty.
-  Cheaper carry — patient capital that prices locked mana at, say, 0.5%/month instead of 2% — scales every
-  floor down linearly.</p>
-  <p class="prose"><strong>Subsidy pays someone to reach the floors — and for patient capital, subsidy
-  <em>is</em> the floor.</strong> The carry floor is a marginal condition (edge per mana vs. interest per
-  mana), so pool depth cancels out of it — but the <em>total</em> prize for correcting a mispricing ε
-  scales with depth, and a trader with fixed attention cost C participates only if the prize covers it.
-  That gives a second floor, ε ≈ √(2cC/p<sub>B</sub>D), which tightens as <strong>1/√depth</strong>.
-  Calibration: correcting a band-edge error on the Jackson conditional pays about <strong>M$1</strong>
-  today — this is a market that pays one mana for a five-point insight. (Not a coincidence, a
-  measurement: at C ≈ M$1 the attention floor and the carry floor coincide at today's depth.) The min-bet
-  granularity floor, for comparison, is ~0.15 points here — subsidy solved that constraint at the first
-  M$100; rates, not tick size, set today's bands.</p>
-  <p class="prose">Which floor binds depends on who sets marginal prices. For capital-constrained traders
-  (mana earning 2%/month elsewhere) carry binds and subsidy is nearly futile. For <em>patient</em> capital —
-  idle mana, hobby attention, r ≈ 0 — only the attention floor binds, and there subsidy is the whole game.
-  The bet-feed audit above is evidence for the patient regime: the tail answers trade at all, at prices far
-  inside any carry band. <span id="subsidyverdict"></span></p>
-  <p class="prose small muted">Corrected Jul 11, when this sentence became computed: the pre-publication
-  text read "±1.3 per side — 2.6 combined", which reused Jackson's floor for Bellows (her
-  p<sub>B</sub> = 0.271 makes hers ±1.9) and combined the legs by doubling. The correct combination for
-  the <em>ranking</em> trade is quadrature — one act of noticing covers both legs, per-leg prizes are
-  quadratic, so the widest hidable gap is √(ε²<sub>J</sub>+ε²<sub>B</sub>) (derivation in the min-trade
-  footnote). At the frozen prices the corrected claim is <em>stronger</em>: ±2.3 combined at M$10k/answer,
-  break-even ≈ M$5.7k/answer (≈ M$11.5k under the skeptic's model that charges the pair two noticings).</p>
-
-  <h3>The anatomy of a band</h3>
-  <p class="prose">Each published band is a sum of floors, and the floors respond to different levers. The
-  <strong>tick</strong> floor (min-bet granularity, ~0.2 points here) was solved by the first M$100 of
-  liquidity. The <strong>carry</strong> floor splits into two branches: capital locked until November if the
-  candidate is picked, and capital parked until July 27 in the (likely, for tail candidates) refund branch —
-  the slider above moves both. The <strong>attention</strong> floor is what's left when capital is free:
-  someone still has to notice, and the prize must cover the noticing.</p>
-  <p class="prose">The loans toggle exists because Manifold's leverage system changes the carry arithmetic
-  more than any plausible disagreement about r. A position holder can reclaim <strong>1% of position value
-  per day</strong> as an interest-free loan (linear — a position fully recycles in ~100 days; paid members
-  2–3%/day), and we verified against the resolution source that this is safe even on the refund branch: the
-  loan is repaid by deduction from the N/A refund, so the holder stays whole in every world and meanwhile
-  had the capital back. Loans shrink the four-month live branch by ~<span class="num">2.4×</span> and the
-  two-week refund branch by only ~<span class="num">7%</span> — they tighten exactly the bands that were
-  already the informative ones. The platform's margin-loan rate (<span class="num">0.03%</span>/day ≈
-  <span class="num">0.9%</span>/mo) is also the honest anchor for r itself: nobody rational carries at
-  5%/mo while the house lends at 0.9%. Fine print: loan capacity per answer caps at 5% of a trader's
-  equity, so the <em>no-loans</em> column is still the right model for a single whale trying to buy a
-  correction alone.</p>
-  <details><summary>Every candidate's floors, one table (click a board row for the same thing, one at a time)</summary>
-    <div class="tablewrap" id="anatomy"></div>
-    <p class="prose small muted" id="anatomynote"></p>
-  </details>
-
-  <p class="prose">Take the frozen 2026-07-10 prices as fixed (this ladder deliberately ignores the
-  live toggle): <strong>which choices does the market become able to distinguish, purely because the
-  bands tighten?</strong></p>
+  <h2>What the committee could read off this board</h2>
+  <p class="prose" id="roTail"><strong>Drop the longshots — that work is done.</strong> Platner
+  prices at <span class="num">.137</span>, Wood at <span class="num">.400</span>, both far outside
+  every serious band on the board. The market's pruning is confident, already delivered, and free;
+  nobody needs to spend a meeting on the tail.</p>
+  <p class="prose"><strong>Read the Mills number sideways.</strong> Her <span class="num" id="roMillsNum">.418</span>
+  looks like "weak candidate." Not quite: these prices forecast <em>worlds</em>, not effects of
+  choices. The worlds where a committee reaches past two front-runners for the ex-governor are
+  mostly worlds where something else has already gone wrong. The market's most contrarian number
+  is also its most confounded — a flag, not a verdict.</p>
+  <p class="prose" id="rojb"><strong>Do not read Jackson <span class="num">.620</span> over Bellows
+  <span class="num">.590</span> as advice.</strong> The 3-point gap is inside both bands: nobody is
+  being paid to make that difference meaningful, so it isn't. This is the board's central, least
+  intuitive lesson — it measures each candidate to a few points, and measures the <em>comparison
+  between the top two</em>, the actual decision, not at all.</p>
+  <p class="prose">The full menu, as a ladder: which comparisons can the market make at the prices
+  and settings in view — and which would become possible as its floors drop. (The reform columns
+  are priced in the next section.)</p>
   <div class="tablewrap"><table id="ladder">
-    <tr><th>Comparison (frozen gap)</th><th class="num">gap</th><th>today<br><span class="small" id="ladderHdr">(r = 2%/mo)</span></th><th>+ netting</th><th>+ netting &amp;<br>patient capital</th></tr>
+    <tr><th>Comparison</th><th class="num">gap<br><span class="small">frozen prices</span></th><th>today<br><span class="small" id="ladderHdr">(r = 2%/mo)</span></th><th>+ netting<br><span class="small">margin reform (next section)</span></th><th>+ netting &amp; patient capital<br><span class="small">capital free + M$10k subsidy</span></th></tr>
     <tr><td>Jackson vs Platner</td><td class="num">0.483</td><td><span class="yes">✓</span> <span class="small num">±24 comb.</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
     <tr><td>Jackson vs Wood</td><td class="num">0.220</td><td><span class="yes">✓</span> <span class="small">barely</span> <span class="small num">±21</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
     <tr><td>Jackson vs Mills</td><td class="num">0.202</td><td><span class="no">✗</span> <span class="small num">±37</span></td><td><span class="yes">✓</span> <span class="small num">±8</span></td><td><span class="yes">✓</span></td></tr>
@@ -501,100 +474,103 @@
   assumes the floor is actually reached — i.e., every column silently assumes the subsidy lever too.
   Combination rules (corrected Jul 11): the carry columns add the two legs linearly — carry is a separable
   per-mana cost, a below-floor leg can't be cross-subsidized. The patient-capital column is the
-  attention-only floor at the reference M$10k/answer subsidy, legs combined in quadrature — one act of
-  noticing covers the whole pair trade (derivation in the min-trade footnote).</p>
+  attention-only floor at the reference M$10k/answer subsidy, legs combined in quadrature (square root
+  of the sum of squares) — one act of noticing covers the whole pair trade (derivation in the min-trade
+  footnote).</p>
+  <p class="prose">And one comfort the committee should actually enjoy: <strong>whatever it
+  chooses, no one will ever prove the market would have chosen better.</strong> The gap is inside
+  the bands, and November is a single coin flip. We pre-commit below (claim P3) to not claiming
+  vindication either way — and note that anyone who does claim it is overreading.</p>
 
-  <p class="prose"><strong>Today's market, funded, can rule out the tail</strong> — barely.
-  <strong>Netting buys the establishment question</strong> ("is Mills really worse?" becomes answerable).
-  <strong>Jackson-vs-Bellows needs either the full reform stack — or the patient-capital regime plus real
-  subsidy</strong> (the quadrature arithmetic above). Shah-vs-Bellows is beyond every rung and both regimes —
-  at these prices that comparison is a genuine tie, and no market mechanism will pretend otherwise.</p>
-  <p class="prose">The house-money case: reforms take engineering
-  and time this decision doesn't have, but the subsidy lever exists <em>today</em> — and Manifold's own
-  tooling can aim it at single answers (ordinary users can't; whole-market subsidy would spray ~78% of it
-  onto the decorative tail). The expected cost is unusually low, because of the same N/A asymmetry that
-  taxes traders: subsidy parked in answers that resolve N/A comes back, in full, on July 27 — the house
-  risks real exposure only on the one answer that survives the decision. A few thousand mana, aimed at
-  Jackson, Bellows, and Shah, for two weeks, mostly refunded: that is the entire price of making this
-  decision market worth the committee's glance.</p>
+  <h2>The price of a sharper answer</h2>
+  <p class="prose" id="floorsPara">Each band is a sum of three floors, and each floor answers to a
+  different lever. The <strong>tick</strong> floor — the price step from the smallest trade anyone
+  makes, ±<span class="num">0.1</span> points at the depth in view — was solved by the market's
+  first M$100 of depth. The <strong>carry</strong> floor: money locked to November if the candidate
+  is picked, money idled to July 27 for a refund if not — both kinds of waiting have to be paid
+  for. The <strong>attention</strong> floor is what remains when the waiting is free: someone still
+  has to notice the error, and the prize has to cover the noticing — at the settings in view it,
+  not carry, is what binds the front-runners.</p>
+  <p class="prose"><strong>Carry, and the refund-branch penalty.</strong> For a front-runner,
+  conditionality is nearly free — Jackson's band is almost all ordinary locked-to-November carry.
+  For a longshot it's brutal: a bet on Mills's row idles to July 27 for a refund in <span class="num dyn" id="millsIdle">98.5%</span> of
+  worlds, so her band balloons to ±<span class="num dyn" id="millsBand">28</span>. Manifold's interest-free loans
+  (a holder can reclaim 1% of a position per day, and we verified against the resolution source
+  that this is safe even on the refund branch) shrink the live branch (to November) by
+  ~<span class="num" id="loanLive">2.4×</span> and the short refund branch by only ~<span class="num" id="loanNA">7%</span> —
+  they tighten exactly the rows that were already the informative ones. The loans toggle above
+  shows it; the fine print (rate anchors, per-answer caps, why a lone whale can't use this) is in
+  the derivation footnote.</p>
+  <p class="prose"><strong>The every-leg tax.</strong> The nine conditions are mutually exclusive —
+  at most one answer can ever cost a multi-answer bettor money — but Manifold margins each answer
+  independently: full stake posted on every leg, including the guaranteed refunds. The trade that
+  answers the committee's actual question (YES on one front-runner, NO on the other) posts exactly
+  <strong>2×</strong> its worst-case loss; a market-maker quoting the whole board — the participant
+  a decision market needs most — posts <strong>9×</strong>. The deepest tax lands on the most
+  useful participants. Margining to worst-case loss instead ("netting") would delete the
+  refund-branch penalty for anyone betting across several answers. On the board (this table follows
+  the controls and the live/frozen toggle; Kleban and below omitted as in the tables above):</p>
+  <div class="tablewrap" id="netting"></div>
+  <p class="prose" id="nettingverdict"></p>
+  <p class="prose small muted">Design footnote: the refund machinery is already per-answer (we verified the
+  resolution code), so netting is an accounting change, not a resolution change. The missing piece is that
+  in independent-answer markets Manifold has no way to <em>know</em> the conditions are exclusive — it
+  would take a creator-declared "exclusive conditions" flag, with the margin relief scoped to it. That flag
+  is arguably the single cheapest infrastructure change that would make platform decision markets work.</p>
+  <p class="prose"><strong>Subsidy, and whom it helps.</strong> Reforms lower the floors; subsidy
+  pays someone to reach them — and which lever matters depends on whose money sets marginal prices.
+  For capital-constrained traders (mana earning 2%/month elsewhere), carry binds and subsidy is
+  nearly futile. For <em>patient</em> capital — idle mana, hobby attention — only the attention
+  floor binds, and that floor tightens with the square root of pool depth: deepen the pools and the
+  same error pays a bigger prize. The freshness audit above is evidence the patient regime is the
+  real one here: the tail answers trade at all, at prices far inside any carry band. Calibration, at the Jul-10 snapshot's depth: correcting a band-edge error
+  on Jackson's row paid about <strong>M$1</strong> — a market that pays one mana for a five-point
+  insight. <span id="subsidyverdict"></span></p>
+  <p class="prose small muted">Corrected Jul 11, when this sentence became computed: the pre-publication
+  text read "±1.3 per side — 2.6 combined", which reused Jackson's floor for Bellows (her
+  p<sub>B</sub> = 0.271 makes hers ±1.9) and combined the legs by doubling. The correct combination for
+  the <em>ranking</em> trade is quadrature — one act of noticing covers both legs, per-leg prizes are
+  quadratic, so the widest hidable gap is √(ε²<sub>J</sub>+ε²<sub>B</sub>) (derivation in the min-trade
+  footnote). At the frozen prices the corrected claim is <em>stronger</em>: ±2.3 combined at M$10k/answer,
+  break-even ≈ M$5.7k/answer (≈ M$11.5k under the skeptic's model that charges the pair two noticings).</p>
+  <details><summary>Every candidate's floors, one table (click a board row for the same thing, one at a time)</summary>
+    <div class="tablewrap" id="anatomy"></div>
+    <p class="prose small muted" id="anatomynote"></p>
+  </details>
+
+  <p class="prose" id="ladderconcl">So the ladder prices out as: <strong>the market in view,
+  funded, can rule out the tail</strong>. <strong>Netting buys the establishment question</strong>
+  ("is Mills really worse?" becomes answerable). <strong>Jackson-vs-Bellows needs either the full
+  reform stack — or patient capital plus real subsidy</strong> (the quadrature arithmetic above).
+  And Shah-vs-Bellows is beyond every rung and both regimes — at these prices that comparison is a
+  genuine tie, and no market mechanism will pretend otherwise.</p>
+  <p class="prose" id="pitch">The house-money case: reforms take engineering and time this decision
+  doesn't have, but the subsidy lever exists <em>today</em> — and Manifold's own tooling can aim it
+  at single answers (ordinary users can't; at the odds in view, ~<span class="num">78%</span> of a
+  whole-market subsidy would land outside the two live rows). The refund asymmetry keeps the cost
+  low: subsidy parked in answers that end in refunds comes back, in full, on July 27 — the house
+  risks real exposure only on the one answer that survives the decision. Given the prices,
+  liquidity, and assumptions in view, <strong>≈<span class="num">M$5.7k</span> of pool per answer
+  might buy the Jackson–Bellows ranking</strong> (today's front-runner pools:
+  <span class="num">M$528–632</span>), parked for <span class="num">15</span> days, mostly
+  refunded. That is the entire price of making this decision market worth the committee's
+  glance.</p>
   <p class="prose small muted">Mechanism note: per-answer subsidy targeting is currently internal-only API
   surface; a pending mechanism upgrade (cpmm-multi-2) would open it to everyone — for a two-answer aim
   that's ~4.5× more of each subsidized mana landing on target — and would stop the current liquidity-add
   discarding a small slice of every contribution. Better if merged; nothing above depends on it.</p>
 
-  <h2>The other structure <span class="dateline">added Jul 11</span></h2>
-  <p class="prose">The capital tax and the carry floor are properties of the <em>conditional-board
-  structure</em>, not of prediction markets. So we built the structure that dodges the tax, within
-  current platform rules: price the <strong>joints</strong> — "Jackson defeats Collins," not "Jackson
-  wins <em>if</em> nominated" — as one mutually-exclusive market. Exclusivity is then enforced by the
-  market mechanism itself (complete sets of shares redeem to cash automatically), so a trader quoting
-  the whole board, or trading the <em>ranking</em>, posts roughly worst-case loss instead of every leg.
-  The catch, and the reason the board above stays the instrument of record: joint prices for long-shot
-  nominees live below Manifold's 1% price floor, where the market literally cannot quote them. The
-  board's refund structure is what keeps every candidate readable — the carry its bands price in is the
-  fee for that. Two structures, two halves of the problem. This race now has both, and they grade each
-  other:</p>
-  <p class="prose"><a href="https://manifold.markets/EvanDaniel/maine-senate-election-result-collin">
-  <strong>Maine Senate election result? (Collins, Jackson, Bellows)</strong></a> — created 2026-07-11,
-  seeded off the frozen family (nominee odds × conditionals × Collins-primary risk). Disclosure: we
-  created and seeded it; it's run as publication plus criticism bounty, and nothing in our own analysis
-  treats its prices as external evidence until other people trade it.</p>
-  <div class="tablewrap"><table id="pairtable">
-    <tr><th>Answer</th><th class="num">at creation<br><span class="small">Jul 11, 19:00 UTC</span></th><th class="num">live</th></tr>
-    <tr><td>Jackson (D) defeats Collins (R)</td><td class="num">0.293</td><td class="num" data-aid="QznPg2dsdg">—</td></tr>
-    <tr><td>Collins (R) defeats Jackson (D)</td><td class="num">0.188</td><td class="num" data-aid="s5Z0cLU0cg">—</td></tr>
-    <tr><td>Bellows (D) defeats Collins (R)</td><td class="num">0.125</td><td class="num" data-aid="ZtQZyqSOu6">—</td></tr>
-    <tr><td>Collins (R) defeats Bellows (D)</td><td class="num">0.104</td><td class="num" data-aid="Nzcq9LL525">—</td></tr>
-    <tr><td>Other (D) defeats Collins (R)</td><td class="num">0.104</td><td class="num" data-aid="lS8yOQsNdO">—</td></tr>
-    <tr><td>Collins (R) defeats other (D)</td><td class="num">0.125</td><td class="num" data-aid="tLPN082OLs">—</td></tr>
-    <tr><td>None of the above</td><td class="num">0.060</td><td class="num" data-aid="2El2SnS8LQ">—</td></tr>
-  </table></div>
-  <p class="prose" id="pairnote">Each front-runner gets two answers — "X defeats Collins" and "Collins
-  defeats X". Their <em>sum</em> is the probability of that matchup happening at all; their
-  <em>ratio</em>, ĉ&nbsp;=&nbsp;P(X&nbsp;defeats&nbsp;Collins)&nbsp;÷&nbsp;P(matchup), is the joint
-  market's implied P(X wins, given the matchup) — the <strong>pair-implied conditional</strong>, this
-  structure's answer to the board's question. (One wedge: it also conditions on Collins being the
-  Republican nominee, a ~3% risk the family prices separately.) At creation: Jackson
-  <span class="num">0.609</span> (board: <span class="num">0.620</span>), Bellows
-  <span class="num">0.546</span> (board: <span class="num">0.590</span>) — a 1–4 point divergence at
-  birth, inside the board's bands. The chart at the top has a <strong>structure selector</strong>:
-  switch to "joint market" to see this structure's own dots and error bars, or "both" to compare the
-  two bar-for-bar.</p>
-
-  <h3>Do the structures agree? (claim S1, tracked live)</h3>
-  <div class="tablewrap"><table id="s1track">
-    <tr><th>Front-runner</th><th class="num">board P(win | nom)</th><th class="num">pair-implied ĉ</th><th class="num">divergence</th><th class="num">frozen band</th><th>S1 status</th></tr>
-    <tr data-i="0"><td>Troy Jackson</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>—</td></tr>
-    <tr data-i="1"><td>Shenna Bellows</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>—</td></tr>
-  </table></div>
-  <p class="prose small muted">Prices <span id="s1when">at creation (Jul 11, 19:00 UTC)</span>.
-  Divergence is |pair-implied − board|; S1 (frozen below) predicts it stays inside the board's frozen
-  no-correction band until the nomination — free money separates the structures otherwise, and our own
-  arbitrage anchors are pointed at the gap.</p>
-
-  <div class="prereg">
-    <h3>Structure claims, frozen 2026-07-11 at market creation</h3>
-    <div class="claim"><span class="cid">S1</span><div>
-      <p><strong>The two structures agree within incentive bounds.</strong> Until the nomination, the
-      pair-implied conditionals for Jackson and Bellows stay within the board's no-correction band of the
-      board's prices (else free money separates them, and our own arbitrage anchors are pointed at it).</p>
-      <p class="grade">Grade at the nomination. Divergence at creation: 1.1 / 4.4 points — inside.</p></div></div>
-    <div class="claim"><span class="cid">S2</span><div>
-      <p><strong>Joints jump; conditionals don't.</strong> At the nomination of X ∈ {Jackson, Bellows},
-      X's "defeats Collins" answer jumps up by roughly the non-nomination mass being resolved (from ≈p·c
-      toward ≈c), while the board's conditional for X moves by less than its band (P2's martingale
-      property — now with an in-family control). LP capital in the joint market pays for that jump;
-      board LPs don't.</p>
-      <p class="grade">Grade within 3 trading days of the announcement, alongside P2.</p></div></div>
-  </div>
-
-  <h2>Hanson's objections, graded on this market family</h2>
+  <h2>What the theorists would tell the committee</h2>
+  <p class="prose">Robin Hanson proposed decision markets — condition a market on each option, let
+  the prices advise the chooser — three decades ago, and the objections have been rehearsed ever
+  since, mostly on whiteboards. This family is a rare live test bench. Six standard objections,
+  graded against it:</p>
   <div class="cards">
     <div class="cardx"><span class="verdict v-no">partly refuted</span>
       <h3>"Conditional markets are too thin to mean anything"</h3>
-      <p>For the two live front-runners the bands are ±5–6 points on M$600-ish pools — genuinely informative.
+      <p>For the two live front-runners the bands are ±5–6 points on M$600-ish pools (Jul-10 snapshot) — genuinely informative.
       The objection survives only in the tail (±16 to ±50 points) and for slow-resolving conditions. Thinness
-      is a function of p<sub>B</sub> and the decision clock, not a blanket property.</p></div>
+      is a function of the nomination odds and the decision clock, not a blanket property.</p></div>
     <div class="cardx"><span class="verdict v-ok">confirmed</span>
       <h3>"It can't actually rank the options"</h3>
       <p>Jackson leads Bellows by 3 points; both bands are ±5–6. The market prices each candidate well and
@@ -607,14 +583,15 @@
       something else went wrong. The market's most contrarian claim is also its most confounded.</p></div>
     <div class="cardx"><span class="verdict v-no">refuted mechanically</span>
       <h3>"Arbitrage will keep conditionals honest"</h3>
-      <p>Riskless arbitrage is structurally repelled: the N/A refund branch breaks every static payout table
-      (our own arb bot disabled its Maine conditional legs for exactly this). Only opinionated capital
-      disciplines a conditional — unless you hedge with the conditioner market, which restores the joint at
-      exactly c·p and is how the family's consistency law (footnotes) becomes tradeable at all.</p>
+      <p>Riskless arbitrage is structurally repelled: the refund branch breaks the fixed payout tables
+      arbitrage bots rely on (our own bot disabled its Maine conditional legs for exactly this). Only
+      opinionated capital disciplines a conditional — unless you hedge with the nominee market, which
+      reconstructs the joint bet at exactly c·p and is how the family's consistency law (the coherence
+      check above) becomes tradeable at all.</p>
       <p class="small muted" style="margin-top:6px">Live demonstration, Jul 11 evening: hours after the
-      joint market launched, its Jackson ratio drifted ~10 points off the board — and the mechanical
-      anchors stayed (correctly) silent. Only opinionated or refund-aware capital can close it; the S1
-      tracker above is watching.</p></div>
+      joint market launched, its Jackson ratio drifted ~10 points off the board — and our automated
+      arbitrage rules stayed (correctly) silent. Only opinionated or refund-aware capital can close it;
+      the S1 tracker below is watching.</p></div>
     <div class="cardx"><span class="verdict v-mid">wrong objective</span>
       <h3>"Who chose the question?"</h3>
       <p>The markets condition on <em>a Democrat</em> winning. The anti-Collins coalition's objective is
@@ -625,11 +602,14 @@
       <h3>"If the decision follows the market, the market breaks"</h3>
       <p>The committee never committed to follow these prices, so the self-reference regime — manipulation,
       self-fulfilling equilibria, he-who-sets-incentives — stays untested. With ~64 traders and M$3,000 of
-      subsidy, a committed decision rule would be trivially cheap to lean on. This is the experiment nobody
+      subsidy (Jul 10), a committed decision rule would be trivially cheap to lean on. This is the experiment nobody
       has run.</p></div>
   </div>
 
   <h2>Pre-registration</h2>
+  <p class="prose">The claims this page stakes its credibility on, frozen before the decision. The
+  prose around them has been rewritten since (see the footer's revision note); the claims and their
+  numbers have not, and will not be.</p>
   <div class="prereg">
     <h3>Claims frozen 2026-07-10, before the committee's choice</h3>
     <div class="claim"><span class="cid">P1</span><div>
@@ -650,6 +630,40 @@
       <p>Seat outcome vs. the frozen P(Dem win) = 0.596.</p>
       <p class="grade">One Brier sample in November — weak evidence by construction, recorded anyway.</p></div></div>
   </div>
+
+  <h3>The structure experiment <span class="dateline">added Jul 11</span></h3>
+  <p class="prose">On July 11 we added a second market that asks the same question the other way —
+  outcomes ("<a href="https://manifold.markets/EvanDaniel/maine-senate-election-result-collin">Jackson
+  defeats Collins</a>"), not conditionals — partly because that design escapes the every-leg deposit
+  tax, and partly so the two designs can grade each other. The chart's structure selector shows its
+  dots and bands; the answer-by-answer detail is in the footnotes. Disclosure: we created and seeded
+  it, and nothing in our analysis treats its prices as external evidence until other people trade it.
+  Two claims were frozen at its creation:</p>
+  <div class="prereg">
+    <h3>Structure claims, frozen 2026-07-11 at market creation</h3>
+    <div class="claim"><span class="cid">S1</span><div>
+      <p><strong>The two structures agree within incentive bounds.</strong> Until the nomination, the
+      pair-implied conditionals for Jackson and Bellows stay within the board's no-correction band of the
+      board's prices (else free money separates them, and our own arbitrage anchors are pointed at it).</p>
+      <p class="grade">Grade at the nomination. Divergence at creation: 1.1 / 4.4 points — inside.</p></div></div>
+    <div class="claim"><span class="cid">S2</span><div>
+      <p><strong>Joints jump; conditionals don't.</strong> At the nomination of X ∈ {Jackson, Bellows},
+      X's "defeats Collins" answer jumps up by roughly the non-nomination mass being resolved (from ≈p·c
+      toward ≈c), while the board's conditional for X moves by less than its band (P2's martingale
+      property — now with an in-family control). LP capital in the joint market pays for that jump;
+      board LPs don't.</p>
+      <p class="grade">Grade within 3 trading days of the announcement, alongside P2.</p></div></div>
+  </div>
+  <h3>Do the structures agree? (claim S1, tracked live)</h3>
+  <div class="tablewrap"><table id="s1track">
+    <tr><th>Front-runner</th><th class="num">board P(win | nom)</th><th class="num">pair-implied ĉ</th><th class="num">divergence</th><th class="num">frozen band</th><th>S1 status</th></tr>
+    <tr data-i="0"><td>Troy Jackson</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>—</td></tr>
+    <tr data-i="1"><td>Shenna Bellows</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td class="num">—</td><td>—</td></tr>
+  </table></div>
+  <p class="prose small muted">Prices <span id="s1when">at creation (Jul 11, 19:00 UTC)</span>.
+  Divergence is |pair-implied − board|; S1 (frozen above) predicts it stays inside the board's frozen
+  band until the nomination — free money separates the structures otherwise, and our own arbitrage
+  bots watch the gap.</p>
 
   <div class="pending">
     <strong>Model read: none before the decision</strong> <span class="small">(decided 2026-07-11)</span>.
@@ -708,7 +722,7 @@
     <strong>Second</strong>, the fee-free minimum bet (M$1 moves these pools ~0.1–0.2 points) means carry is
     the entire floor — the bands on the board <em>are</em> the market's resolution. <strong>Third</strong>, a band
     is a statement about incentives, not freshness: prices can also simply be <em>old</em>. That failure mode
-    needs its own check (we ran it — the bet-feed audit under the board; this market passes), and a
+    needs its own check (we ran it — the freshness audit in "Can these prices be trusted"; this market passes), and a
     price's evidential value decays with world-change since its last meaningful trade, not with today's
     p<sub>B</sub>. Sensitivity: ε* is linear in r; we quote r = 2%/month — halve or 2.5× the bands for
     1% or 5%, or move the slider above the board.</p>
@@ -728,25 +742,28 @@
     corrector.</p>
   </details>
 
-  <details class="fnote"><summary>Does the family even add up? (yes — within a point, at the frozen 2026-07-10 prices)</summary>
-    <p class="prose">Decision markets come with a consistency law:
-    <span class="num">P(Dem&nbsp;win) = Σ&nbsp;P(nominee=X)·P(win|X)</span>. Multiply each row of the board
-    and stack the products; the total should land on the directly-traded P(Dem win). It does.</p>
-    <div class="stack"><div class="stack-inner">
-      <div class="sbar" id="sbar"></div>
-      <div class="sscale" id="sscale"></div>
-      <p class="small muted" style="margin-top:14px">Stacked: nominee-probability × conditional, per candidate; hatched = the
-      <span class="num">0.057</span> of nominee mass with no conditional priced (shown at 0.40–0.55, midpoint drawn).
-      Ticks: the three directly-traded P(Dem win) prices. Sum ≈ <span class="num">0.583–0.592</span> vs. direct
-      <span class="num">0.578 / 0.584 / 0.596</span>.</p>
-    </div></div>
-    <p class="prose">The Republican side is equally tidy: Collins-wins-reelection trades at
-    <span class="num">0.391</span> against party-Republican at <span class="num">0.423</span>, and the
-    <span class="num">0.032</span> wedge is separately priced — a "Collins clears 95% in her primary" market
-    sits at <span class="num">0.966</span>, i.e. ~3.4% primary-loss risk. Even the redundancies agree: a
-    standalone "Troy Jackson wins the seat" market trades at <span class="num">0.357</span> vs. the board's
-    implied <span class="num">0.564 × 0.620 = 0.350</span>. Whatever these markets are, they are not
-    internally silly.</p>
+  <details class="fnote"><summary>The joint market, answer by answer</summary>
+    <div class="tablewrap"><table id="pairtable">
+      <tr><th>Answer</th><th class="num">at creation<br><span class="small">Jul 11, 19:00 UTC</span></th><th class="num">live</th></tr>
+      <tr><td>Jackson (D) defeats Collins (R)</td><td class="num">0.293</td><td class="num" data-aid="QznPg2dsdg">—</td></tr>
+      <tr><td>Collins (R) defeats Jackson (D)</td><td class="num">0.188</td><td class="num" data-aid="s5Z0cLU0cg">—</td></tr>
+      <tr><td>Bellows (D) defeats Collins (R)</td><td class="num">0.125</td><td class="num" data-aid="ZtQZyqSOu6">—</td></tr>
+      <tr><td>Collins (R) defeats Bellows (D)</td><td class="num">0.104</td><td class="num" data-aid="Nzcq9LL525">—</td></tr>
+      <tr><td>Other (D) defeats Collins (R)</td><td class="num">0.104</td><td class="num" data-aid="lS8yOQsNdO">—</td></tr>
+      <tr><td>Collins (R) defeats other (D)</td><td class="num">0.125</td><td class="num" data-aid="tLPN082OLs">—</td></tr>
+      <tr><td>None of the above</td><td class="num">0.060</td><td class="num" data-aid="2El2SnS8LQ">—</td></tr>
+    </table></div>
+    <p class="prose" id="pairnote">Each front-runner gets two answers — "X defeats Collins" and "Collins
+    defeats X". Their <em>sum</em> is the probability of that matchup happening at all; their
+    <em>ratio</em>, ĉ&nbsp;=&nbsp;P(X&nbsp;defeats&nbsp;Collins)&nbsp;÷&nbsp;P(matchup), is the joint
+    market's implied P(X wins, given the matchup) — the <strong>pair-implied conditional</strong>, this
+    structure's answer to the board's question. (One wedge: it also conditions on Collins being the
+    Republican nominee, a ~3% risk the family prices separately.) At creation: Jackson
+    <span class="num">0.609</span> (board: <span class="num">0.620</span>), Bellows
+    <span class="num">0.546</span> (board: <span class="num">0.590</span>) — a 1–4 point divergence at
+    birth, inside the board's bands. The chart at the top has a <strong>structure selector</strong>:
+    switch to "joint market" to see this structure's own dots and error bars, or "both" to compare the
+    two bar-for-bar.</p>
   </details>
 
   <footer>
@@ -761,16 +778,23 @@
     Jackson standalone <a class="num" href="https://manifold.markets/Jack1/troy-jackson-wins-2026-us-senate-el">lchuI99Qlc</a>;
     joint pairwise market <a class="num" href="https://manifold.markets/EvanDaniel/maine-senate-election-result-collin">n2yLUz2l6q</a>.
     Band derivation, refund-semantics verification (against the Manifold open-source resolution code), and the
-    market map live in the project task directory (<span class="num">tasks/maine_decision_market/</span>).
-    Numbers on this page come in three kinds, and the styling says which. Plain numbers in the claims
-    and prose are the <strong>pre-registered record</strong> — frozen 2026-07-10 (the board family) and
-    2026-07-11 (the joint market, at its creation) — and never move; that is what pre-registered means
-    here. <span class="dyn">Highlighted</span> numbers re-derive from the capital controls. And the
-    masthead toggle switches the charts between the frozen record and <strong>live Manifold
-    prices and pool depths</strong> fetched in your browser (since Jul 11 the attention/granularity
-    floors follow live depth too) — live is the default when the fetch succeeds; where it is
-    blocked, the page degrades to the frozen record. However the charts are set, the pre-registered
-    claims are graded against the frozen numbers only.</p>
+    market map live in the project's research notes (<span class="num">tasks/maine_decision_market/</span>;
+    not yet published — ask and we'll share).
+    Numbers on this page come in three kinds. The <strong>essay</strong> — charts, tables, numbers,
+    and conclusions — is computed from whichever snapshot the prices toggle (in the controls above
+    the chart) pins: <strong>live Manifold prices and pool depths</strong> fetched in your browser
+    (the default when the fetch succeeds), or the frozen 2026-07-10 record (the fallback wherever
+    the fetch is blocked). <span class="dyn">Highlighted</span> numbers re-derive from the capital
+    controls specifically. What never moves: the <strong>pre-registered claim blocks</strong>,
+    dated correction notes, and any number carrying an explicit date — that is the record, frozen
+    2026-07-10 (the board family) and 2026-07-11 (the joint market, at its creation), and the
+    claims are graded against those frozen numbers only. A view pins into a shareable URL —
+    <span class="num">?snapshot=2026-07-10</span> or <span class="num">?snapshot=live</span>; more
+    dates will join as the snapshot library grows.</p>
+    <p><strong>Revision note.</strong> The prose on this page was rewritten 2026-07-11 — a briefing
+    framing, plainer vocabulary, sections reordered around the committee's questions. Every
+    pre-registered claim, frozen number, and computation is unchanged. That separation — prose as a
+    replaceable view over a frozen record — is the point of the page.</p>
   </footer>
 </div>
 
@@ -789,9 +813,9 @@
     { name: "Shenna Bellows",key: "bellows", sid: "bellows", p: 0.271, pX: 0.271,   c: 0.590, pool: 632, lt: "Jul 10", v8: 1470, status: "informative",
       condId: "c56R9zZt2U", nomId: "QOLgZ26pQ8", pairDem: "ZtQZyqSOu6", pairRep: "Nzcq9LL525",
       pair: { c: 0.546, q: 0.229, p: 0.249, attn: 0.26, kc: 0.033 } },
-    { name: "Nirav Shah",    key: "shah",    sid: "shah",    p: 0.037, pX: 0.0366,  c: 0.600, pool: 607, lt: "Jul 10", v8: 448,  status: "mush — band swallows the price",
+    { name: "Nirav Shah",    key: "shah",    sid: "shah",    p: 0.037, pX: 0.0366,  c: 0.600, pool: 607, lt: "Jul 10", v8: 448,  status: "band swallows the price",
       condId: "UNuAAzg2cu", nomId: "6sU9hhdpSc" },
-    { name: "Jordan Wood",   key: "wood",    sid: "wood",    p: 0.031, pX: 0.0310,  c: 0.400, pool: 520, lt: "Jul 10", v8: 61,   status: "mush — band swallows the price",
+    { name: "Jordan Wood",   key: "wood",    sid: "wood",    p: 0.031, pX: 0.0310,  c: 0.400, pool: 520, lt: "Jul 10", v8: 61,   status: "band swallows the price",
       condId: "y5RUNduAqN", nomId: "zIhEdQg9pC" },
     { name: "Janet Mills",   key: "mills",   sid: "mills",   p: 0.015, pX: 0.01453, c: 0.418, pool: 694, lt: "Jul 9",  v8: 167,  status: "live but wide",
       condId: "9O6O9tuCU8", nomId: "tuzytsnlll" },
@@ -824,15 +848,15 @@
   function viewNote() {
     var live = PRICEMODE === "live" && LIVE.cond;
     if (VIEW === "board") return live
-      ? "The conditional board at live prices and live horizons. The pre-registered record is one click away (masthead: frozen 2026-07-10)."
+      ? "The conditional board at live prices and live horizons. The pre-registered record is one click away (prices toggle: frozen 2026-07-10)."
       : "The conditional board, frozen 2026-07-10 — the pre-registered record.";
     if (VIEW === "pair") return "Pair-implied conditionals from the joint market" +
       (live ? ", at live prices and live horizons" : ", frozen at its creation (Jul 11, 19:00 UTC)") +
-      ": ĉ = P(X defeats Collins) ÷ P(the X-vs-Collins matchup). Bands: the board's carry law " +
-      "(hedged-ratio trade) plus the 1%-price-grid floor ÷ matchup mass. Beyond the front-runners, " +
-      "candidates are bucketed — no individual price. These are incentive floors — unchanged at 100× " +
-      "the liquidity; what today's thin depth (" + jointLiqTag() + " vs the board's M$3,000) adds is the haze layer, " +
-      "which flow or subsidy removes. The hard band is the subsidized limit.";
+      ": ĉ = P(X defeats Collins) ÷ P(the X-vs-Collins matchup). Bands: the board's carry law plus the " +
+      "1% price grid, magnified by each matchup's small probability. Beyond the front-runners, " +
+      "candidates are bucketed — no individual price. The hard bands are incentive floors — unchanged " +
+      "at 100× the liquidity; what today's thin depth (" + jointLiqTag() + " vs the board's M$3,000) adds is the soft " +
+      "attention layer, which trading or subsidy removes.";
     return "Circle / upper bar: conditional board; square / lower bar: joint market, pair-implied" +
       (live ? " — both at live prices" : " (board frozen Jul 10, joint frozen Jul 11)") +
       ". Same carry law in both; the joint market adds a coarser price-grid floor but prices the " +
@@ -858,7 +882,10 @@
   }
   var RHO = 0.01;                // daily free-loan reclaim: 1%/day of position, linear
   var FROZEN_R = 2.0, FROZEN_LOANS = false, FROZEN_MBET = 1;   // the pre-registered setting
-  var state = { r: FROZEN_R, loans: FROZEN_LOANS, mbet: FROZEN_MBET };
+  // Default state: loans ON (the realistic reading of Manifold carry; evand
+  // 2026-07-11). The pre-registered record stays the no-loans case — plain
+  // numbers quote it, and unticking the box reproduces it.
+  var state = { r: FROZEN_R, loans: true, mbet: FROZEN_MBET };
 
   function effDays(T, rho) {     // effective locked-days under linear reclaim
     if (!rho) return T;
@@ -918,10 +945,15 @@
     return liveDepth() && LIVE.ms.jointLiq ? "M$" + Math.round(LIVE.ms.jointLiq) : "M$175";
   }
   function pp(e) { return (e * 100).toFixed(1); }
+  function pp1(e) { return (e * 100).toFixed(1).replace(/\.0$/, ""); }
+  function fmtc(v) { return "<span class='num'>" + v.toFixed(3).replace(/^0/, "") + "</span>"; }
   function dynv(t) { return "<span class='num dyn'>" + t + "</span>"; }
   function ppr(e) { var v = e * 100; return v >= 3 ? String(Math.round(v)) : v.toFixed(1); }
   function fmtM(m) { return "M$" + (m >= 10 ? String(Math.round(m)) : String(Math.round(m * 10) / 10)); }
   function fmtMk(m) { return m >= 1000 ? "M$" + (m / 1000).toFixed(1).replace(/\.0$/, "") + "k" : fmtM(m); }
+  function fmtMkRange(a, b) {   // "M$528–632", "M$5.7k–11.5k" — one currency mark
+    return fmtMk(a) + "–" + fmtMk(b).replace(/^M\$/, "");
+  }
   function fmtSetting() {
     return "r = " + state.r.toFixed(1) + "%/mo" + (state.loans ? " + loans" : "") +
       (state.mbet !== FROZEN_MBET ? ", min trade " + fmtM(state.mbet) : "");
@@ -940,10 +972,21 @@
   // (roadmap iv) are just "more of these" from other sources.
   function snapshotFromAPI(rs) {
     var s = { at: new Date().toISOString(), cond: {}, nom: {}, pair: {},
-              demwin: rs[3].probability, jointLiq: rs[2].totalLiquidity || null };
+              demwin: rs[3].probability, jointLiq: rs[2].totalLiquidity || null,
+              boardLastBet: rs[0].lastBetTime || null };
     rs[0].answers.forEach(function (a) { s.cond[a.id] = { p: a.probability, pool: a.pool ? a.pool.YES + a.pool.NO : null }; });
     rs[1].answers.forEach(function (a) { s.nom[a.id] = { p: a.probability }; });
     rs[2].answers.forEach(function (a) { s.pair[a.id] = { p: a.probability, y: a.pool ? a.pool.YES : null, n: a.pool ? a.pool.NO : null }; });
+    // Coherence-check quotes: any may be null (failed fetch) — degrade gently.
+    s.partyDem = null; s.partyRep = null;
+    if (rs[4] && rs[4].answers) rs[4].answers.forEach(function (a) {
+      if (/democrat/i.test(a.text)) s.partyDem = a.probability;
+      else if (/republican/i.test(a.text)) s.partyRep = a.probability;
+    });
+    s.collins = rs[5] ? rs[5].probability : null;
+    s.demwinThin = rs[6] ? rs[6].probability : null;
+    s.jacksonSeat = rs[7] ? rs[7].probability : null;
+    s.primary95 = rs[8] ? rs[8].probability : null;
     return s;
   }
   // Exact price move of an M$m YES market-order on one cpmm-1 pool (p=0.5).
@@ -967,7 +1010,14 @@
       fetch("https://api.manifold.markets/v0/market/ZI29Oy5URc").then(function (r) { return r.json(); }),
       fetch("https://api.manifold.markets/v0/market/nqLE5L0yhs").then(function (r) { return r.json(); }),
       fetch("https://api.manifold.markets/v0/market/n2yLUz2l6q").then(function (r) { return r.json(); }),
-      fetch("https://api.manifold.markets/v0/market/RcL0Q9O0EU").then(function (r) { return r.json(); })
+      fetch("https://api.manifold.markets/v0/market/RcL0Q9O0EU").then(function (r) { return r.json(); }),
+      // Coherence-check quotes (v20): party MC + four binaries. Individually
+      // caught so a failure degrades the live coherence line, not the page.
+      fetch("https://api.manifold.markets/v0/market/UzNUOlCZgt").then(function (r) { return r.json(); }).catch(function () { return null; }),
+      fetch("https://api.manifold.markets/v0/market/cdzE85PIEz").then(function (r) { return r.json(); }).catch(function () { return null; }),
+      fetch("https://api.manifold.markets/v0/market/L6Lll6upng").then(function (r) { return r.json(); }).catch(function () { return null; }),
+      fetch("https://api.manifold.markets/v0/market/lchuI99Qlc").then(function (r) { return r.json(); }).catch(function () { return null; }),
+      fetch("https://api.manifold.markets/v0/market/Nn0chE02lP").then(function (r) { return r.json(); }).catch(function () { return null; })
     ]).then(function (rs) {
       LIVE.ms = snapshotFromAPI(rs);
       LIVE.cond = {}; LIVE.nom = {}; LIVE.pair = {};
@@ -1185,11 +1235,11 @@
         var html = "<strong>" + d.name + "</strong><br>P(nominee) = <span class='num'>" + d.p + "</span>";
         if (d.c) html += "<br>board P(win | nominee) = <span class='num'>" + d.c + "</span> ± <span class='num'>" + d.e +
           "</span> <span class='num'>(carry, " + fmtSetting() + ")</span>";
-        if (d.ea) html += "<br>haze floor ±<span class='num'>" + (100 * d.ea).toFixed(1) +
+        if (d.ea) html += "<br>attention floor ±<span class='num'>" + (100 * d.ea).toFixed(1) +
           "</span> pts (min trade " + fmtM(state.mbet) + ", " + depthTag() + ")";
         if (d.pc) html += "<br>joint mkt pair-implied ĉ = <span class='num'>" + d.pc + "</span> ± <span class='num'>" +
           d.pe + "</span> <span class='num'>(" + d.pdec + ")</span>";
-        if (d.pea) html += "<br>joint haze floor ±<span class='num'>" + Math.round(100 * d.pea) +
+        if (d.pea) html += "<br>joint attention floor ±<span class='num'>" + Math.round(100 * d.pea) +
           "</span> pts at " + (liveDepth() ? jointLiqTag() + " live" : "its creation M$175") + " depth";
         if (d.plc) html += "<br>pair-implied live = <span class='num'>" + d.plc + "</span>";
         if (d.lt) html += "<br>last traded " + d.lt + " · M$<span class='num'>" + d.v8 + "</span> since withdrawal";
@@ -1216,7 +1266,7 @@
       '<th>drawn to scale<br><span class="small" style="text-transform:none; letter-spacing:0">' +
       '<span style="display:inline-block;width:10px;height:8px;border-radius:2px;background:var(--ink-2)"></span> live ' +
       '<span style="display:inline-block;width:10px;height:8px;border-radius:2px;background:color-mix(in srgb, var(--ink-2) 40%, transparent)"></span> refund ' +
-      '<span style="display:inline-block;width:2px;height:11px;background:var(--ink);vertical-align:-2px"></span> haze</span></th></tr>';
+      '<span style="display:inline-block;width:2px;height:11px;background:var(--ink);vertical-align:-2px"></span> attention</span></th></tr>';
     CANDS.forEach(function (d0) {
       var d = mat(d0);
       if (d.c === null) return;
@@ -1247,8 +1297,8 @@
       ") and the min-trade knob (√), and is " +
       "untouched by the first two levers. <strong>Bold marks the larger — binding — floor</strong>; in " +
       "the bar, the binding floor is whatever reaches furthest right (solid = live branch, pale = refund " +
-      "branch, │ = haze). The tick column — the price impact of one min-worthwhile trade — follows the " +
-      "third knob; it stays out of the solid ε band and joins the haze. Kleban, Geiger and Loud are " +
+      "branch, │ = attention). The tick column — the price impact of one min-worthwhile trade — follows the " +
+      "third knob; it stays out of the solid ε band and joins the attention layer. Kleban, Geiger and Loud are " +
       "omitted for the reasons in the board table.";
   }
 
@@ -1260,40 +1310,81 @@
     { a: 0, b: 1, gap: 0.030, label: "<strong>Jackson vs Bellows</strong> (the live choice)" },
     { a: 2, b: 1, gap: 0.010, label: "Shah vs Bellows" }
   ];
-  // Patient-capital cell: carry → 0, so only the attention floor remains —
-  // computed at the reference M$10k/answer subsidy, legs in quadrature
-  // (was a hand-frozen "±2.4" until Jul 11; see the correction note above).
-  function patientCell(A, B, gap) {
+  // Ladder cells: verdict info shared by the table and the computed
+  // conclusions paragraph. (Hand-frozen cells retired Jul 11; the ladder
+  // follows the prices toggle AND the controls — evand ruling: the essay is
+  // "what should we do, given the best info available, right now".)
+  function vinfo(gap, comb) {
+    return { ok: gap > comb, barely: gap > comb && gap < 1.25 * comb, tiny: comb < 0.002, comb: comb };
+  }
+  function vcell(v) {
+    if (v.tiny) return '<span class="small muted">carry ~0 — attention decides →</span>';
+    return (v.ok ? '<span class="yes">✓</span>' : '<span class="no">✗</span>') +
+      (v.barely ? ' <span class="small">barely</span>' : "") +
+      ' <span class="small num">±' + ppr(v.comb) + "</span>";
+  }
+  function pinfo(A, B, gap) {
     var q = gapAttnAtDepth(A, B, SUBSIDY_S);
-    if (gap <= q && q > 2 * gap) return '<span class="no">✗</span> — genuinely tied <span class="small num">±' + ppr(q) + "</span>";
-    var ok = gap > q, barely = ok && gap < 1.25 * q;
-    return (ok ? '<span class="yes">✓</span>' : '<span class="no">✗</span>') +
-      (barely ? ' <span class="small">barely</span>' : "") +
-      ' <span class="small num">±' + ppr(q) + "</span>";
+    // tied = the gap sits at/below Manifold's 1% price grid — the site-wide
+    // proxy for "spread too small". Depth can't break that kind of tie
+    // (market orders can land between grid points, but the grid is the
+    // working resolution limit); a merely-large funding ask is NOT a tie.
+    return { ok: gap > q, barely: gap > q && gap < 1.25 * q, tied: gap <= BOARD_GRID + 1e-9, q: q };
   }
-  function verdictCell(gap, comb) {
-    if (comb < 0.002) {
-      return '<span class="small muted">carry ~0 — attention decides →</span>';
-    }
-    var ok = gap > comb;
-    var barely = ok && gap < 1.25 * comb;
-    return (ok ? '<span class="yes">✓</span>' : '<span class="no">✗</span>') +
-      (barely ? ' <span class="small">barely</span>' : "") +
-      ' <span class="small num">±' + ppr(comb) + "</span>";
+  function pcell(v) {
+    if (v.tied) return '<span class="no">✗</span> <span class="small">gap at the 1% grid — genuine tie</span>';
+    return (v.ok ? '<span class="yes">✓</span>' : '<span class="no">✗</span>') +
+      (v.barely ? ' <span class="small">barely</span>' : "") +
+      ' <span class="small num">±' + ppr(v.q) + "</span>";
   }
-  function drawLadder() {   // always the frozen exercise: frozen prices, frozen horizons
-    frozenCalc(function () {
-      var h = '<tr><th>Comparison (frozen gap)</th><th class="num">gap</th><th>today<br><span class="small" id="ladderHdr">(' +
-        fmtSetting() + ')</span></th><th>+ netting</th><th>+ netting &amp;<br>patient capital</th></tr>';
-      PAIRS.forEach(function (pr) {
-        var A = CANDS[pr.a], B = CANDS[pr.b];
-        h += "<tr><td>" + pr.label + '</td><td class="num">' + pr.gap.toFixed(3) + "</td>" +
-          "<td>" + verdictCell(pr.gap, bandE(A) + bandE(B)) + "</td>" +
-          "<td>" + verdictCell(pr.gap, nettedE(A) + nettedE(B)) + "</td>" +
-          "<td>" + patientCell(A, B, pr.gap) + "</td></tr>";
-      });
-      document.getElementById("ladder").innerHTML = h;
+  function drawLadder() {
+    var h = '<tr><th>Comparison</th><th class="num">gap<br><span class="small">' +
+      (PRICEMODE === "live" && LIVE.cond ? "live prices" : "frozen prices") +
+      '</span></th><th>today<br><span class="small" id="ladderHdr">(' +
+      fmtSetting() + ')</span></th><th>+ netting<br><span class="small">margin reform (next section)</span></th><th>+ netting &amp; patient capital<br><span class="small">capital free + M$10k subsidy</span></th></tr>';
+    var rows = [];
+    PAIRS.forEach(function (pr) {
+      var A = mat(CANDS[pr.a]), B = mat(CANDS[pr.b]);
+      var gap = Math.abs(A.c - B.c);
+      var r = { gap: gap,
+                today: vinfo(gap, bandE(A) + bandE(B)),
+                net: vinfo(gap, nettedE(A) + nettedE(B)),
+                pat: pinfo(A, B, gap) };
+      rows.push(r);
+      h += "<tr><td>" + pr.label + '</td><td class="num">' + gap.toFixed(3) + "</td>" +
+        "<td>" + vcell(r.today) + "</td><td>" + vcell(r.net) + "</td><td>" + pcell(r.pat) + "</td></tr>";
     });
+    document.getElementById("ladder").innerHTML = h;
+    drawLadderConcl(rows);
+  }
+  // The conclusions paragraph is the same computation, prosified. Every
+  // clause branches on the cell verdicts — no hand-frozen conclusions.
+  function drawLadderConcl(rows) {
+    var el = document.getElementById("ladderconcl");
+    if (!el) return;
+    var t0 = rows[0], t1 = rows[1], m = rows[2], jb = rows[3], sb = rows[4];
+    var c1 = (t0.today.ok && t1.today.ok)
+      ? "<strong>the market in view, funded, can rule out the tail</strong>" +
+        ((t0.today.barely || t1.today.barely) ? " — barely" : "")
+      : "<strong>the market in view can rule out only part of the tail</strong> (netting finishes the job)";
+    var c2 = m.today.ok
+      ? "<strong>the establishment question (“is Mills really worse?”) is already answerable</strong>"
+      : m.net.ok
+        ? "<strong>netting buys the establishment question</strong> (“is Mills really worse?” becomes answerable)"
+        : "<strong>even netting doesn't reach the Mills question at these settings</strong>";
+    var c3 = jb.today.ok
+      ? "<strong>and Jackson-vs-Bellows clears its floors outright — the ranking is priced at these settings</strong>"
+      : jb.net.ok
+        ? "<strong>Jackson-vs-Bellows needs netting alone</strong>"
+        : jb.pat.ok
+          ? "<strong>Jackson-vs-Bellows needs either the full reform stack — or patient capital plus real subsidy</strong> (the quadrature arithmetic above)"
+          : "<strong>Jackson-vs-Bellows is beyond every rung at these settings</strong>";
+    var c4 = sb.pat.tied
+      ? "And Shah-vs-Bellows is not a funding problem at all: its gap sits at Manifold's 1% price grid — a tie at the market's working resolution, and no depth will pretend otherwise."
+      : sb.pat.ok
+        ? "Shah-vs-Bellows becomes measurable only in the patient column."
+        : "And Shah-vs-Bellows stays out of reach even in the patient column — distinguishing it would take more than the reference subsidy.";
+    el.innerHTML = "So the ladder prices out as: " + c1 + ". " + c2 + ". " + c3 + ". " + c4;
   }
 
   // ---- controls chrome ----
@@ -1334,11 +1425,11 @@
     if (carryOk) {
       var gh = gapHazeE(J, B);
       h += gh > gap
-        ? " Carry is only floor one: the pair's haze floor (±" + dynv(pp(gh)) +
+        ? " Carry is only floor one: the pair's attention floor (±" + dynv(pp(gh)) +
           ", per-leg floors ±" + dynv(pp(atJ)) + " / ±" + dynv(pp(atB)) +
           " in quadrature — one noticing covers both legs) still swallows the gap — cheap capital " +
           "alone doesn't buy the ranking; depth has to move too."
-        : " And the pair's haze floor (±" + dynv(pp(gh)) + ", per-leg floors in quadrature) sits " +
+        : " And the pair's attention floor (±" + dynv(pp(gh)) + ", per-leg floors in quadrature) sits " +
           "under the gap too — at this depth and these settings the ranking is genuinely priced.";
     }
     return h;
@@ -1348,20 +1439,20 @@
     switch (d.sid) {
       case "jackson":
         return "The board measures Jackson well — almost all carry, nearly no refund-branch penalty " +
-          "(p<sub>B</sub> <span class='num'>" + d.p.toFixed(2).replace(/^0/, "") + "</span> means the conditional usually matters). " +
+          "(nomination odds <span class='num'>" + d.p.toFixed(2).replace(/^0/, "") + "</span> — the conditional usually matters). " +
           rankVerdict() + " The joint market reads him at ĉ <span class='num'>" + d.pair.c.toFixed(3).replace(/^0/, "") + "</span>; its tax is " +
           "different — a <span class='num'>" + pp(pairGridE(d.pair)) + "</span>-point grid cell plus ±" +
-          dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " of haze at today's " + jointLiqTag() + " depth.";
+          dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " of attention floor at today's " + jointLiqTag() + " depth.";
       case "bellows":
-        return "Bellows carries the wider refund branch of the two front-runners (p<sub>B</sub> " +
+        return "Bellows carries the wider refund branch of the two front-runners (nomination odds " +
           "<span class='num'>.271</span>: more worlds where capital idles to Jul 27). " + rankVerdict() +
-          " Her joint-market read is the coarser one: matchup mass <span class='num'>" +
-          d.pair.q.toFixed(3).replace(/^0/, "") + "</span> makes each 1% tick worth <span class='num'>" +
+          " Her joint-market read is the coarser one: the matchup's total probability (<span class='num'>" +
+          d.pair.q.toFixed(3).replace(/^0/, "") + "</span>) makes each 1% tick worth <span class='num'>" +
           pp(pairGridE(d.pair)) + "</span> conditional points.";
       case "shah": case "wood":
         return "±" + dynv(pp(k.live + k.na)) + ", and " + dynv(pp(k.na)) +
           " of it is the refund branch: capital idled to Jul 27 against a <span class='num'>" +
-          d.p.toFixed(3).replace(/^0/, "") + "</span> shot at mattering. Netting would delete that term " +
+          d.p.toFixed(3).replace(/^0/, "") + "</span> shot at mattering. Netting would delete that penalty " +
           "(→ ±" + dynv(pp(nettedE(d))) + "). The price itself is fresh (last trade " +
           d.lt + ") — the width is incentives, not neglect. In the joint market this candidate has no " +
           "individual price: bucketed under “Another Dem.”";
@@ -1370,11 +1461,9 @@
           " of it refund-branch carry against a <span class='num'>" + d.p.toFixed(3).replace(/^0/, "") + "</span> nomination shot. " +
           "The market's most contrarian claim (an ex-governor at <span class='num'>" + d.c.toFixed(3).replace(/^0/, "") + "</span>) is also " +
           "its most confounded — the worlds where the committee reaches past two front-runners are " +
-          "worlds where something else went wrong. M$<span class='num'>167</span> traded since the " +
-          "withdrawal; fresh, just wide.";
+          "worlds where something else went wrong. M$<span class='num'>167</span> traded Jul 8–10; fresh, just wide.";
       case "platner":
-        return "A fossil that isn't stale: M$<span class='num'>3,001</span> of flow since his " +
-          "withdrawal — the most-traded row on the board. <span class='num'>" + d.c.toFixed(3).replace(/^0/, "") + "</span> prices the " +
+        return "The board's strangest row, and its most-traded: M$<span class='num'>3,001</span> of flow in the two days after his withdrawal (Jul 8–10). <span class='num'>" + d.c.toFixed(3).replace(/^0/, "") + "</span> prices the " +
           "“he un-withdraws by Jul 13” world, not a leftover opinion of the old candidacy. " +
           "Not in the joint market (withdrawn before its creation).";
       case "field":
@@ -1385,7 +1474,7 @@
         return "The joint market's catch-all: any Democrat beyond the front-runners vs Collins. " +
           "ĉ <span class='num'>" + d.pair.c.toFixed(3).replace(/^0/, "") + "</span> with a <span class='num'>" +
           pp(pairGridE(d.pair)) + "</span>-point grid cell and " +
-          "±" + dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " of haze at today's depth. The board can't price this " +
+          "±" + dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " of attention floor at today's depth. The board can't price this " +
           "mass at all; the bucket prices it coarsely — the two structures' blind spots are complements.";
     }
     return "";
@@ -1407,7 +1496,7 @@
       (d.withdrawn ? '<span class="chip">withdrawn</span>' : "") +
       (d.bucket ? '<span class="chip">joint mkt only</span>' : "") +
       '<span class="meta">nomination <span class="num">' + (d.p < 0.095 ? (d.p * 100).toFixed(1) : String(Math.round(d.p * 100))) + "%</span>" +
-      (d.lt ? " · last traded " + d.lt + " · M$<span class='num'>" + d.v8 + "</span> since the withdrawal" : "") +
+      (d.lt ? " · last traded " + d.lt + " · M$<span class='num'>" + d.v8 + "</span> traded Jul 8–10" : "") +
       "</span><span class=\"meta\" style=\"margin-left:auto\">click a name to switch</span></div>";
     if (d.c !== null) {
       var k = carryParts(d), tot = k.live + k.na;
@@ -1419,7 +1508,7 @@
         '<span class="nums"><span class="num">' + d.c.toFixed(3).replace(/^0/, "") + "</span> · carry ±" + dynv(pp(tot)) +
         " <span class='small'>(to-Nov " + dynv(pp(k.live)) + " + refund " + dynv(pp(k.na)) + ")</span>" +
         " + grid <span class='num'>1.0</span>" +
-        (at !== null ? " · haze ±" + dynv(pp(at)) : "") + "</span></div>";
+        (at !== null ? " · attention ±" + dynv(pp(at)) : "") + "</span></div>";
     }
     if (d.pair) {
       var eC = pairCarryE(d.pair), eG = pairGridE(d.pair);
@@ -1429,7 +1518,7 @@
              d.pair.attn ? 100 * pairHazeE(d.pair) : null) +
         '<span class="nums">ĉ <span class="num">' + d.pair.c.toFixed(3).replace(/^0/, "") + "</span> · carry ±" + dynv(pp(eC)) +
         " + grid <span class='num'>" + pp(eG) + "</span>" +
-        (d.pair.attn ? " · haze ±" + dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " <span class='small'>at " + jointLiqTag() + " depth</span>" : "") + "</span></div>";
+        (d.pair.attn ? " · attention ±" + dynv(String(Math.round(100 * pairHazeE(d.pair)))) + " <span class='small'>at " + jointLiqTag() + " depth</span>" : "") + "</span></div>";
     }
     h += '<p class="dtext">' + explain(d) + "</p>";
     document.getElementById("detail").innerHTML = h;
@@ -1456,11 +1545,11 @@
     var lo = Math.min.apply(null, netted), hi = Math.max.apply(null, netted);
     var wide = netted.filter(function (n) { return n > MUSH_E; }).length;
     document.getElementById("nettingverdict").innerHTML = wide === 0
-      ? "Every “mush” row becomes an “informative” row: the whole board lands at " +
-        dynv("±" + pp(lo) + "–" + pp(hi)) + " points, and the ranking trade’s 2× haircut disappears with it."
+      ? "Every swallowed row becomes a measured one: the whole board lands at " +
+        dynv("±" + pp(lo) + "–" + pp(hi)) + " points, and the ranking trade’s double deposit disappears with it."
       : "Netting tightens the whole board to " + dynv("±" + pp(lo) + "–" + pp(hi)) + " points at these settings — " +
         "but " + dynv(String(wide)) + " row" + (wide === 1 ? "" : "s") + " stay" + (wide === 1 ? "s" : "") +
-        " wider than ±" + pp(MUSH_E) + ": at this cost of capital, netting alone no longer clears the mush.";
+        " wider than ±" + pp(MUSH_E) + ": at this cost of capital, netting alone no longer rescues the longshots.";
   }
   // ---- regime-keyed subsidy conclusion (the patient-capital arithmetic) ----
   var SUBSIDY_S = 10000;   // the essay's reference subsidy scenario, M$ of depth per answer
@@ -1476,10 +1565,10 @@
       (quad < gap
         ? " — <strong>under the " + dynv(pp(gap)) + "-point Jackson–Bellows gap</strong> (break-even ≈ " +
           dynv(fmtMk(breakEven)) + "/answer). If the patient-capital reading is right, subsidy alone can " +
-          "buy the ranking; the ladder below is the pessimistic case."
+          "buy the ranking; the ladder's patient column is the pessimistic case."
         : " — <strong>still above the " + dynv(pp(gap)) + "-point Jackson–Bellows gap</strong>; buying the " +
           "ranking outright would take ≈ " + dynv(fmtMk(breakEven)) + "/answer of depth. At these prices " +
-          "even the patient regime needs more than the reference M$10k; the ladder below is the " +
+          "even the patient regime needs more than the reference M$10k; the ladder's patient column is the " +
           "pessimistic case.");
   }
 
@@ -1521,11 +1610,284 @@
         '<td class="num">±' + (s.band * 100).toFixed(1) + "</td>" +
         "<td>" + (div <= s.band
           ? '<span class="yes">✓</span> <span class="small">inside</span>'
-          : '<span class="no">✗</span> <span class="small">outside — a hedged-ratio trade profits; the mechanical anchors can\u2019t express the ratio (S1 grading will note this)</span>') + "</td>";
+          : '<span class="no">✗</span> <span class="small">outside — profitable to close, but only with a refund-aware trade our simple arbitrage rules can\u2019t express (S1 grading will note this)</span>') + "</td>";
     });
   }
 
-  function update() { horizons(); drawBoard(); drawAnatomy(); drawLadder(); drawNetting(); drawRegime(); drawControls(); drawDetail(); drawPair(); drawS1(); }
+  // ---- the computed dek: the lede's verdict clause is a function of the
+  // marketstate + regime (pre-decision / post-nomination / post-election).
+  // At the frozen defaults it reproduces the static HTML text exactly, so
+  // the pre-registered lede survives a JS failure or a CSP-blocked fetch.
+  function nomineeIfDecided() {
+    if (!LIVE.nom) return null;
+    var who = null;
+    CANDS.forEach(function (d) {
+      if (d.nomId && LIVE.nom[d.nomId] !== undefined && LIVE.nom[d.nomId] > 0.9) who = d.name;
+    });
+    return who;
+  }
+  function drawDek() {
+    var el = document.getElementById("dekverdict");
+    if (!el) return;
+    var live = PRICEMODE === "live" && LIVE.cond;
+    var now = live && LIVE.ms ? Date.parse(LIVE.ms.at) : null;
+    if (now && now > ELECTION) {
+      el.innerHTML = "<strong>the race is decided, and the frozen claims below are graded, not argued</strong>";
+      return;
+    }
+    if (now && now > DECISION) {
+      var who = nomineeIfDecided();
+      el.innerHTML = "<strong>the committee has chosen" + (who ? " — " + who : "") +
+        " — and what remains is the grading</strong>: claim P2 below asks whether the chosen row became the market";
+      return;
+    }
+    var J = mat(CANDS[0]), B = mat(CANDS[1]);
+    var gap = Math.abs(J.c - B.c), comb = bandE(J) + bandE(B), att = gapHazeE(J, B);
+    var h = "<strong>the market has confidently ruled out the longshots; on the live question — " +
+      "Jackson or Bellows — it is silent within its own error bars</strong>";
+    if (gap > comb && gap > att) {
+      h = "<strong>the market has confidently ruled out the longshots — and " +
+        (live ? "at live prices" : "at these settings") + " the Jackson–Bellows gap (" +
+        dynv(pp(gap)) + " pts) clears every floor (±" + dynv(pp(Math.max(comb, att))) +
+        ")</strong>: for once, the ranking is priced";
+    } else if (gap > comb) {
+      h += ", and cheap capital alone won't make it speak — carry cleared, the binding floor is now " +
+        "attention (±" + dynv(pp(att)) + " against the " + dynv(pp(gap)) + "-pt gap): someone must pay for depth";
+    } else {
+      h += ", and making it speak has a price, which we compute below";
+    }
+    el.innerHTML = h;
+  }
+
+  // Freshness clause: frozen text = the Jul-10 audit; live mode appends the
+  // board market's most-recent-trade age from the same fetch (market-level
+  // lastBetTime — the per-row audit stays a frozen-record claim).
+  function drawFresh() {
+    var el = document.getElementById("freshclause");
+    if (!el) return;
+    var base = "the Jul-10 bet feed shows every row traded within the prior two days";
+    if (PRICEMODE === "live" && LIVE.ms && LIVE.ms.boardLastBet) {
+      var mins = Math.max(0, (Date.parse(LIVE.ms.at) - LIVE.ms.boardLastBet) / 60000);
+      var ago = mins < 90 ? Math.round(mins) + " minutes"
+        : mins < 2880 ? Math.round(mins / 60) + " hours"
+        : Math.round(mins / 1440) + " days";
+      el.innerHTML = base + " — and as of the live fetch, the board's most recent trade is " +
+        dynv(ago) + " old";
+    } else { el.innerHTML = base; }
+  }
+
+  // ---- the coherence check: the stack bar is a chart, so it follows the
+  // prices toggle; the live lines re-run the identity, Republican-side and
+  // redundancy checks at the fetched prices. Frozen prose stays the record.
+  var DOMAIN = 0.7;
+  var COH_FROZEN = {
+    segs: [
+      { name: "Jackson",  key: "jackson", v: 0.564 * 0.620 },
+      { name: "Bellows",  key: "bellows", v: 0.271 * 0.590 },
+      { name: "Shah",     key: "shah",    v: 0.037 * 0.600 },
+      { name: "Wood",     key: "wood",    v: 0.031 * 0.400 },
+      { name: "Mills",    key: "mills",   v: 0.015 * 0.418 },
+      { name: "tail (Kleban, Geiger, Platner)", key: "none", v: 0.0117 * 0.545 + 0.0072 * 0.450 + 0.0079 * 0.137 }
+    ],
+    uncovMass: 0.0565, uncovLabel: "unpriced nominee mass 0.057",
+    ticks: [0.5775, 0.5836, 0.5955]
+  };
+  function cohData() {
+    if (PRICEMODE === "live" && LIVE.ms) {
+      // Live: the six rows this page maps (Kleban/Geiger fold into the
+      // hatched not-mapped mass — a slightly wider hatch than frozen).
+      var segs = [], mass = 0;
+      CANDS.forEach(function (d0) {
+        var d = mat(d0);
+        if (d.c === null || d.pX === null || !d.condId) return;
+        segs.push({ name: d.name, key: d.key, v: d.pX * d.c });
+        mass += d.pX;
+      });
+      var un = Math.max(0, 1 - mass);
+      return { segs: segs, uncovMass: un,
+        uncovLabel: "nominee mass not mapped on this page " + un.toFixed(3),
+        ticks: [LIVE.ms.partyDem, LIVE.ms.demwinThin, LIVE.ms.demwin]
+          .filter(function (x) { return x !== null && x !== undefined; }) };
+    }
+    return COH_FROZEN;
+  }
+  function drawCoherence() {
+    var sbar = document.getElementById("sbar");
+    if (!sbar) return;
+    var D = cohData(), html = "", acc = 0;
+    D.segs.forEach(function (st) {
+      html += '<div class="seg" data-tt="' + st.name + ": <span class=\'num\'>" + st.v.toFixed(3) + "</span>" +
+        '" style="left:' + (acc / DOMAIN * 100) + "%; width:" + (st.v / DOMAIN * 100) + "%; background:" + COLORS[st.key] + '"></div>';
+      acc += st.v;
+    });
+    var uv = D.uncovMass * 0.475;   // drawn at the 0.40-0.55 midpoint
+    html += '<div class="seg uncov" data-tt="' + D.uncovLabel + ' × ~0.475: <span class=\'num\'>' + uv.toFixed(3) +
+      '</span>" style="left:' + (acc / DOMAIN * 100) + "%; width:" + (uv / DOMAIN * 100) + '%"></div>';
+    // Anchor ticks only — the caption enumerates the values (labels at these
+    // x-positions would collide: 0.578 and 0.596 are ~17px apart here).
+    D.ticks.forEach(function (a) {
+      html += '<div class="anchor-tick" data-tt="direct P(Dem win): <span class=\'num\'>' + a.toFixed(4) +
+        '</span>" style="left:' + (a / DOMAIN * 100) + '%"></div>';
+    });
+    sbar.innerHTML = html;
+    var sh = "";
+    [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7].forEach(function (v) {
+      sh += '<span style="left:' + (v / DOMAIN * 100) + '%">' + v.toFixed(1) + "</span>";
+    });
+    document.getElementById("sscale").innerHTML = sh;
+    sbar.querySelectorAll(".seg, .anchor-tick").forEach(function (seg) {
+      seg.addEventListener("mousemove", function (ev) { showTip(seg.dataset.tt, ev); });
+      seg.addEventListener("mouseleave", function () { tip.style.display = "none"; });
+    });
+    var live = PRICEMODE === "live" && LIVE.ms;
+    var bl = document.getElementById("cohbarlive");
+    if (bl) {
+      if (live && D.ticks.length) {
+        bl.innerHTML = "Live, fetched " + LIVE.at.toISOString().slice(11, 16) + " UTC: sum ≈ <span class='num'>" +
+          (acc + D.uncovMass * 0.40).toFixed(3) + "–" + (acc + D.uncovMass * 0.55).toFixed(3) +
+          "</span> vs. direct <span class='num'>" +
+          D.ticks.map(function (t) { return t.toFixed(3).replace(/^0/, ""); }).join(" / ") + "</span>.";
+      } else bl.textContent = "";
+    }
+    var cl = document.getElementById("cohlive");
+    if (cl) {
+      if (live && LIVE.ms.collins !== null && LIVE.ms.partyRep !== null) {
+        var wedge = LIVE.ms.partyRep - LIVE.ms.collins;
+        var J = mat(CANDS[0]), impl = J.pX * J.c;
+        var h2 = "At the live fetch: Collins re-election <span class='num'>" + LIVE.ms.collins.toFixed(3).replace(/^0/, "") +
+          "</span> vs party-Republican <span class='num'>" + LIVE.ms.partyRep.toFixed(3).replace(/^0/, "") +
+          "</span> — wedge <span class='num'>" + wedge.toFixed(3).replace(/^0/, "") + "</span>";
+        if (LIVE.ms.primary95 !== null) h2 += " against <span class='num'>" +
+          (100 * (1 - LIVE.ms.primary95)).toFixed(1) + "%</span> separately-priced primary risk";
+        if (LIVE.ms.jacksonSeat !== null) h2 += "; Jackson standalone <span class='num'>" +
+          LIVE.ms.jacksonSeat.toFixed(3).replace(/^0/, "") + "</span> vs the board's implied <span class='num'>" +
+          impl.toFixed(3).replace(/^0/, "") + "</span>";
+        var mid = acc + D.uncovMass * 0.475;
+        var gaps = [Math.abs(mid - LIVE.ms.demwin)];
+        if (LIVE.ms.primary95 !== null) gaps.push(Math.abs(wedge - (1 - LIVE.ms.primary95)));
+        if (LIVE.ms.jacksonSeat !== null) gaps.push(Math.abs(LIVE.ms.jacksonSeat - impl));
+        var worst = Math.max.apply(null, gaps);
+        h2 += ". " + (worst < 0.02 ? "The family still adds up."
+          : worst < 0.05 ? "Gaps of up to " + pp(worst) + " points have opened — inside the bands, worth watching."
+          : "A " + pp(worst) + "-point gap has opened — the identity check is live data now.");
+        cl.innerHTML = h2;
+      } else cl.textContent = "";
+    }
+  }
+  // ---- computed prose: the essay's argumentative paragraphs are functions
+  // of the marketstate + controls (evand ruling 2026-07-11: parameterize
+  // FULLY — numbers AND conclusions; the pre-registered blocks and dated
+  // notes are the only immovable text).
+  function drawProse() {
+    var J = mat(CANDS[0]), B = mat(CANDS[1]);
+    var gap = Math.abs(J.c - B.c), comb = bandE(J) + bandE(B), att = gapHazeE(J, B);
+    var rankOk = gap > comb && gap > att;
+    var lead = J.c >= B.c ? { n: "Jackson", c: J.c } : { n: "Bellows", c: B.c };
+    var trail = J.c >= B.c ? { n: "Bellows", c: B.c } : { n: "Jackson", c: J.c };
+    var el;
+    if ((el = document.getElementById("roShapes"))) {
+      var bLo = Math.min(bandE(J), bandE(B)), bHi = Math.max(bandE(J), bandE(B));
+      el.innerHTML = "The headline is in the shapes. The market is a confident <strong>pruner</strong> " +
+        (rankOk
+          ? "and — unusually, at the prices and settings in view — a <strong>ranker</strong> too: each front-runner is measured to ±<span class='num'>" +
+            pp(bLo) + "–" + pp(bHi) + "</span> points, and the " + pp1(gap) +
+            "-point gap between Jackson and Bellows clears every floor."
+          : "and a useless <strong>ranker</strong>: each front-runner is measured to ±<span class='num'>" +
+            pp(bLo) + "–" + pp(bHi) + "</span> points, so the longshots below them are loudly ruled out — but the " +
+            pp1(gap) + "-point gap <em>between</em> Jackson and Bellows, the committee's actual question, is not measured at all.");
+    }
+    if ((el = document.getElementById("roTail"))) {
+      el.innerHTML = "<strong>Drop the longshots — that work is done.</strong> Platner prices at " +
+        fmtc(mat(CANDS[5]).c) + ", Wood at " + fmtc(mat(CANDS[3]).c) +
+        ", both far outside every serious band on the board. The market's pruning is confident, " +
+        "already delivered, and free; nobody needs to spend a meeting on the tail.";
+    }
+    if ((el = document.getElementById("roMillsNum"))) el.textContent = mat(CANDS[4]).c.toFixed(3).replace(/^0/, "");
+    if ((el = document.getElementById("rojb"))) {
+      el.innerHTML = rankOk
+        ? "<strong>For once, the ranking is priced: " + lead.n + " " + fmtc(lead.c) + " over " +
+          trail.n + " " + fmtc(trail.c) + ".</strong> At the prices and settings in view, the " +
+          pp1(gap) + "-point gap clears the pair's combined floors (carry ±<span class='num'>" +
+          pp(comb) + "</span>, attention ±<span class='num'>" + pp(att) + "</span>): a rational " +
+          "trader is being paid to disagree with the ordering, and isn't. Treat it as measured — at these settings."
+        : "<strong>Do not read " + lead.n + " " + fmtc(lead.c) + " over " + trail.n + " " +
+          fmtc(trail.c) + " as advice.</strong> The " + pp1(gap) + "-point gap is inside " +
+          (gap > comb ? "the pair's attention floor (±<span class='num'>" + pp(att) + "</span>)" : "both bands") +
+          ": nobody is being paid to make that difference meaningful, so it isn't. This is the " +
+          "board's central, least intuitive lesson — it measures each candidate to a few points, " +
+          "and measures the <em>comparison between the top two</em>, the actual decision, not at all.";
+    }
+    if ((el = document.getElementById("floorsPara"))) {
+      var carryBinds = bandE(J) >= hazeE(J);
+      el.innerHTML = "Each band is a sum of three floors, and each floor answers to a different " +
+        "lever. The <strong>tick</strong> floor — the price step from the smallest trade anyone " +
+        "makes, ±<span class='num'>" + pp(tickE(J)) + "</span> points at the depth in view — was " +
+        "solved by the market's first M$100 of depth. The <strong>carry</strong> floor: money " +
+        "locked to November if the candidate is picked, money idled to July 27 for a refund if " +
+        "not — both kinds of waiting have to be paid for" +
+        (carryBinds ? ", and at the settings in view this is the binding floor" : "") +
+        ". The <strong>attention</strong> floor is what remains when the waiting is free: someone " +
+        "still has to notice the error, and the prize has to cover the noticing" +
+        (carryBinds ? "." : " — at the settings in view it, not carry, is what binds the front-runners.");
+    }
+    var M = mat(CANDS[4]);
+    if ((el = document.getElementById("millsIdle"))) el.textContent = (100 * (1 - M.pX)).toFixed(1) + "%";
+    if ((el = document.getElementById("millsBand"))) el.textContent = ppr(bandE(M));
+    if ((el = document.getElementById("loanLive"))) el.textContent = (T_LIVE / effDays(T_LIVE, RHO)).toFixed(1) + "×";
+    if ((el = document.getElementById("loanNA"))) el.textContent = Math.round(100 * (1 - effDays(T_NA, RHO) / T_NA)) + "%";
+  }
+  // The pitch is a computation: given the prices, liquidity, and assumptions
+  // in view, does more funding help, and how much would it take? No narrative
+  // about who funded what — just the state (evand framing, 2026-07-11).
+  function drawPitch() {
+    var el = document.getElementById("pitch");
+    if (!el) return;
+    var J = mat(CANDS[0]), B = mat(CANDS[1]);
+    var gap = Math.abs(J.c - B.c), attNow = gapHazeE(J, B);
+    var N = PRICEMODE === "live" && LIVE.ms ? Object.keys(LIVE.ms.cond).length : 9;
+    var spray = Math.round(100 * (N - 2) / N);
+    var days = Math.max(1, Math.round(T_NA));
+    var quad = gapAttnAtDepth(J, B, SUBSIDY_S);
+    var needPool = gap > 0.001 ? SUBSIDY_S * Math.pow(quad / gap, 2) : Infinity;
+    var head = "The house-money case: reforms take engineering and time this decision doesn't " +
+      "have, but the subsidy lever exists <em>today</em> — and Manifold's own tooling can aim it " +
+      "at single answers (ordinary users can't; at the odds in view, ~<span class='num'>" + spray +
+      "%</span> of a whole-market subsidy would land outside the two live rows). The refund " +
+      "asymmetry keeps the cost low: subsidy parked in answers that end in refunds comes back, " +
+      "in full, on July 27 — the house risks real exposure only on the one answer that survives " +
+      "the decision. Given the prices, liquidity, and assumptions in view, ";
+    var verdict;
+    if (attNow < gap) {
+      verdict = "<strong>more funding isn't needed</strong>: the pair's attention floor " +
+        "(±<span class='num'>" + pp(attNow) + "</span>) already sits under the " + pp1(gap) +
+        "-point Jackson–Bellows gap. What remains is whether opinionated money claims the prize.";
+    } else if (gap <= BOARD_GRID + 1e-9) {
+      verdict = "<strong>funding is not the binding constraint</strong>: the " + pp1(gap) +
+        "-point gap sits at Manifold's 1% price grid — the site-wide floor for “spread too " +
+        "small.” (A proxy, not a law: deep pools can be market-ordered between grid points. But " +
+        "a gap this size is a tie at the market's working resolution, and depth would confirm " +
+        "it, not break it.)";
+    } else {
+      verdict = "<strong>≈<span class='num'>" + fmtMk(needPool) + "</span> of pool per answer " +
+        "might buy the Jackson–Bellows ranking</strong> (today's front-runner pools: " +
+        "<span class='num'>" + fmtMkRange(Math.min(J.pool, B.pool), Math.max(J.pool, B.pool)) +
+        "</span>), parked for <span class='num'>" + days + "</span> days, mostly refunded.";
+      if (needPool >= 1e5) {
+        var tot = 2 * needPool;
+        verdict += " Large in mana — small in the currency that matters: ≈<span class='num'>" +
+          fmtMk(tot) + "</span> for the pair is roughly <span class='num'>$" +
+          Math.round(tot / 200 / 100) / 10 + "k–" + Math.round(tot / 150 / 100) / 10 +
+          "k</span> at the footer's rough rate, before any volume deal — the price range of a " +
+          "single good poll.";
+      } else {
+        verdict += " That is the entire price of making this decision market worth the " +
+          "committee's glance.";
+      }
+    }
+    el.innerHTML = head + verdict;
+  }
+
+  function update() { horizons(); drawDek(); drawFresh(); drawBoard(); drawAnatomy(); drawLadder(); drawNetting(); drawRegime(); drawControls(); drawDetail(); drawPair(); drawS1(); drawCoherence(); drawProse(); drawPitch(); }
 
   var slider = document.getElementById("rslider");
   var loansbox = document.getElementById("loansbox");
@@ -1560,64 +1922,22 @@
     });
   });
 
-  // Force the controls to the frozen state at init: browsers restore form
-  // values across reloads, so the checkbox can render checked while state
-  // says no-loans (uncheck-does-nothing bug, caught by evand 2026-07-11).
-  // The pre-registered default must win over restored control state.
+  // Force the controls to the page defaults at init: browsers restore form
+  // values across reloads, so the checkbox can render out of sync with state
+  // (uncheck-does-nothing bug, caught by evand 2026-07-11). The page default
+  // (r = 2%, loans ON, M$1) must win over restored control state.
   slider.value = state.r;
   loansbox.checked = state.loans;
   mslider.value = Math.log10(state.mbet);
 
-  // ?mode=frozen|live pins the price mode (shareable links; deterministic
-  // render checks). Without it, live becomes the default once fetched.
-  var qm = /[?&]mode=(frozen|live)\b/.exec(location.search);
-  if (qm) { PRICETOUCHED = true; PRICEMODE = qm[1]; }
+  // ?snapshot=2026-07-10|live pins the view — shareable, reproducible links
+  // (?mode=frozen|live is the older alias). When the snapshot library
+  // (roadmap iii) lands, its dates slot into this same parameter.
+  var qm = /[?&](?:mode|snapshot)=(live|frozen|2026-07-10)\b/.exec(location.search);
+  if (qm) { PRICETOUCHED = true; PRICEMODE = qm[1] === "live" ? "live" : "frozen"; }
 
   update();
   fetchLive();   // live layer loads by default; the frozen record stands regardless
 
-  // coherence stacked bar, domain 0..0.7
-  var SEGS = [
-    { name: "Jackson",  key: "jackson", v: 0.564 * 0.620 },
-    { name: "Bellows",  key: "bellows", v: 0.271 * 0.590 },
-    { name: "Shah",     key: "shah",    v: 0.037 * 0.600 },
-    { name: "Wood",     key: "wood",    v: 0.031 * 0.400 },
-    { name: "Mills",    key: "mills",   v: 0.015 * 0.418 },
-    { name: "tail (Kleban, Geiger, Platner)", key: "none", v: 0.0117 * 0.545 + 0.0072 * 0.450 + 0.0079 * 0.137 }
-  ];
-  var UNCOV = 0.0565 * 0.475; // midpoint of 0.40-0.55 on unpriced mass
-  var DOMAIN = 0.7;
-  var sbar = document.getElementById("sbar");
-  var html = "", acc = 0;
-  SEGS.forEach(function (s) {
-    html += '<div class="seg" data-tt="' + s.name + ": <span class=\'num\'>" + s.v.toFixed(3) + "</span>" +
-      '" style="left:' + (acc / DOMAIN * 100) + "%; width:" + (s.v / DOMAIN * 100) + "%; background:" + COLORS[s.key] + '"></div>';
-    acc += s.v;
-  });
-  html += '<div class="seg uncov" data-tt="unpriced nominee mass 0.057 × ~0.475: <span class=\'num\'>' + UNCOV.toFixed(3) +
-    '</span>" style="left:' + (acc / DOMAIN * 100) + "%; width:" + (UNCOV / DOMAIN * 100) + '%"></div>';
-  acc += UNCOV;
-  // Anchor ticks only — the caption enumerates the three values (labels at
-  // these x-positions would collide: 0.578 and 0.596 are ~17px apart here).
-  [0.5775, 0.5836, 0.5955].forEach(function (a) {
-    html += '<div class="anchor-tick" data-tt="direct P(Dem win): <span class=\'num\'>' + a.toFixed(4) +
-      '</span>" style="left:' + (a / DOMAIN * 100) + '%"></div>';
-  });
-  sbar.innerHTML = html;
-  var sscale = document.getElementById("sscale");
-  var sh = "";
-  [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7].forEach(function (v) {
-    sh += '<span style="left:' + (v / DOMAIN * 100) + '%">' + v.toFixed(1) + "</span>";
-  });
-  sscale.innerHTML = sh;
-  sbar.querySelectorAll(".seg, .anchor-tick").forEach(function (seg) {
-    seg.addEventListener("mousemove", function (ev) {
-      tip.innerHTML = seg.dataset.tt;
-      tip.style.display = "block";
-      tip.style.left = Math.min(ev.clientX + 14, window.innerWidth - 310) + "px";
-      tip.style.top = (ev.clientY + 14) + "px";
-    });
-    seg.addEventListener("mouseleave", function () { tip.style.display = "none"; });
-  });
 })();
 </script>
